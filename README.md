@@ -385,7 +385,7 @@ Creates and returns a new spot.
 
 * Require Authentication: true
 * Request
-  * Method: GET
+  * Method: POST
   * URL: /api/spots
   * Headers:
     * Content-Type: application/json
