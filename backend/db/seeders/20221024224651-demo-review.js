@@ -33,7 +33,7 @@ module.exports = {
         userId: 5,
         review: 'It was alright, a bit noisy at night',
         stars: 4
-      },
+      }, ]);
   },
 
   async down (queryInterface, Sequelize) {
