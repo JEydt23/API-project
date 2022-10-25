@@ -9,33 +9,104 @@ const { handleValidationErrors } = require('../../utils/validation');
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
+
         include: [
             { model: Review },
             { model: SpotImage }
         ],
     })
-    // allSpots.toJSON()
-    // console.log(allSpots)
 
-    let spotList = [];
+    for (let spot of allSpots) {
+        // spot = spot.toJSON();
+        let totalReviews = await Review.sum('stars', { where: { spotId: spot.id } });
+        // console.log('****total review stars: ', totalReviews)
+
+        let numberOfReviews = await Review.count({ where: { spotId: spot.id } });
+        // console.log('****number of reviews: ', numberOfReviews);
+
+        // totalReviews = parseInt(totalReviews);
+        // numberOfReviews = parseInt(numberOfReviews);
+
+        let average = totalReviews / numberOfReviews;
+        // console.log('*************average: ', average)
+        spot.dataValues.avgRating = average;
+
+        delete spot.dataValues.Reviews
+
+    }
+
+    let Spots = [];
     allSpots.forEach(spot => {
-        spotList.push(spot.toJSON())
+        Spots.push(spot.toJSON())
     })
 
-    spotList.forEach(spot => {
+    Spots.forEach(spot => {
         spot.SpotImages.forEach(image => {
             // console.log(image.preview)
             if (image.preview === true) {
-                spot.preview = image.url
+                spot.previewImage = image.url;
             }
         })
-        if (!spot.preview) {
-            spot.preview = 'No preview image found'
+        if (!spot.previewImage) {
+            spot.previewImage = 'No preview image found';
         }
+        delete spot.SpotImages;
     })
 
+    res.json({Spots});
+})
 
-    res.json(spotList)
+// GET ALL SPOTS OWNED BY CURRENT OWNER
+router.get('/current', requireAuth, async (req, res) => {
+    const allSpots = await Spot.findAll({
+        where: {
+            ownerId: req.user.id
+        },
+        include: [
+            { model: Review },
+            { model: SpotImage }
+        ],
+    })
+
+    for (let spot of allSpots) {
+        // spot = spot.toJSON();
+        let totalReviews = await Review.sum('stars', { where: { spotId: spot.id } });
+        // console.log('****total review stars: ', totalReviews)
+
+        let numberOfReviews = await Review.count({ where: { spotId: spot.id } });
+        // console.log('****number of reviews: ', numberOfReviews);
+
+        // totalReviews = parseInt(totalReviews);
+        // numberOfReviews = parseInt(numberOfReviews);
+
+        let average = totalReviews / numberOfReviews;
+        // console.log('*************average: ', average)
+        spot.dataValues.avgRating = average;
+
+        delete spot.dataValues.Reviews
+
+    }
+
+    let Spots = [];
+    allSpots.forEach(spot => {
+        Spots.push(spot.toJSON())
+    })
+
+    Spots.forEach(spot => {
+        spot.SpotImages.forEach(image => {
+            // console.log(image.preview)
+            if (image.preview === true) {
+                spot.previewImage = image.url;
+            }
+        })
+        if (!spot.previewImage) {
+            spot.previewImage = 'No preview image found';
+        }
+        delete spot.SpotImages;
+    })
+
+    res.json({Spots});
+
 })
 
 module.exports = router;

@@ -26,6 +26,12 @@ module.exports = {
 				userId: 3,
 				review: 'Filthy and disgusting',
 				stars: 1
+			},
+			{
+				spotId: 5,
+				userId: 2,
+				review: 'Just okay. Nothing to write home about.',
+				stars: 2
 			}
 		]);
 	},
