@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
         delete spot.SpotImages;
     })
 
-    res.json({Spots});
+    res.json({ Spots });
 })
 
 // GET ALL SPOTS OWNED BY CURRENT OWNER
@@ -105,8 +105,30 @@ router.get('/current', requireAuth, async (req, res) => {
         delete spot.SpotImages;
     })
 
-    res.json({Spots});
+    res.json({ Spots });
 
 })
+
+// GET DETAILS OF A SPOT FROM AN ID
+
+router.get('/:spotId', async (req, res) => {
+    // const { spotId } = req.params;
+    const detailsOfSpot = await Spot.findByPk(req.user.id, {
+        include: {
+            model: User, as: "Owner",
+            attributes: ['id', 'firstName', 'lastName']
+        }
+    });
+
+    if (!detailsOfSpot){
+        res.status(404);
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: res.statusCode
+        })
+    }
+
+
+});
 
 module.exports = router;
