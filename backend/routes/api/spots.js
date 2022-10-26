@@ -243,19 +243,43 @@ router.put('/:spotId', requireAuth, async (req, res) => {
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const spot = await Spot.findByPk(spotId);
-    if (!spot){
+    if (!spot) {
         res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
         })
     }
-    if (spot.ownerId === req.user.id){
+    if (spot.ownerId === req.user.id) {
         spot.destroy();
         res.status(200).json({
             message: "Successfully deleted",
             statusCode: 200
         })
     }
+})
+
+// GET ALL REVIEWS BY SPOT'S ID
+
+// NOT WORKING
+
+router.get('/:spotId/reviews', async (req, res) => {
+    const { spotId } = req.params;
+    const review = await Spot.findByPk(spotId);
+    if (!review) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+    const reviews = await Spot.findAll({
+        where: { spotId: spotId },
+        include: { model: User, as: "User", attributes: ['id', 'firstName', 'lastName'] }
+    })
+
+    const image = await ReviewImage.findByPk(spotId, { attributes: ['id', 'url'] });
+
+    res.json({ Reviews: reviews, ReviewImages: image })
+
 })
 
 module.exports = router;
