@@ -8,8 +8,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // GET REVIEWS OF CURRENT USER
 
-// NOT WORKING
-
 router.get('/current', requireAuth, async (req, res) => {
 
     const reviews = await Review.findAll({
@@ -17,37 +15,80 @@ router.get('/current', requireAuth, async (req, res) => {
             userId: req.user.id
         },
         include: [
-            { model: Spot, attributes: { exclude: ['description', 'createdAt', 'updatedAt'] } },
             { model: User, attributes: ['id', 'firstName', 'lastName'] },
             { model: ReviewImage, as: "ReviewImages", attributes: ['id', 'url'] },
+            {
+                model: Spot, attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
+                include: { model: SpotImage, where: { preview: true }, attributes: ['url'] }
+            },
 
         ],
     })
 
     let reviewList = [];
-    reviews.forEach(spot => {
-        reviewList.push(spot.toJSON())
-    })
+    // reviews.forEach(spot => {
+    //     reviewList.push(spot.toJSON())
+    // })
 
-    reviewList.forEach(spot => {
+    // Loop through all reviews (OBJECT, not array)
+    // Then query for each review's preview image
 
-        spot.SpotImages.forEach(image => {
-            // console.log(image.preview)
-            if (image.preview === true) {
-                spot.previewImage = image.url;
-            }
+    for (let review of reviews) {
+        review = review.toJSON();
+        const imagePrev = await SpotImage.findByPk(review.id, {
+            where: { preview: true },
+            attributes: ['url'],
+
         })
-        if (!spot.previewImage) {
-            spot.previewImage = 'No preview image found';
+
+        // reviewList.forEach(spot => {
+        //     spot.SpotImages.forEach(image => {
+        //         // console.log(image.preview)
+
+        //         if (image.preview === true) {
+        //             spot.previewImage = image.url;
+        //         }
+        if (imagePrev) {
+            review.Spot.previewImage = imagePrev.url
         }
-        delete spot.SpotImages;
-    })
 
+        //     })
 
-    res.json(reviews)
+        // if (!spot.previewImage) {
+        //     spot.previewImage = 'No preview image found';
+        // }
+        if (!imagePrev) {
+            review.Spot.previewImage = 'No preview image found';
+        }
+        // })
+        reviewList.push(review)
+        delete review.Spot.SpotImages;
+    }
+
+    res.json({ Reviews: reviewList })
 })
 
+//ADD AN IMAGE TO REVIEW BASED ON REVIEWERS ID
 
+// getting null for req.params 
+
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+    const { reviewId } = req.params;
+    const { url } = req.body;
+
+    console.log(req.params)
+    console.log(url)
+
+    const review = await Review.findByPk(reviewId);
+    const addImage = await ReviewImage.create({
+        url,
+        reviewId: review.id
+    })
+
+    const checkImageIsThere = await ReviewImage.findByPk(addImage.id, { attributes: ['id', 'url'] });
+
+    res.json(checkImageIsThere)
+})
 
 
 

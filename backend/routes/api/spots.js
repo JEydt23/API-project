@@ -260,26 +260,76 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
 // GET ALL REVIEWS BY SPOT'S ID
 
-// NOT WORKING
-
 router.get('/:spotId/reviews', async (req, res) => {
     const { spotId } = req.params;
-    const review = await Spot.findByPk(spotId);
-    if (!review) {
+
+    // Find all reviews where the spotId matches the spotId request parameter
+    const reviews = await Review.findAll({
+        where: { spotId: spotId },
+        include: {
+            model: User, as: "User", attributes: ['id', 'firstName', 'lastName'],
+            // model: ReviewImage, as: "ReviewImages", attributes: ['id', 'url']
+        }
+    })
+
+    // Find an review image by the spotId request parameter
+    const image = await ReviewImage.findByPk(spotId, { attributes: ['id', 'url'] });
+
+    // Search query for spot by its spotId
+    const spotExist = await Spot.findByPk(spotId);
+    if (!spotExist) {
         res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
         })
     }
-    const reviews = await Spot.findAll({
-        where: { spotId: spotId },
-        include: { model: User, as: "User", attributes: ['id', 'firstName', 'lastName'] }
-    })
-
-    const image = await ReviewImage.findByPk(spotId, { attributes: ['id', 'url'] });
 
     res.json({ Reviews: reviews, ReviewImages: image })
 
 })
 
-module.exports = router;
+// CREATE A REVIEW FOR A SPOT BASED ON SPOT ID
+
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
+
+    // Search query for spot by its spotId
+    //  also copied from above route, fix both if breaks
+
+    const spotExist = await Spot.findByPk(spotId);
+    if (!spotExist) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    const reviewExist = await Review.findOne({
+        where: {
+            spotId: spotId,
+            userId: req.user.id
+        }
+    })
+    if (reviewExist){
+        res.status(403).json({
+            message: "User already has a review for this spot",
+            statusCode: 403
+        })
+    }
+
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: spotId,
+        review: review,
+        stars: stars
+    })
+
+    res.status(201).json(newReview)
+})
+
+
+
+
+    module.exports = router;
