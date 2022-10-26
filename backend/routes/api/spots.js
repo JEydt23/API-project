@@ -157,19 +157,103 @@ router.post('/', requireAuth, async (req, res) => {
     } catch {
         res.status(400);
         res.json({
-            "message": "Validation Error",
-            "statusCode": 400,
-            "errors": {
-                "address": "Street address is required",
-                "city": "City is required",
-                "state": "State is required",
-                "country": "Country is required",
-                "lat": "Latitude is not valid",
-                "lng": "Longitude is not valid",
-                "name": "Name must be less than 50 characters",
-                "description": "Description is required",
-                "price": "Price per day is required"
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude is not valid",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day is required"
             }
+        })
+    }
+})
+
+// ADD IMAGE TO SPOT BASED ON SPOT'S ID
+
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { url } = req.body;
+
+    const addImage = await SpotImage.create({
+        spotId: req.user.id,
+        url: url,
+        preview: true
+    })
+    res.json({
+        id: addImage.id,
+        url: addImage.url,
+        preview: addImage.preview
+    })
+
+    const spot = await Spot.findByPk(req.user.id);
+    if (!spot) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+})
+
+// EDIT A SPOT
+
+router.put('/:spotId', requireAuth, async (req, res) => {
+    const id = req.params.spotId
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const spot = await Spot.findByPk(id);
+
+    if (!spot) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    };
+
+    try {
+        await spot.update({
+            ownerId: req.user.id,
+            address, city, state, country, lat, lng, name, description, price
+        });
+        res.json(spot);
+    } catch {
+        res.status(400).json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude is not valid",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day is required"
+            }
+        })
+    }
+})
+
+// DELETE A SPOT
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId);
+    if (!spot){
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+    if (spot.ownerId === req.user.id){
+        spot.destroy();
+        res.status(200).json({
+            message: "Successfully deleted",
+            statusCode: 200
         })
     }
 })
