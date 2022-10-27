@@ -180,7 +180,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { url } = req.body;
 
     const addImage = await SpotImage.create({
-        spotId: req.user.id,
+        spotId: req.params.spotId,
         url: url,
         preview: true
     })
@@ -190,7 +190,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         preview: addImage.preview
     })
 
-    const spot = await Spot.findByPk(req.user.id);
+    const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
         res.status(404).json({
             message: "Spot couldn't be found",

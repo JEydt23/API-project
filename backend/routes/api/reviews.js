@@ -25,14 +25,14 @@ router.get('/current', requireAuth, async (req, res) => {
         ],
     })
 
-    let reviewList = [];
     // reviews.forEach(spot => {
     //     reviewList.push(spot.toJSON())
     // })
 
-    // Loop through all reviews (OBJECT, not array)
+    // Loop through all reviews
     // Then query for each review's preview image
 
+    let reviewList = [];
     for (let review of reviews) {
         review = review.toJSON();
         const imagePrev = await SpotImage.findByPk(review.id, {
@@ -68,31 +68,92 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Reviews: reviewList })
 })
 
-//ADD AN IMAGE TO REVIEW BASED ON REVIEWERS ID
+//CREATE AN IMAGE TO REVIEW BASED ON REVIEWERS ID
 
-// getting null for req.params 
+
 
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const { reviewId } = req.params;
     const { url } = req.body;
 
-    console.log(req.params)
-    console.log(url)
-
     const review = await Review.findByPk(reviewId);
+    console.log(review)
+    if (!review) {
+        res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+    // , {
+    //     include: [
+    //         { model: ReviewImage }
+    //     ]
+    // });
     const addImage = await ReviewImage.create({
         url,
         reviewId: review.id
     })
 
-    const checkImageIsThere = await ReviewImage.findByPk(addImage.id, { attributes: ['id', 'url'] });
+    const checkImageIsThere = await ReviewImage.findByPk(addImage.id, {
+        attributes: ['id', 'url']
+    });
 
-    res.json(checkImageIsThere)
+    // If review not found, 404
+
+    // If more than 10 images, 403
+    const howManyImages = await ReviewImage.count({ where: { reviewId: review.id } })
+    if (howManyImages > 10) {
+        res.status(403).json({
+            message: "Maximum number of images for this resource was reached",
+            statusCode: 403
+        })
+    }
+
+    res.json({ id: checkImageIsThere.id, url: checkImageIsThere.url })
 })
 
 
+// EDIT A REVIEW
+
+router.put('/:reviewId', requireAuth, async (req, res) => {
+
+    const id = req.params.reviewId
+    const { review, stars } = req.body
+
+    const findReview = await Review.findByPk(id);
+
+    if (!findReview) {
+        res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    await findReview.update({ review, stars })
+
+    res.json(findReview)
 
 
+})
+
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    const { reviewId } = req.params;
+    const review = await Review.findByPk(reviewId);
+    if (!review) {
+        res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+    if (review.userId === req.user.id){
+        review.destroy();
+        res.status(200).json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
+    }
+
+})
 
 
 
