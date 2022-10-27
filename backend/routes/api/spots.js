@@ -312,7 +312,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
             userId: req.user.id
         }
     })
-    if (reviewExist){
+    if (reviewExist) {
         res.status(403).json({
             message: "User already has a review for this spot",
             statusCode: 403
@@ -329,7 +329,39 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     res.status(201).json(newReview)
 })
 
+// GET ALL BOOKINGS FOR SPOT BASED ON SPOT'S ID
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+
+    const { spotId } = req.params;
+
+    // Search query for spot by its spotId
+    const spotExist = await Spot.findByPk(spotId);
+    if (!spotExist) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+    // Check to see if current logged in user matches spot's owner's id
+    if (req.user.id === spotExist.ownerId) {
+        const bookings = await Booking.findAll({
+            where: { spotId: spotId },
+            include: { model: User, attributes: ['id', 'firstName', 'lastName'] }
+        })
+        res.json({ Bookings: bookings })
+    }
+    // Check to see if it isn't
+    if (req.user.id !== spotExist.ownerId){
+        const bookings2 = await Booking.findAll({
+            where: { spotId: spotExist.id},
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        res.json({ Bookings: bookings2 })
+    }
 
 
 
-    module.exports = router;
+})
+
+module.exports = router;
