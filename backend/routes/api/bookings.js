@@ -42,7 +42,24 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Bookings: bookingsList })
 })
 
-
+// router.delete('/:bookingId', requireAuth, async (req, res) => {
+//     const { bookingId } = req.params;
+//     const booking = await Spot.findByPk(bookingId);
+//     if (!booking) {
+//         res.status(404).json({
+//             message: "Booking couldn't be found",
+//             statusCode: 404
+//         })
+//     }
+//     if (booking.ownerId === req.user.id) {
+//         booking.destroy();
+//         res.status(200).json({
+//             message: "Successfully deleted",
+//             statusCode: 200
+//         })
+//     }
+//     if (booking){}
+// })
 
 
 
