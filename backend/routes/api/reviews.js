@@ -70,8 +70,6 @@ router.get('/current', requireAuth, async (req, res) => {
 
 //CREATE AN IMAGE TO REVIEW BASED ON REVIEWERS ID
 
-
-
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const { reviewId } = req.params;
     const { url } = req.body;

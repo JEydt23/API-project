@@ -3,7 +3,7 @@
 // /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-  
+
     await queryInterface.bulkInsert('Bookings', [
       {
         spotId: 1,
@@ -25,13 +25,13 @@ module.exports = {
       },
       {
         spotId: 4,
-        userId: 4,
+        userId: 2,
         startDate:'2022-12-13',
         endDate: '2022-12-15'
       },
       {
         spotId: 5,
-        userId: 5,
+        userId: 1,
         startDate:'2022-12-31',
         endDate: '2023-01-05'
       },
