@@ -8,12 +8,34 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
+    let { page, size } = req.query;
+
+    let pagination = {};
+    page = parseInt(page);
+    size = parseInt(size);
+
+    if (Number.isNaN(page)) {
+        page = 1;
+    }
+
+    if (Number.isNaN(size)) {
+        size = 25;
+    }
+
+    if (size > 10) size = 10;
+
+    pagination.limit = size;
+    pagination.size = size * (page - 1);
+
     const allSpots = await Spot.findAll({
+
+        ...pagination,
 
         include: [
             { model: Review },
             { model: SpotImage }
         ],
+
     })
 
     for (let spot of allSpots) {
@@ -53,7 +75,7 @@ router.get('/', async (req, res) => {
         delete spot.SpotImages;
     })
 
-    res.json({ Spots });
+    res.json({ Spots, page, size });
 })
 
 // GET ALL SPOTS OWNED BY CURRENT USER
