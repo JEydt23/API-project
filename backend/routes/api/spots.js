@@ -112,22 +112,14 @@ router.get('/current', requireAuth, async (req, res) => {
 // GET DETAILS OF A SPOT FROM AN ID
 
 router.get('/:spotId', async (req, res) => {
-    // const { spotId } = req.params DOESN'T WORK, WHY????
-    const detailsOfSpot = await Spot.findByPk(req.user.id, {
+    const { spotId } = req.params;
+    const detailsOfSpot = await Spot.findByPk(spotId, {
         include: [
             { model: Review, attributes: [] },
             { model: SpotImage, as: "SpotImages", attributes: ['id', 'url', 'preview'] },
             { model: User, as: "Owner", attributes: ['id', 'firstName', 'lastName'] },
         ]
     });
-
-    const countReview = await Review.count({ where: { spotId: req.user.id } });
-    const sumStar = await Review.sum('stars', { where: { spotId: req.user.id } });
-
-    let average = sumStar / countReview;
-    detailsOfSpot.dataValues.numReviews = countReview;
-
-    detailsOfSpot.dataValues.avgStarRating = average;
 
     if (!detailsOfSpot) {
         res.status(404);
@@ -136,6 +128,14 @@ router.get('/:spotId', async (req, res) => {
             statusCode: res.statusCode
         })
     }
+    const countReview = await Review.count({ where: { spotId: req.user.id } });
+    const sumStar = await Review.sum('stars', { where: { spotId: req.user.id } });
+
+    let average = sumStar / countReview;
+    detailsOfSpot.dataValues.numReviews = countReview;
+
+    detailsOfSpot.dataValues.avgStarRating = average;
+
 
     res.json(detailsOfSpot)
 
@@ -179,6 +179,13 @@ router.post('/', requireAuth, async (req, res) => {
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { url } = req.body;
 
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
     const addImage = await SpotImage.create({
         spotId: req.params.spotId,
         url: url,
@@ -190,13 +197,6 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         preview: addImage.preview
     })
 
-    const spot = await Spot.findByPk(req.params.spotId);
-    if (!spot) {
-        res.status(404).json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
 })
 
 // EDIT A SPOT
@@ -366,6 +366,9 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
+    const { startDate, endDate } = req.body;
+    const startDateInMSeconds = new Date(startDate);
+    const endDateInMSeconds = new Date(endDate);
 
     // Search query for spot by its spotId
     // Same code as above, if breaks change both
@@ -377,16 +380,31 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             statusCode: 404
         })
     }
+    if (startDateInMSeconds >= endDateInMSeconds) {
+        res.status(400).json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+                endDate: "endDate cannot be on or before startDate"
+            }
+        })
+    }
 
-    const { startDate, endDate } = req.body;
 
-    const bookingExist = await Booking.findAll({
+
+    const bookingExist = await Booking.findOne({
         where: {
-            spotId: spotId
+            spotId: spotId,
+            startDate: new Date(startDate).getTime(),
+            endDate: new Date(endDate).getTime()
         }
     })
-    console.log("XXXXXXXXXX-BOOKING EXISTS-XXXXXXXXXXX", bookingExist[0])
-    if (bookingExist[0]) {
+    console.log(bookingExist)
+
+    if ((bookingExist.startDateInMSeconds >= startDateInMSeconds && bookingExist.endDateInMSeconds < endDateInMSeconds) ||
+        (bookingExist.startDateInMSeconds <= startDateInMSeconds && bookingExist.endDateInMSeconds < endDateInMSeconds && startDateInMSeconds <= bookingExist.endDateInMSeconds) ||
+        (bookingExist.startDateInMSeconds <= startDateInMSeconds && bookingExist.endDateInMSeconds > endDateInMSeconds) ||
+        (bookingExist.startDateInMSeconds === startDateInMSeconds || bookingExist.endDateInMSeconds === startDateInMSeconds || bookingExist.startDateInMSeconds === endDateInMSeconds || bookingExist.endDateInMSeconds === endDateInMSeconds)) {
         res.status(403).json({
             message: "Sorry, this spot is already booked for the specified dates",
             statusCode: 403,

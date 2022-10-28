@@ -42,24 +42,41 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Bookings: bookingsList })
 })
 
-// router.delete('/:bookingId', requireAuth, async (req, res) => {
-//     const { bookingId } = req.params;
-//     const booking = await Spot.findByPk(bookingId);
-//     if (!booking) {
-//         res.status(404).json({
-//             message: "Booking couldn't be found",
-//             statusCode: 404
-//         })
-//     }
-//     if (booking.ownerId === req.user.id) {
-//         booking.destroy();
-//         res.status(200).json({
-//             message: "Successfully deleted",
-//             statusCode: 200
-//         })
-//     }
-//     if (booking){}
-// })
+router.delete('/:bookingId', requireAuth, async (req, res) => {
+
+    const booking = await Booking.findByPk(req.params.bookingId);
+    // console.log('~~~~~~~~~~> ', currentDate)
+    // console.log(new Date().toDateString())
+    let currentDate = new Date().getTime();
+    if (!booking) {
+        res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    if (currentDate > new Date(booking.startDate).getTime()) {
+        res.status(403).json({
+            message: "Bookings that have been started can't be deleted",
+            statusCode: 403
+        })
+    }
+
+
+
+
+    const spot = await Spot.findByPk({ where: { id: booking.spotId } })
+
+    if (booking.req.user.id === req.user.id || spot.ownerId === req.user.id) {
+        await booking.destroy();
+        res.status(200).json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
+    }
+
+    // // if (booking) { }
+})
 
 
 
