@@ -49,14 +49,14 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     // console.log(new Date().toDateString())
     let currentDate = new Date().getTime();
     if (!booking) {
-        res.status(404).json({
+        return res.status(404).json({
             message: "Booking couldn't be found",
             statusCode: 404
         })
     }
 
     if (currentDate > new Date(booking.startDate).getTime()) {
-        res.status(403).json({
+        return res.status(403).json({
             message: "Bookings that have been started can't be deleted",
             statusCode: 403
         })
@@ -66,7 +66,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
     // if (booking.req.user.id === req.user.id || spot.ownerId === req.user.id) {
         await booking.destroy();
-        res.status(200).json({
+        return res.status(200).json({
             message: "Successfully deleted",
             statusCode: 200
         })
@@ -83,13 +83,13 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const booking = await Booking.findByPk(bookingId);
 
     if (!booking) {
-        res.status(404).json({
+        return res.status(404).json({
             message: "Booking couldn't be found",
             statusCode: 404
         })
     }
     if (startDate >= endDate) {
-        res.status(400).json({
+        return res.status(400).json({
             message: "Validation error",
             statusCode: 400,
             errors: {
