@@ -30,20 +30,20 @@ router.get('/current', requireAuth, async (req, res) => {
         if (imagePrev) {
             booking.Spot.previewImage = imagePrev.url
         }
+        // if (!imagePrev) {
+        //     booking.Spot.previewImage = 'No preview image found';
+        // }
 
-        if (!imagePrev) {
-            booking.Spot.previewImage = 'No preview image found';
-        }
 
         bookingsList.push(booking)
-        delete booking.Spot.SpotImages;
+        // delete booking.Spot.SpotImages;
     }
 
-    res.json({ Bookings: bookingsList })
+    return res.json({ Bookings: bookingsList })
 })
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-
+    // console.log(req.params.bookingId)
     const booking = await Booking.findByPk(req.params.bookingId);
     // console.log('~~~~~~~~~~> ', currentDate)
     // console.log(new Date().toDateString())
@@ -70,9 +70,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
             message: "Successfully deleted",
             statusCode: 200
         })
-    // }
 
-    // // if (booking) { }
 })
 
 // EDIT A BOOKING
@@ -82,7 +80,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const { bookingId } = req.params
     const { startDate, endDate } = req.body
 
-    const booking = await Review.findByPk(bookingId);
+    const booking = await Booking.findByPk(bookingId);
 
     if (!booking) {
         res.status(404).json({
@@ -99,10 +97,11 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         })
     }
-
-    await booking.update({ startDate, endDate })
-
-    res.json(booking)
+    // const bookingJson = booking.toJSON();
+    // const updateBooking = await booking.update({ startDate, endDate, })
+    booking.startDate = startDate
+    booking.endDate = endDate
+    res.json( booking )
 
 
 })
