@@ -1,0 +1,33 @@
+#spotImage {
+    height: 270.5px;
+    width: 256.97px;
+    border-radius: 20px;
+}
+
+#city-country {
+    font-weight: bolder;
+    text-align: justify;
+}
+
+#price {
+    font-weight: bold;
+}
+
+span#avgRating {
+    font-weight: normal;
+    margin: auto;
+    text-align: right;
+}
+span#night {
+    font-weight: normal;
+
+}
+
+/* .previewImage {
+    display: inline;
+} */
+
+#giant-box {
+    display: flex;
+    justify-content: space-around;
+}

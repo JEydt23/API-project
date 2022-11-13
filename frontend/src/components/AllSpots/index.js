@@ -13,7 +13,7 @@ const ShowAllSpots = () => {
 
     if (!getSpots.length) return null;
     return (
-        <div style={{ border: '2px solid red' }}>
+        <div id='giant-box' style={{ border: '2px solid red' }}>
             {getSpots.map(spot => (
                 <AllSpots key={spot.id} spot={spot} />
             ))}

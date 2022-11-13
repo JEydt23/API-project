@@ -1,19 +1,28 @@
 import { NavLink } from "react-router-dom";
+import './AllSpots.css'
+
 
 const AllSpots = ({ spot }) => {
-// console.log(spot)
+    // console.log(spot)
     return (
-        <div>
-            <div style={{ border: '10px solid black' }}>
-                <h1>ALL SPOTS</h1>
-            </div>
-            <div className="allSpots" >
-                <h2>Images should be here</h2>
+        <div className="spots" >
+            <div className="previewImage">
                 <NavLink to='/'>
                     <img src={spot.previewImage} alt={spot.name} id='spotImage'></img>
                 </NavLink>
             </div>
+            <div className="spots-info" /*style={{border: '2px solid black'}}*/>
+                <div id="city-country">{spot.city}, {spot.country}
+                    <span id='avgRating'> ★{spot.avgRating}</span>
+                </div>
+                <div id='price'>${spot.price}
+                    <span id='night'> night</span>
+
+                </div>
+
+            </div>
         </div>
+
     )
 
 }

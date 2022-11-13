@@ -1,5 +1,7 @@
 const GET_ALL_SPOTS = 'spots/GetAllSpots';
 
+// *****ACTION CREATOR ******
+
 // GET ALL SPOTS ACTION CREATOR
 
 const allSpotsAction = (spots) => {
