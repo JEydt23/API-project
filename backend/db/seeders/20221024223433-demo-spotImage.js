@@ -7,27 +7,27 @@ module.exports = {
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: "test1.png",
+        url: "https://www.dmarge.com/wp-content/uploads/2020/07/qld-exterior.jpg",
         preview: true
       },
       {
         spotId: 2,
-        url: "test2.png",
+        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcljBXDnfgzsTZeVOBj-QA9mKhyn2VAP744Q&usqp=CAU",
         preview: true
       },
       {
         spotId: 3,
-        url: "test3.png",
+        url: "https://na.rdcpix.com/745ad62cc62d7347941c32fece2be067w-c1701926610rd-w832_h468_r4_q80.jpg",
         preview: true
       },
       {
         spotId: 4,
-        url: "test4.png",
+        url: "https://cloudfront-us-east-1.images.arcpublishing.com/tronc/QBPKE2Z5CNEX3OKYUAATJCEE2E.jpg",
         preview: true
       },
       {
         spotId: 5,
-        url: "test5.png",
+        url: "https://thumbs.dreamstime.com/z/nice-luxury-yacht-coastal-mansion-intracoastal-waterway-fort-lauderdale-florida-yacht-coastal-mansion-119370410.jpg",
         preview: true
       }, ]);
   },
