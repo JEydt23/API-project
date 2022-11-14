@@ -23,11 +23,12 @@ span#night {
 
 }
 
-/* .previewImage {
-    display: inline;
-} */
-
 #giant-box {
-    display: flex;
-    justify-content: space-around;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1.75rem;
+    width: min(90%);
+    margin-inline: auto;
 }

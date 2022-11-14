@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
         size = 25;
     }
 
-    if (size > 10) size = 10;
+    if (size > 48) size = 48;
 
     pagination.limit = size;
     pagination.size = size * (page - 1);
@@ -150,8 +150,8 @@ router.get('/:spotId', async (req, res) => {
             statusCode: res.statusCode
         })
     }
-    const countReview = await Review.count({ where: { spotId: req.user.id } });
-    const sumStar = await Review.sum('stars', { where: { spotId: req.user.id } });
+    const countReview = await Review.count({ where: { spotId: spotId } });
+    const sumStar = await Review.sum('stars', { where: { spotId: spotId } });
 
     let average = sumStar / countReview;
     detailsOfSpot.dataValues.numReviews = countReview;

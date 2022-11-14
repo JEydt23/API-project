@@ -28,6 +28,7 @@ function LoginForm() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
+      <h2>Welcome to Airbnb</h2>
       <label>
         Username or Email
         <input
@@ -46,7 +47,7 @@ function LoginForm() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit" id='loginButton'>Log In</button>
     </form>
   );
 }

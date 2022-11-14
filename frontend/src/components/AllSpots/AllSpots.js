@@ -2,12 +2,13 @@ import { NavLink } from "react-router-dom";
 import './AllSpots.css'
 
 
+
 const AllSpots = ({ spot }) => {
     // console.log(spot)
     return (
         <div className="spots" >
             <div className="previewImage">
-                <NavLink to='/'>
+                <NavLink to={`/spots/${spot.id}`}>
                     <img src={spot.previewImage} alt={spot.name} id='spotImage'></img>
                 </NavLink>
             </div>
