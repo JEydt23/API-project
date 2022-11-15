@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots';
+import { spotImageAction } from '../../store/spots';
 import './CreateSpot.css'
 
 function CreateSpot({ spot }) {
@@ -28,26 +29,32 @@ function CreateSpot({ spot }) {
         if (!name || name.length > 20) errors.push("Name can't be empty and must be shorter than 20 characters.")
         if (!description || description.length > 100) errors.push("Description can't be empty and must be shorter than 100 characters.")
         if (!price || price < 1) errors.push("Price can't be empty and must be greater than 0 dollars.")
-        // if (!url.match(/\.(gif|png|jpeg|jpg)$/)) errors.push("Image's url should use gif, png, jpeg or jpg format.");
+        if (!url.match(/\.(gif|png|jpeg|jpg)$/)) errors.push("Image's url should use gif, png, jpeg or jpg format.");
         setValidations(errors)
-    }, [address, city, state, country, name, description, price]);
+    }, [address, city, state, country, name, description, price, url]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(true);
 
         if (!validations.length) {
-            const newSpot = {
+            const payload = {
                 address, city, state, country, name, description, price
             }
             // let hostSpot = await dispatch(createSpot(newSpot))
-            // if (hostSpot) {
-            //     const hasImage = ({
-            //         url: url,
-            //         preview: true
-            //     });
-            // }
-            await dispatch(createSpot(newSpot))
+
+            const hasImage = ({
+                url: url,
+                preview: true
+            });
+
+            const newSpot = await dispatch(createSpot(payload))
+            // .catch(async (response) => {
+            //     const data = await response.json();
+
+
+            // })
+            dispatch(spotImageAction(hasImage, newSpot))
             await history.push('/')
         }
     }
@@ -121,15 +128,15 @@ function CreateSpot({ spot }) {
                     required
                 />
             </label>
-            {/* <label>
+            <label>
                 Image URL
                 <input
-                    type="text"
+                    type="url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     required
                 />
-            </label> */}
+            </label>
             <button type="submit">Become a Host</button>
         </form>
 

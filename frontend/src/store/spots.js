@@ -4,7 +4,7 @@ const GET_ALL_SPOTS = 'spots/GetAllSpots';
 const GET_SPOT_DETAILS = 'spots/GetSpotDetails'
 const CREATE_SPOT = 'spots/CreateSpot'
 const DELETE_SPOT = 'spots/DeleteSpot'
-// const ADD_IMAGE_SPOT = 'spots/AddImageSpot'
+const ADD_IMAGE_SPOT = 'spots/AddImageSpot'
 
 // *****ACTION CREATOR ******
 
@@ -28,12 +28,12 @@ const createSpotAction = (spot) => {
 
 // ADD IMAGE TO SPOT ACTION CREATOR
 
-// const addImageAction = (image) => {
-//     return {
-//         type: ADD_IMAGE_SPOT,
-//         image
-//     }
-// }
+const addImageAction = (image) => {
+    return {
+        type: ADD_IMAGE_SPOT,
+        image
+    }
+}
 
 // GET ONE SPOT DETAILS ACTION CREATOR
 
@@ -113,36 +113,37 @@ export const createSpot = (addSpot) => async (dispatch) => {
 
 // ADD IMAGE THUNK
 
-// export const spotImageAction = (image, spotId) => async (dispatch) => {
-//     const { url, preview } = image;
-//     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ url, preview })
-//     })
-//     const imageResponse = await response.json();
-//     if (response.ok) {
-//         dispatch(addImageAction(imageResponse));
-//     }
-// }
+export const spotImageAction = (image, spotId) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image })
+    })
+    if (response.ok) {
+        const imageResponse = await response.json();
+        dispatch(addImageAction(imageResponse));
+        // response.previewImage = imageResponse
+    }
+}
 
 
 // DELETE SPOT THUNK
 
 export const deleteSpot = (id) => async (dispatch) => {
-    // console.log('~~~~~~ SPOT ID ~~~~~~', spotId)
-    // console.log(spotId.id)
+    console.log('~~~~~~ SPOT ID ~~~~~~', id)
+    
     const { spotId } = id;
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
-    // console.log()
-    // if (response.ok) {
-    //     (console.log('~~~~~~~delete hit~~~~~~', spotId))
-    //     const data = await response.json();
-    //     dispatch(deleteSpotAction(spotId));
-    //     return data;
-    // }
+    console.log()
+    if (response.ok) {
+        (console.log('~~~~~~~delete hit~~~~~~', spotId))
+        const data = await response.json();
+        dispatch(deleteSpotAction(spotId));
+        return data;
+    }
 }
 
 // SPOT REDUCER
@@ -160,9 +161,9 @@ const spotsReducer = (state = { viewAllSpots: {}, viewSingleSpot: {} }, action) 
         case CREATE_SPOT:
             newState.viewSingleSpot = action.spot;
             return newState;
-        // case ADD_IMAGE_SPOT:
-        //     newState.viewSingleSpot = action.spot;
-        //     return newState;
+        case ADD_IMAGE_SPOT:
+            newState.viewSingleSpot = action.image;
+            return newState;
         case DELETE_SPOT:
             delete newState[action.spot.id];
 
