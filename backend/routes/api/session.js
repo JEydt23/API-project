@@ -48,16 +48,17 @@ router.post(
       // err.errors = 'Invalid credentials';
       // return next(err);
       return res.status(401).json({
-
+        errors: ['Invalid credentials'],
         message: 'Invalid credentials',
         statusCode: 401
+
       })
     }
 
     const token = await setTokenCookie(res, user);
     user.token = token
 
-    return res.json({user});
+    return res.json(user);
       // id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, username: user.username, token: token});
   }
 );
