@@ -37,61 +37,70 @@ function SignupFormPage({ setShowModal }) {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      <h2>Sign Up for Air-bee-en-bee</h2>
+      <div className="input-fields">
       <label>
-        First Name
-        <input
+        {/* First Name */}
+        <input id='input-box'
           type="text"
           value={firstName}
+          placeholder="First Name"
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
       </label>
       <label>
-        Last Name
-        <input
+        {/* Last Name */}
+        <input id='input-box'
           type="text"
+          placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           required
         />
       </label>
       <label>
-        Email
-        <input
+        {/* Email */}
+        <input id='input-box'
           type="text"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </label>
       <label>
-        Username
-        <input
+        {/* Username */}
+        <input id='input-box'
           type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
       </label>
       <label>
-        Password
-        <input
+        {/* Password */}
+        <input id='input-box'
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </label>
       <label>
-        Confirm Password
-        <input
+        {/* Confirm Password */}
+        <input id='input-box'
           type="password"
+          placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      </div>
+      <button id='submit-button' type="submit">Sign Up</button>
     </form>
   );
 }

@@ -30,25 +30,29 @@ function LoginForm({ setShowModal }) {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <h2>Welcome to Airbnb</h2>
-      <label>
-        Username or Email
-        <input
+      <h2>Welcome to Air-bee-en-bee</h2>
+      <div className="input-fields">
+      <label >
+        {/* Username or Email */}
+        <input id='input-box'
           type="text"
           value={credential}
+          placeholder="Username or email"
           onChange={(e) => setCredential(e.target.value)}
           required
         />
       </label>
-      <label>
-        Password
-        <input
+      <label >
+        {/* Password */}
+        <input id='input-box'
           type="password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
       </label>
+      </div>
       <button type="submit" id='loginButton'>Log In</button>
     </form>
   );

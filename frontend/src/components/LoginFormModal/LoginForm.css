@@ -1,4 +1,4 @@
-#modal-content {
+/* #modal-content {
     margin: 5% auto 15% auto;
     border: 1px solid #888;
     border-radius: 5px;
@@ -27,8 +27,8 @@ label {
     margin: auto;
 } */
 
-button#loginButton {
+/* button#loginButton {
     display: flex;
     justify-content: center;
 
-}
+}  */

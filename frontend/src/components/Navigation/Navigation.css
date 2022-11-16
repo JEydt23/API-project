@@ -1,15 +1,20 @@
  #logo {
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
+
 
 }
 
-#user-circle {
+button#user-circle {
+    background-color: white;
+    border: 0;
+}
+
+#createASpot {
+    display: grid;
     position: relative;
-    display: flex;
-    justify-content: space-between;
-}
 
+}
 
 .modalNavBar {
 
@@ -17,19 +22,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 150px;
+    height: 75px;
     padding: 0 8rem 0 8rem;
     position: fixed;
     width: 100%;
     box-sizing: border-box;
     z-index: 1;
     background-color: white;
+    border-bottom: 1px rgb(223, 219, 219) solid
 }
 
 .spotDetails {
     display: flex;
     position: absolute;
-    top: 150px;
+    top: 100px;
+    width: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;

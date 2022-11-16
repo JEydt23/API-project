@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import droppie from './Images/droppie.png'
 
 function ProfileButton({ user, setLogin, setShowModal }) {
 
@@ -34,7 +35,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   return (
     <>
       <button id='user-circle' onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        {/* <i className="fas fa-user-circle" /> */}
+        <img src={droppie} alt='drop-down'></img>
       </button>
       {showMenu && (user ?
         (<ul className="profile-dropdown">

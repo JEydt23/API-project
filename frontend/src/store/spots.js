@@ -107,7 +107,8 @@ export const createSpot = (addSpot) => async (dispatch) => {
 
 // EDIT SPOT THUNK
 
-export const editSpotThunk = (payload, spotId) => async (dispatch) => {
+// !!spotId is passed in through payload in EditSpotForm index!!
+export const editSpotThunk = (payload) => async (dispatch) => {
     // console.log(`########## spot`, payload.spotId)
     // console.log('&&&&&&&&&&&&&&&& id', spotId)
     const response = await csrfFetch(`/api/spots/${payload.spotId}`, {
@@ -125,6 +126,7 @@ export const editSpotThunk = (payload, spotId) => async (dispatch) => {
 
 // DELETE SPOT THUNK
 
+// !!CAN ONLY DELETE SPOTS IF CURRENT USER OWNS THEM!!
 export const deleteSpot = (spotId) => async (dispatch) => {
 
     // const { id } = spotId;

@@ -8,7 +8,7 @@ import './Navigation.css';
 import LoginForm from '../LoginFormModal/LoginForm';
 import SignupFormPage from '../SignupFormPage'
 import { Modal } from '../../context/Modal'
-import logo from './Images/logo.png'
+import logo from './Images/logo-resize.png'
 
 
 function Navigation({ isLoaded }) {
@@ -38,13 +38,11 @@ function Navigation({ isLoaded }) {
         </NavLink>
         <div id='createASpot'>
           {sessionUser &&
-            <div >
+            <div className='become-a-host'>
               <NavLink to='/spots'>
                 Become a Host
               </NavLink>
             </div>}
-        </div>
-        {/* <li> */}
           {isLoaded && (
             <ProfileButton
               user={sessionUser}
@@ -52,7 +50,7 @@ function Navigation({ isLoaded }) {
               setShowModal={setShowModal}
             />
           )}
-        {/* </li> */}
+        </div>
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} >
