@@ -39,23 +39,29 @@ function CreateSpot({ spot }) {
 
         if (!validations.length) {
             const payload = {
-                address, city, state, country, name, description, price
+                address, city, state, country, name, description, price, url
+            }
+
+            const newNew = await dispatch(createSpot(payload))
+            newNew.SpotImages = [{url: url}]
+            if(newNew){
+                history.push(`/spots/${newNew.id}`)
             }
             // let hostSpot = await dispatch(createSpot(newSpot))
 
-            const hasImage = ({
-                url: url,
-                preview: true
-            });
+            // const hasImage = ({
+            //     url: url,
+            //     preview: true
+            // });
 
-            const newSpot = await dispatch(createSpot(payload))
+            // const newSpot = await dispatch(createSpot(payload))
             // .catch(async (response) => {
             //     const data = await response.json();
 
 
-            // })
-            dispatch(spotImageAction(hasImage, newSpot))
-            await history.push('/')
+            // // })
+            // dispatch(spotImageAction(hasImage, newSpot))
+            // await history.push('/')
         }
     }
 

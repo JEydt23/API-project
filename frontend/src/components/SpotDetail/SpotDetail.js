@@ -15,7 +15,7 @@ const SpotDetail = ({ spotDetails }) => {
     const handleDelete = async (e) => {
         e.preventDefault();
         const spot = {spotId}
-        await dispatch(deleteSpot(spot))
+        await dispatch(deleteSpot(spot.id))
         await history.push('/')
     }
 
