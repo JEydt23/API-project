@@ -33,18 +33,18 @@ function Navigation({ isLoaded }) {
   return (
     <div>
       <div className='modalNavBar' >
-      <NavLink exact to="/" >
-        <img src={logo} alt='logo' id='logo'></img>
-      </NavLink>
-        <li>
-          <div id='createASpot'>
-            {sessionUser &&
-              <div >
-                <NavLink to='/spots'>
-                  Become a Host
-                </NavLink>
-              </div>}
-          </div>
+        <NavLink exact to="/" >
+          <img src={logo} alt='logo' id='logo'></img>
+        </NavLink>
+        <div id='createASpot'>
+          {sessionUser &&
+            <div >
+              <NavLink to='/spots'>
+                Become a Host
+              </NavLink>
+            </div>}
+        </div>
+        {/* <li> */}
           {isLoaded && (
             <ProfileButton
               user={sessionUser}
@@ -52,7 +52,7 @@ function Navigation({ isLoaded }) {
               setShowModal={setShowModal}
             />
           )}
-        </li>
+        {/* </li> */}
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} >

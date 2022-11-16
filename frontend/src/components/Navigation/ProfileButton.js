@@ -33,7 +33,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button id='user-circle' onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (user ?

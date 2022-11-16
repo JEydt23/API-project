@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SpotDetail from "./components/SpotDetail";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
+import EditSpot from "./components/EditSpotForm";
 
 
 function App() {
@@ -28,11 +29,14 @@ function App() {
           <Route path='/' exact>
             <AllSpots />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route exact path='/spots/:spotId'>
             <SpotDetail />
           </Route>
-          <Route path='/spots'>
+          <Route exact path='/spots'>
             <CreateSpot />
+          </Route>
+          <Route exact path='/spots/:spotId/edit'>
+            <EditSpot />
           </Route>
         </Switch>
       )}

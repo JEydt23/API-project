@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
-import { createSpot } from '../../store/spots';
-import './CreateSpot.css'
+import { useHistory, useParams } from 'react-router-dom';
+import { editSpotThunk } from '../../store/spots';
 
-function CreateSpot({ spot }) {
+function EditSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { spotId } = useParams();
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -15,9 +15,8 @@ function CreateSpot({ spot }) {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [validations, setValidations] = useState([]);
-    const [url, setUrl] = useState('');
-    const [errors, setErrors] = useState(false);
 
+    const [errors, setErrors] = useState(false);
 
     useEffect(() => {
         const errors = [];
@@ -28,9 +27,9 @@ function CreateSpot({ spot }) {
         if (!name || name.length > 20) errors.push("Name can't be empty and must be shorter than 20 characters.")
         if (!description || description.length > 100) errors.push("Description can't be empty and must be shorter than 100 characters.")
         if (!price || price < 1) errors.push("Price can't be empty and must be greater than 0 dollars.")
-        if (!url.match(/\.(gif|png|jpeg|jpg)$/)) errors.push("Image's url should use gif, png, jpeg or jpg format.");
+
         setValidations(errors)
-    }, [address, city, state, country, name, description, price, url]);
+    }, [address, city, state, country, name, description, price]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,20 +37,20 @@ function CreateSpot({ spot }) {
 
         if (!validations.length) {
             const payload = {
-                address, city, state, country, name, description, price, url
+                address, city, state, country, name, description, price, spotId
             }
+            console.log("payload:::::::::::::::", payload)
+            await dispatch(editSpotThunk(payload))
 
-            const newNew = await dispatch(createSpot(payload))
-            newNew.SpotImages = [{url: url}]
-            if(newNew){
-                history.push(`/spots/${newNew.id}`)
-            }
+            await history.push(`/spots/${spotId}`)
+
+
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Create a New Spot</h1>
+            <h1>Edit Spot</h1>
             <ul className='errorsList'>
                 {validations.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
@@ -118,21 +117,11 @@ function CreateSpot({ spot }) {
                     required
                 />
             </label>
-            <label>
-                Image URL
-                <input
-                    type="url"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Become a Host</button>
+            <button type="submit">Save Changes</button>
         </form>
-
     );
 
 
 }
 
-export default CreateSpot;
+export default EditSpot;

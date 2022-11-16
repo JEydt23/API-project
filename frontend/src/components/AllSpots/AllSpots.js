@@ -4,7 +4,7 @@ import './AllSpots.css'
 
 
 const AllSpots = ({ spot }) => {
-    // console.log(spot)
+    
     return (
         <div className="spots" >
             <div className="previewImage">
@@ -12,7 +12,7 @@ const AllSpots = ({ spot }) => {
                     <img src={spot.previewImage} alt={spot.name} id='spotImage'></img>
                 </NavLink>
             </div>
-            <div className="spots-info" /*style={{border: '2px solid black'}}*/>
+            <div className="spots-info" >
                 <div id="city-country">{spot.city}, {spot.country}
                     <span id='avgRating'> ★{spot.avgRating}</span>
                 </div>
