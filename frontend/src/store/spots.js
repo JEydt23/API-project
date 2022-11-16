@@ -129,46 +129,52 @@ export const editSpotThunk = (payload) => async (dispatch) => {
 // !!CAN ONLY DELETE SPOTS IF CURRENT USER OWNS THEM!!
 export const deleteSpot = (spotId) => async (dispatch) => {
 
-    // const { id } = spotId;
-    // console.log('~~~~~~ SPOT ID ~~~~~~', spotId)
-    // console.log('~~~~~~~~ID', spotId.spotId)
-    // console.log('=====spotId====', spotId)
-    const response = await csrfFetch(`/api/spots/${spotId.spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
-    // console.log(response)
+
     if (response.ok) {
-        // (console.log('~~~~~~~delete hit~~~~~~', spotId))
-        // const data = await response.json();
-        dispatch(deleteSpotAction(spotId.spotId));
-        // return data;
+
+        dispatch(deleteSpotAction(spotId));
+
     }
 }
 
 // SPOT REDUCER
 
 const spotsReducer = (state = { viewAllSpots: {}, viewSingleSpot: {} }, action) => {
-    let newState = { ...state };
+
     switch (action.type) {
-        case GET_ALL_SPOTS:
+        case GET_ALL_SPOTS: {
+            const newState = { viewAllSpots: {}, viewSingleSpot: {} }
             action.spots.Spots.forEach(spot => newState.viewAllSpots[spot.id] = spot);
             return newState;
-        case GET_SPOT_DETAILS:
+        }
+        case GET_SPOT_DETAILS: {
+            const newState = { viewAllSpots: {}, viewSingleSpot: {} }
             newState.viewSingleSpot = action.spot
             return newState;
-        case CREATE_SPOT:
+
+        }
+        case CREATE_SPOT: {
+            const newState = { ...state, viewAllSpots: { ...state.viewAllSpots }, viewSingleSpot: { ...state.viewSingleSpot } }
             newState.viewSingleSpot = action.spot;
             return newState;
-        case EDIT_SPOT:
+
+        }
+        case EDIT_SPOT: {
+            const newState = { ...state, viewAllSpots: { ...state.viewAllSpots }, viewSingleSpot: { ...state.viewSingleSpot } }
             newState.viewSingleSpot = action.spot.spotId;
             return newState;
-        case DELETE_SPOT:
-            delete newState[action.spot.spotId.spotId];
+        }
+        case DELETE_SPOT: {
+            const newState = { ...state, viewAllSpots: { ...state.viewAllSpots }, viewSingleSpot: { ...state.viewSingleSpot } }
+            delete newState.viewAllSpots[action.id];
             return newState;
+        }
         default:
             return state;
     }
-
 }
 
 export default spotsReducer;
