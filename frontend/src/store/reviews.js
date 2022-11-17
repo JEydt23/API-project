@@ -22,6 +22,7 @@ export const getAllSpotReviews = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const reviews = await response.json();
+        console.log(reviews.Reviews)
         dispatch(allSpotsReviewAction(reviews))
     }
 }
@@ -29,12 +30,14 @@ export const getAllSpotReviews = (spotId) => async (dispatch) => {
 // REVIEW REDUCER
 
 const reviewReducer = (state = { spot: {} }, action) => {
-    let newState = { ...state }
+
     switch (action.type) {
-        case ALL_SPOT_REVIEWS:
+        case ALL_SPOT_REVIEWS: {
             // More or less same as spotsReducer's get all spots
-            action.reviews.Reviews.array.forEach(review => newState.spot[review.id] = review);
+            const newState = {spot: {}}
+            action.reviews.Reviews.forEach(review => newState.spot[review.id] = review);
             return newState;
+        }
         default:
             return state;
     }
