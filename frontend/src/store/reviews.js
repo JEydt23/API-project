@@ -72,6 +72,7 @@ export const createReviewThunk = (reviewObj, user) => async (dispatch) => {
 // DELETE REVIEW THUNK
 
 export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    // console.log('9999999 reviewId = ', reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}/`, {
         method: 'DELETE'
     })
@@ -101,8 +102,8 @@ const reviewReducer = (state = { spot: {} }, action) => {
         }
         case DELETE_REVIEW: {
             const newState = { ...state, spot: { ...state.spot } }
-            console.log('NEWSTATE FOR DELETE ==== ', newState.spot[action.review.id])
-            delete newState.spot[action.review.id];
+            delete newState.spot[action.reviewId];
+            return newState;
         }
         default:
             return state;

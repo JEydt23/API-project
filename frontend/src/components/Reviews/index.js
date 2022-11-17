@@ -3,13 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllSpotReviews } from '../../store/reviews';
 import CreateReview from '../CreateReview';
 import { deleteReviewThunk } from '../../store/reviews';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 
 const GetReviewsBySpot = ({ spotDetails }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const spotReviews = useSelector(state => Object.values(state.review.spot));
+    const currentUser = useSelector(state => state.session.user);
+    let value;
+    spotReviews.find(e => {
+
+        if (e.userId == currentUser.id){
+            value = e.id
+            console.log(value)
+        }
+    })
 
     useEffect(() => {
         dispatch(getAllSpotReviews(spotDetails.id))
@@ -17,17 +26,20 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     }, [dispatch, spotDetails.id])
 
 
-    const handleReviewDelete = async (e) => {
-        e.preventDefault();
-        await dispatch(deleteReviewThunk(spotReviews[0].id))
-        alert('Deletion is a success!')
-        await history.push(`/spots/${spotDetails.id}`)
-    }
+    // const handleReviewDelete = async (e) => {
+    //     e.preventDefault();
+    //     await dispatch(deleteReviewThunk(spotReviews.id))
+    //     alert('Deletion is a success!')
+    //     await history.push(`/spots/${spotDetails.id}`)
+    // }
 
 
 
     if (!spotReviews.length) return null;
-    console.log('&&&&&& spotReviews ===== ', spotReviews)
+    // console.log('22222 reviewId = ', reviewId)
+    // console.log('&&&&&& spotReviews ===== ', { spotReviews })
+    // console.log('spotDetails = ', spotDetails)
+    // console.log('spotDetails.id = ', spotDetails.id)
     // console.log('########### spotReviews', spotReviews[0].id)
     // console.log(`******** spotDetails.id ===`, spotDetails.id)
 
@@ -35,14 +47,18 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
         <div>
             <div className='spot-reviews' style={{ border: '800px solid black' }} >
-                {/* {console.log('######## spotReviews.review', spotReviews[0].review)}
-                {console.log('ele.reviewMAP === ', spotReviews.map(ele => ele.review))} */}
+               
                 <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                 <h3>  {spotDetails.name} ★ {spotDetails.avgStarRating}</h3>
                 <ul>
                     {spotReviews.map((ele) => (
                         <li key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
-                        <button id='delete-review-button' onClick={handleReviewDelete}>Delete Review</button>
+                            {(currentUser.id === ele.User.id &&
+                                <button id='delete-review-button' onClick={async (e) => {
+                                    e.preventDefault()
+                                    await dispatch(deleteReviewThunk(value))
+                                    await history.push(`/spots/${spotDetails.id}`)
+                                }}>Delete Review</button>)}
                         </li>
                     ))}
                 </ul>
