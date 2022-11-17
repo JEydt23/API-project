@@ -20,9 +20,7 @@ const GetSpotDetail = () => {
             })
     }, [dispatch, spotId])
 
-    // dispatch(deleteSpot(spotId))
-
-
+    
 
     if (!spotDetails) return null;
     return isloaded && (

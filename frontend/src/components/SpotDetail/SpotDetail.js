@@ -13,11 +13,12 @@ const SpotDetail = ({ spotDetails }) => {
     const spotImage = spotDetails.SpotImages;
 
 
+
     if (!spotImage) return null;
 
     const handleDelete = async (e) => {
         e.preventDefault();
-        
+
         await history.push('/')
         await dispatch(deleteSpot(spotDetails.id))
 

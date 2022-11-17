@@ -331,7 +331,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
     // Search query for spot by its spotId
     //  also copied from above route, fix both if breaks
-
+    
     const spotExist = await Spot.findByPk(spotId);
     if (!spotExist) {
         return res.status(404).json({
