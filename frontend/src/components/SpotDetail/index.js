@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { deleteSpot, getOneSpot } from "../../store/spots";
 import SpotDetail from './SpotDetail'
 import { useParams } from "react-router-dom";
+import './SpotDetail.css'
 
 
 const GetSpotDetail = () => {
@@ -20,9 +21,9 @@ const GetSpotDetail = () => {
             })
     }, [dispatch, spotId])
 
-    
 
-    if (!spotDetails) return null;
+
+    // if (!spotDetails) return null;
     return isloaded && (
         <div>
             <SpotDetail key={spotDetails.id} spotDetails={spotDetails} />

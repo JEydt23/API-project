@@ -1,1 +1,39 @@
 
+#spotDetailImage {
+    width: 720px;
+    height: 480px;
+}
+
+div.spotDetails {
+    text-align: left;
+    /* position: relative; */
+    top: -300px;
+    width: 720px;
+
+}
+
+button.spot-delete-button {
+    width: 200px;
+    border-radius: 5px;
+    border: 0px;
+    padding: 10px;
+    background-color: rgb(238, 17, 65);
+    margin: 5px;
+}
+
+button.spot-edit-button {
+    width: 200px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 0px;
+    padding: 10px;
+    background-color: rgb(238, 17, 65);
+}
+
+
+div.spot-details-buttons {
+    display: flex;
+    justify-content: left;
+    
+
+}

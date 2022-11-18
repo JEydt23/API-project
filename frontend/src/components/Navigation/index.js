@@ -43,14 +43,14 @@ function Navigation({ isLoaded }) {
                 Become a Host
               </NavLink>
             </div>}
-          {isLoaded && (
-            <ProfileButton
-              user={sessionUser}
-              setLogin={setLogin}
-              setShowModal={setShowModal}
-            />
-          )}
         </div>
+        {isLoaded && (
+          <ProfileButton
+            user={sessionUser}
+            setLogin={setLogin}
+            setShowModal={setShowModal}
+          />
+        )}
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} >

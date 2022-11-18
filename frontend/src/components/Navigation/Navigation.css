@@ -1,43 +1,91 @@
  #logo {
-    height: 100%;
-    width: 100%;
+     height: 100%;
+     width: 100%;
 
 
-}
+ }
 
-button#user-circle {
-    background-color: white;
-    border: 0;
-}
+ button#user-circle {
+     background-color: white;
+    /* display: flex; */
+    width: 86px;
 
-#createASpot {
-    display: grid;
-    position: relative;
 
-}
+ }
 
-.modalNavBar {
+ #createASpot {
+     display: grid;
+     position: relative;
 
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 75px;
-    padding: 0 8rem 0 8rem;
-    position: fixed;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1;
-    background-color: white;
-    border-bottom: 1px rgb(223, 219, 219) solid
-}
 
-.spotDetails {
-    display: flex;
-    position: absolute;
-    top: 100px;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
+ }
+
+ .modalNavBar {
+
+     position: relative;
+     background-color: white;
+     border-bottom: 1px rgb(223, 219, 219) solid;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     height: 75px;
+     padding: 0 10rem 0 10rem;
+     position: fixed;
+     width: 100%;
+     z-index: 1;
+     box-sizing: border-box;
+ }
+
+ .spotDetails {
+     display: flex;
+     position: absolute;
+     top: 100px;
+     width: 100%;
+     align-items: left;
+     margin: 20%;
+     justify-content: center;
+     flex-direction: column;
+ }
+
+ /* div#createASpot {
+
+     position: fixed;
+     display: flex;
+     justify-content: space-between;
+     align-items: right;
+     right: 200px;
+     z-index: 1;
+
+
+ } */
+
+ .login-logout-buttons {
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     border-radius: 5px;
+     border: 0px;
+     padding: 10px;
+     background-color: rgb(238, 17, 65);
+     width: 100%;
+ }
+
+ button {
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     border-radius: 5px;
+     border: 0px;
+     padding: 10px;
+     background-color: rgb(238, 17, 65);
+     width: 100%;
+ }
+
+
+ .profile-dropdown {
+    top: 500px;
+ }

@@ -11,7 +11,7 @@ const SpotDetail = ({ spotDetails }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const spotImage = spotDetails.SpotImages;
-   
+
 
 
 
@@ -28,7 +28,10 @@ const SpotDetail = ({ spotDetails }) => {
     return (
         <div>
             <div className='spotDetails'>
-                <h1>{spotDetails.name}</h1>
+                <h1 className='spot-name-h1'>{spotDetails.name}</h1>
+                <p>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Review(s) . {spotDetails.city}, {spotDetails.country}</p>
+                <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
+                <div className='spot-details-buttons'>
                 <button className="spot-delete-button" onClick={handleDelete}
                 >Delete Spot</button>
                 <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
@@ -36,10 +39,7 @@ const SpotDetail = ({ spotDetails }) => {
                         Edit Spot
                     </button>
                 </NavLink>
-                <p>★{spotDetails.avgStarRating} . {spotDetails.city}, {spotDetails.country}</p>
-                <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
-                <div className='name'>
-                </div>
+            </div>
             </div>
             <div>
                 <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />

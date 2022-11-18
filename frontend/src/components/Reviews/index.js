@@ -5,48 +5,50 @@ import CreateReview from '../CreateReview';
 import { deleteReviewThunk } from '../../store/reviews';
 import { useHistory, useParams } from 'react-router-dom';
 import { getOneSpot } from '../../store/spots';
+import './Reviews.css'
 
 const GetReviewsBySpot = ({ spotDetails }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const spotReviews = useSelector(state => Object.values(state.review.allSpots));
+    const spotReviewNoOV = useSelector(state => state.review.allSpots)
     const currentUser = useSelector(state => state.session.user);
     const oneSpot = useSelector(state => state.spot.viewSingleSpot);
 
-    console.log('MMMMMMMM ONE SPOT STATE = ', oneSpot)
-
-
+    // PROBLEM CODE FOR WHEN NOT LOGGED IN
     let value;
-    spotReviews.find(e => {
+    {spotReviews.find(e => {
 
-        if (e.userId === currentUser.id) {
+        if (e?.userId === currentUser?.id) {
             value = e.id
             // console.log(value)
         }
-    })
+    })}
 
     useEffect(() => {
 
         dispatch(getAllSpotReviews(spotDetails.id))
-        dispatch(getOneSpot(spotDetails.id))
+
     }, [dispatch, spotDetails.id])
 
-
+    useEffect(() => {
+        dispatch(getOneSpot(spotDetails.id))
+    }, [spotDetails.id, spotReviewNoOV, dispatch])
     // if (!spotReviews.length) return;
 
 
     return spotReviews && (
 
         <div>
-            <div className='spot-reviews' style={{ border: '800px solid black' }} >
+            <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
 
                 <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
-                <h3>  {spotDetails.name} ★ {oneSpot.avgStarRating}</h3>
-                <ul>
+                <h3 className='name-of-spot'>  {spotDetails.name} </h3>
+                <p>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
+                <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
                         <li key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
-                            {(currentUser.id === ele.User.id &&
-                                <button id='delete-review-button' onClick={async (e) => {
+                            {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
                                     e.preventDefault()
                                     await dispatch(deleteReviewThunk(value))
 

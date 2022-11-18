@@ -39,8 +39,8 @@ function CreateReview({ spot }) {
     }
     return (
         <>
-            <h1>TESTING</h1>
             <form onSubmit={handleSubmit}>
+
                 <h1>Leave a Review for this location</h1>
                 <ul className='errorsList'>
                     {validations.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -65,7 +65,7 @@ function CreateReview({ spot }) {
                         required
                     />
                 </label>
-                <button type="submit">Create Review</button>
+                <button id='create-review-button' class='review-buttons' type="submit">Create Review</button>
             </form>
         </>
 

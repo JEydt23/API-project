@@ -64,7 +64,7 @@ function LoginForm({ setShowModal }) {
       </div>
       <button type="submit" id='loginButton'>Log In</button>
       <div className="demo-user-login">
-      <button id="'demo-user-button" onClick={demoUser}>DemoUser Login</button>
+      <button id="submit-button" onClick={demoUser}>DemoUser Login</button>
       </div>
 
     </form>
