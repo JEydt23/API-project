@@ -114,6 +114,7 @@ function CreateSpot({ spot }) {
                 <input
                     type="number"
                     value={price}
+                    min='1'
                     onChange={(e) => setPrice(e.target.value)}
                     required
                 />

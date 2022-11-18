@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
         // totalReviews = parseInt(totalReviews);
         // numberOfReviews = parseInt(numberOfReviews);
 
-        let average = totalReviews / numberOfReviews;
+        let average = parseFloat((totalReviews / numberOfReviews).toFixed(1));
         // console.log('*************average: ', average)
         spot.dataValues.avgRating = average;
 
@@ -101,7 +101,7 @@ router.get('/current', requireAuth, async (req, res) => {
         // totalReviews = parseInt(totalReviews);
         // numberOfReviews = parseInt(numberOfReviews);
 
-        let average = totalReviews / numberOfReviews;
+        let average = parseFloat((totalReviews / numberOfReviews).toFixed(1));
         // console.log('*************average: ', average)
         spot.dataValues.avgRating = average;
 
@@ -153,7 +153,8 @@ router.get('/:spotId', async (req, res) => {
     const countReview = await Review.count({ where: { spotId: spotId } });
     const sumStar = await Review.sum('stars', { where: { spotId: spotId } });
 
-    let average = sumStar / countReview;
+    
+    let average = parseFloat((sumStar / countReview).toFixed(1));
     detailsOfSpot.dataValues.numReviews = countReview;
 
     detailsOfSpot.dataValues.avgStarRating = average;
@@ -331,7 +332,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
     // Search query for spot by its spotId
     //  also copied from above route, fix both if breaks
-    
+
     const spotExist = await Spot.findByPk(spotId);
     if (!spotExist) {
         return res.status(404).json({

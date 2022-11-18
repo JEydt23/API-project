@@ -15,7 +15,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     const currentUser = useSelector(state => state.session.user);
     const oneSpot = useSelector(state => state.spot.viewSingleSpot);
 
-    // PROBLEM CODE FOR WHEN NOT LOGGED IN
+    // CODE FOR WHEN NOT LOGGED IN AS RIGHT USER
     let value;
     {spotReviews.find(e => {
 
@@ -44,10 +44,10 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
                 <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                 <h3 className='name-of-spot'>  {spotDetails.name} </h3>
-                <p>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
+                <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
-                        <li key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
+                        <li className='li-li' key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
                             {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
                                     e.preventDefault()
                                     await dispatch(deleteReviewThunk(value))

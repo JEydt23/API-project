@@ -1,14 +1,16 @@
-.spot-reviews {
-   width: 250px;
+/* div.spot-reviews {
+   position: relative;
+    width: 250px;
    height: 250px;
    /* position: fixed; */
-   top: 1400px;
 
-}
 
-form {
-    top: 1000px;
-}
+
+
+/* form {
+    position: relative;
+    top: 400px;
+} */
 
 .review-buttons {
     position: relative;
@@ -21,4 +23,50 @@ form {
     padding: 10px;
     background-color: rgb(238, 17, 65);
     width: 100%;
+}
+
+div.review-box {
+    position: relative;
+    top: 550px;
+    left: 200px;
+    width: 720px;
+}
+
+input.review-inputs{
+    position: relative;
+    top: 700px;
+    left: 120px;
+    width: 350px;
+}
+
+button#create-review-button.review-buttons{
+
+    position: relative;
+    top: 550px;
+    left: 200px;
+    width: 360px;
+
+
+}
+
+h3.name-of-spot{
+    position: relative;
+    top: 325px;
+    left: 700px;
+    width: 360px;
+}
+
+p.list-of-reviews {
+    position: relative;
+    top: 325px;
+    left: 700px;
+    width: 360px;
+}
+
+li.li-li {
+    position: relative;
+    top: 325px;
+    left: 650px;
+    width: 200px;
+
 }
