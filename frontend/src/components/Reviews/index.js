@@ -19,9 +19,12 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     let value;
     {spotReviews.find(e => {
 
+        console.log('e ===', e)
         if (e?.userId === currentUser?.id) {
             value = e.id
-            // console.log(value)
+            console.log('value === ', value)
+            console.log('currentUser === ', currentUser.id)
+            console.log('current user ===', currentUser)
         }
     })}
 
@@ -41,7 +44,8 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
         <div>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-
+                {/*
+                 {(currentUser?.id !== e?.userId) &&} */}
                 <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                 <h3 className='name-of-spot'>  {spotDetails.name} </h3>
                 <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>

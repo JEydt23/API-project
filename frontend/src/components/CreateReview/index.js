@@ -23,7 +23,7 @@ function CreateReview({ spot }) {
         if (stars > 5) errors.push("You cannot give this location more than 5 stars.")
         if (stars < 0) errors.push("You cannot give this location less than 0 stars.")
         if (currentUser && (currentUser.id === currentSpot.ownerId)) errors.push('You cannot review a location you own.')
-        if (review) errors.push("You have already reviewed this location.")
+        // if (review) errors.push("You have already reviewed this location.")
         setValidations(errors)
     }, [review, stars])
 
