@@ -118,7 +118,7 @@ export const editSpotThunk = (payload) => async (dispatch) => {
     })
     if (response.ok) {
         const spotData = await response.json();
-        console.log(spotData)
+        // console.log(spotData)
         dispatch(editSpotAction(spotData))
         return spotData;
     }

@@ -10,6 +10,13 @@ function LoginForm({ setShowModal }) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+
+  const demoUser = (event) => {
+    setCredential('demo@user.io');
+    setPassword('password')
+  }
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -23,6 +30,8 @@ function LoginForm({ setShowModal }) {
       );
   };
 
+
+
   return (
     <form onSubmit={handleSubmit}>
       <ul>
@@ -32,28 +41,32 @@ function LoginForm({ setShowModal }) {
       </ul>
       <h2>Welcome to Air-bee-en-bee</h2>
       <div className="input-fields">
-      <label >
-        {/* Username or Email */}
-        <input id='input-box'
-          type="text"
-          value={credential}
-          placeholder="Username or email"
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label >
-        {/* Password */}
-        <input id='input-box'
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
+        <label >
+          {/* Username or Email */}
+          <input id='input-box-username'
+            type="text"
+            value={credential}
+            placeholder="Username or email"
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        </label>
+        <label >
+          {/* Password */}
+          <input id='input-box-password'
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
       </div>
       <button type="submit" id='loginButton'>Log In</button>
+      <div className="demo-user-login">
+      <button id="'demo-user-button" onClick={demoUser}>DemoUser Login</button>
+      </div>
+
     </form>
   );
 }

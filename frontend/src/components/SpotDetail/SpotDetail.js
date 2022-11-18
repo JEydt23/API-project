@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteSpot } from '../../store/spots';
 import GetReviewsBySpot from '../Reviews';
@@ -11,6 +11,8 @@ const SpotDetail = ({ spotDetails }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const spotImage = spotDetails.SpotImages;
+   
+
 
 
     if (!spotImage) return null;
