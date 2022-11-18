@@ -14,16 +14,20 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     const spotReviewNoOV = useSelector(state => state.review.allSpots)
     const currentUser = useSelector(state => state.session.user);
     const oneSpot = useSelector(state => state.spot.viewSingleSpot);
+    console.log(spotReviewNoOV)
+    console.log(spotDetails)
 
     // CODE FOR WHEN NOT LOGGED IN AS RIGHT USER
     let value;
-    {spotReviews.find(e => {
+    {
+        spotReviews.find(e => {
 
-        if (e?.userId === currentUser?.id) {
-            value = e.id
-            // console.log(value)
-        }
-    })}
+            if (e?.userId === currentUser?.id) {
+                value = e.id
+                // console.log(value)
+            }
+        })
+    }
 
     useEffect(() => {
 
@@ -39,25 +43,27 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
     return spotReviews && (
 
-        <div>
-            <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
+        <div className='spot-reviews' style={{ border: '5px solid black' }}>
 
-                <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
-                <h3 className='name-of-spot'>  {spotDetails.name} </h3>
-                <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
-                <ul className='list-of-reviews'>
+
+            <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
+            <h3 style={{ border: '5px solid green' }}>  {spotDetails.name} </h3>
+            <p style={{ border: '5px solid red' }}>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
+            <div className='ul'>
+                <ul>
                     {spotReviews.map((ele) => (
-                        <li className='li-li' key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
+                        <li key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
                             {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
-                                    e.preventDefault()
-                                    await dispatch(deleteReviewThunk(value))
+                                e.preventDefault()
+                                await dispatch(deleteReviewThunk(value))
 
-                                    await history.push(`/spots/${spotDetails.id}`)
-                                }}>Delete Review</button>)}
+                                await history.push(`/spots/${spotDetails.id}`)
+                            }}>Delete Review</button>)}
                         </li>
                     ))}
                 </ul>
             </div>
+
         </div>
     )
 

@@ -13,7 +13,7 @@ function CreateReview({ spot }) {
     const [stars, setStars] = useState(0);
     const [errors, setErrors] = useState(false);
     const [validations, setValidations] = useState([]);
-    // console.log('------CURRENT SPOT----- ', currentSpot)
+
 
     useEffect(() => {
         const errors = [];
@@ -23,7 +23,7 @@ function CreateReview({ spot }) {
         if (stars > 5) errors.push("You cannot give this location more than 5 stars.")
         if (stars < 0) errors.push("You cannot give this location less than 0 stars.")
         if (currentUser && (currentUser.id === currentSpot.ownerId)) errors.push('You cannot review a location you own.')
-        if (review) errors.push("You have already reviewed this location.")
+
         setValidations(errors)
     }, [review, stars])
 
@@ -43,7 +43,7 @@ function CreateReview({ spot }) {
         }
     }
     return (
-        <>
+        <div className="onSubmit">
             <form onSubmit={handleSubmit}>
                 <div className="review-box">
                     <h4 className="leave-review-h2">Leave a Review for this location</h4>
@@ -52,19 +52,19 @@ function CreateReview({ spot }) {
                     </ul>
                 </div>
                 <div className="review-input">
-                    <label>
-                        {/* Review Message */}
-                        <input className="review-inputs"
+                    {/* <label>
+                        Review Message */}
+                        <input
                             type="text"
                             placeholder="Write a review here"
                             value={review}
                             onChange={(e) => setReview(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
+                    {/* </label> */}
+                    {/* <label> */}
                         {/* Stars */}
-                        <input className="review-inputs"
+                        <input 
                             type="number"
                             min='0'
                             max='5'
@@ -73,11 +73,11 @@ function CreateReview({ spot }) {
                             onChange={(e) => setStars(e.target.value)}
                             required
                         />
-                    </label>
+                    {/* </label> */}
                 </div>
                 <button id='create-review-button' class='review-buttons' type="submit">Create Review</button>
             </form>
-        </>
+        </div>
 
     );
 
