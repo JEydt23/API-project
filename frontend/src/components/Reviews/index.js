@@ -5,11 +5,10 @@ import CreateReview from '../CreateReview';
 import { deleteReviewThunk } from '../../store/reviews';
 import { useHistory, useParams } from 'react-router-dom';
 
-
 const GetReviewsBySpot = ({ spotDetails }) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const spotReviews = useSelector(state => Object.values(state.review.spot));
+    const spotReviews = useSelector(state => Object.values(state.review.allSpots));
     const currentUser = useSelector(state => state.session.user);
     let value;
     spotReviews.find(e => {
@@ -22,32 +21,17 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
     useEffect(() => {
         dispatch(getAllSpotReviews(spotDetails.id))
-        // console.log('&&&&&&&&&&&& spotDetails.id', spotDetails.id)
+
     }, [dispatch, spotDetails.id])
 
 
-    // const handleReviewDelete = async (e) => {
-    //     e.preventDefault();
-    //     await dispatch(deleteReviewThunk(spotReviews.id))
-    //     alert('Deletion is a success!')
-    //     await history.push(`/spots/${spotDetails.id}`)
-    // }
-
-
-
-    if (!spotReviews.length) return null;
-    // console.log('22222 reviewId = ', reviewId)
-    // console.log('&&&&&& spotReviews ===== ', { spotReviews })
-    // console.log('spotDetails = ', spotDetails)
-    // console.log('spotDetails.id = ', spotDetails.id)
-    // console.log('########### spotReviews', spotReviews[0].id)
-    // console.log(`******** spotDetails.id ===`, spotDetails.id)
+    // if (!spotReviews.length) return;
 
     return spotReviews && (
 
         <div>
             <div className='spot-reviews' style={{ border: '800px solid black' }} >
-               
+
                 <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                 <h3>  {spotDetails.name} ★ {spotDetails.avgStarRating}</h3>
                 <ul>

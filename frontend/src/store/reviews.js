@@ -41,7 +41,7 @@ export const getAllSpotReviews = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`)
     if (response.ok) {
         const data = await response.json();
-        // console.log(reviews.Reviews)
+
         dispatch(allSpotsReviewAction(data.Reviews))
     }
 }
@@ -51,11 +51,7 @@ export const getAllSpotReviews = (spotId) => async (dispatch) => {
 export const createReviewThunk = (reviewObj, user) => async (dispatch) => {
 
     const { review, stars, spotId } = reviewObj
-    // console.log('%%%%%% spotId = ', spotId)
-    // console.log("******** spotId.spotId = ", spotId.spotId)
-    // console.log("stars = ", stars)
-    // console.log("review", review)
-    // console.log("addReview = ", addReview)
+
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -72,7 +68,7 @@ export const createReviewThunk = (reviewObj, user) => async (dispatch) => {
 // DELETE REVIEW THUNK
 
 export const deleteReviewThunk = (reviewId) => async (dispatch) => {
-    // console.log('9999999 reviewId = ', reviewId)
+
     const response = await csrfFetch(`/api/reviews/${reviewId}/`, {
         method: 'DELETE'
     })
@@ -83,26 +79,22 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 
 // REVIEW REDUCER
 
-const reviewReducer = (state = { spot: {} }, action) => {
+const reviewReducer = (state = { spot: {}, allSpots: {} }, action) => {
 
     switch (action.type) {
         case ALL_SPOT_REVIEWS: {
-            // More or less same as spotsReducer's get all spots
-            const newState = { spot: {} }
-            action.reviews.forEach(review => newState.spot[review.id] = review);
+            const newState = { spot: {}, allSpots: {} }
+            action.reviews.forEach(review => newState.allSpots[review.id] = review);
             return newState;
         }
         case CREATE_REVIEW: {
-            const newState = { ...state, spot: { ...state.spot } }
-            console.log('action = ', action.review.id)
-            newState.spot[action.review.id] = action.review
-            // console.log('888888 newState =', newState)
-
+            const newState = { ...state, spot: { ...state.spot }, allSpots: { ...state.allSpots } }
+            newState.allSpots[action.review.id] = action.review
             return newState
         }
         case DELETE_REVIEW: {
-            const newState = { ...state, spot: { ...state.spot } }
-            delete newState.spot[action.reviewId];
+            const newState = { ...state, spot: { ...state.spot }, allSpots: {...state.allSpots} }
+            delete newState.allSpots[action.reviewId];
             return newState;
         }
         default:

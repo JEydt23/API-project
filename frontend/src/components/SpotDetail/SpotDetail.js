@@ -13,7 +13,6 @@ const SpotDetail = ({ spotDetails }) => {
     const spotImage = spotDetails.SpotImages;
 
 
-
     if (!spotImage) return null;
 
     const handleDelete = async (e) => {
@@ -23,8 +22,6 @@ const SpotDetail = ({ spotDetails }) => {
         await dispatch(deleteSpot(spotDetails.id))
 
     }
-
-
 
     return (
         <div>
