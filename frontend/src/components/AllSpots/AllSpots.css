@@ -1,7 +1,9 @@
 #spotImage {
-    height: 270.5px;
-    width: 256.97px;
+    height: 250px;
+    width: 250px;
     border-radius: 20px;
+    min-width: 250px;
+    min-height: 250px;
 }
 
 #city-country {

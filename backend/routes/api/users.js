@@ -68,7 +68,7 @@ router.post(
         message: "User already exists",
         statusCode: 403,
         errors: {
-          email: "User with that email already exists"
+          email: "That username already taken"
         }
       })
     }

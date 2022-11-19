@@ -17,16 +17,21 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
     // CODE FOR WHEN NOT LOGGED IN AS RIGHT USER
     let value;
-    {spotReviews.find(e => {
+    let reviewed;
 
-        console.log('e ===', e)
-        if (e?.userId === currentUser?.id) {
-            value = e.id
-            console.log('value === ', value)
-            console.log('currentUser === ', currentUser.id)
-            console.log('current user ===', currentUser)
-        }
-    })}
+    {
+        spotReviews.find(e => {
+
+            console.log('e ===', e)
+            if (e?.userId === currentUser?.id) {
+                value = e.id
+                // console.log('value === ', value)
+                console.log('currentUser === ', currentUser.id)
+
+                console.log('current user ===', currentUser)
+            }
+        })
+    }
 
     useEffect(() => {
 
@@ -39,25 +44,32 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     }, [spotDetails.id, spotReviewNoOV, dispatch])
     // if (!spotReviews.length) return;
 
+    // {spotReviews.filter(review => {
+    //     {console.log('review.userId ===', review.userId)
+    //     console.log('currentUser.id ====', currentUser.id)}
+    //     if (review?.userId !== currentUser?.id)
+
+    if (currentUser) spotReviews.find(review => review.userId === currentUser.id) ? reviewed = true : reviewed = false;
 
     return spotReviews && (
-
         <div>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-                {/*
-                 {(currentUser?.id !== e?.userId) &&} */}
-                <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
+                {(!reviewed) &&
+                    <div>
+                        <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
+                    </div>
+                }
                 <h3 className='name-of-spot'>  {spotDetails.name} </h3>
                 <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
                         <li className='li-li' key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
                             {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
-                                    e.preventDefault()
-                                    await dispatch(deleteReviewThunk(value))
+                                e.preventDefault()
+                                await dispatch(deleteReviewThunk(value))
 
-                                    await history.push(`/spots/${spotDetails.id}`)
-                                }}>Delete Review</button>)}
+                                await history.push(`/spots/${spotDetails.id}`)
+                            }}>Delete Review</button>)}
                         </li>
                     ))}
                 </ul>

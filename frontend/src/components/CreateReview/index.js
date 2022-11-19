@@ -6,6 +6,8 @@ import { createReviewThunk } from "../../store/reviews";
 function CreateReview({ spot }) {
     const currentUser = useSelector(state => state.session.user);
     const currentSpot = useSelector(state => state.spot.viewSingleSpot);
+    const spotReviews = useSelector(state => Object.values(state.review.allSpots));
+
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -24,9 +26,13 @@ function CreateReview({ spot }) {
         if (stars < 0) errors.push("You cannot give this location less than 0 stars.")
         if (currentUser && (currentUser.id === currentSpot.ownerId)) errors.push('You cannot review a location you own.')
         // if (review) errors.push("You have already reviewed this location.")
+
+
+
         setValidations(errors)
     }, [review, stars])
-
+    let reviewed;
+    if (currentUser) spotReviews.find(review => review.userId === currentUser.id) ? reviewed = true : reviewed = false;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +50,7 @@ function CreateReview({ spot }) {
     }
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form hidden={reviewed} onSubmit={handleSubmit}>
                 <div className="review-box">
                     <h4 className="leave-review-h2">Leave a Review for this location</h4>
                     <ul className='errorsList'>

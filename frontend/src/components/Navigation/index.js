@@ -10,7 +10,6 @@ import SignupFormPage from '../SignupFormPage'
 import { Modal } from '../../context/Modal'
 import logo from './Images/logo-resize.png'
 
-
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const [showModal, setShowModal] = useState(false);

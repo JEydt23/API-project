@@ -1,11 +1,11 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import * as sessionActions from '../../store/session';
 import droppie from './Images/droppie.png'
 
 function ProfileButton({ user, setLogin, setShowModal }) {
-
+  // const currentUser = useSelector(state => state.session.user)
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -26,11 +26,17 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  // useEffect(() => {
+  //   console.forceUpdate();
+  // }, [user])
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
 
   };
+
+
 
   return (
     <>
@@ -40,15 +46,15 @@ function ProfileButton({ user, setLogin, setShowModal }) {
       </button>
       {showMenu && (user ?
         (<ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
+          <li key={user.username}>{user.username}</li>
+          <li key={user.email}>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>) :
         (<ul className='profile-dropdown'>
           <li>
-            <button class='login-logout-buttons' onClick={() => {
+            <button className='login-logout-buttons' onClick={() => {
               setLogin(true)
               setShowModal(true)
             }}>
@@ -56,7 +62,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </button>
           </li>
           <li>
-            <button class='login-logout-buttons' onClick={() => {
+            <button className='login-logout-buttons' onClick={() => {
               setLogin(false)
               setShowModal(true)
             }}>
