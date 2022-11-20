@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteSpot } from '../../store/spots';
 import GetReviewsBySpot from '../Reviews';
+import aircover from '../Navigation/Images/aircover.png'
 
 
 import './SpotDetail.css'
@@ -25,6 +26,14 @@ const SpotDetail = ({ spotDetails }) => {
         starRating = `☆ 0`
     }
 
+    let youMessage;
+    if (currentUser.id === spotDetails.ownerId) {
+        youMessage = '(This is your spot)'
+    } else {
+        youMessage = ''
+    }
+
+
     const handleDelete = async (e) => {
         e.preventDefault();
 
@@ -42,27 +51,52 @@ const SpotDetail = ({ spotDetails }) => {
                 <div className='spot-image'>
                     <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
                 </div>
-                <div className='hosted-by'>
-                    <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName}</h2>
+                <div className='hosted-and-buttons'>
+                    <div className='hosted-by'>
+                        <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName} {youMessage}</h2>
+                        <p>4 guests · 3 bedrooms · 4 beds · 3 bath</p>
+                    </div>
+                    <div className='spot-details-buttons'>
+                        {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
+                        >Delete Spot</button>)}
+                        <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
+                            {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
+                                Edit Spot
+                            </button>)}
+                        </NavLink>
+                    </div>
+
                 </div>
                 <div className='address-review-div'>
+                    <div className='address-extraDetails'>
+                        <div className='extra-details-with-emojis'>
+                            <div className='emoji-extra-details'>
+                                <h4>💻 Great for remote work</h4>
+                                <p className='emojitext'>Fast wifi at 120Mbps, plus a dedicated workspace in a private room.</p>
+                            </div>
+                            <div className='emoji-extra-details'>
+                                <h4>🚪 Self check-in</h4>
+                                <p className='emojitext'>Check yourself in with the keypad</p>
+                            </div>
+                            <div className='emoji-extra-details'>
+                                <h4>📅 Free cancellation for 48 hours</h4>
+                            </div>
+                        </div>
+                        <div className='aircover'>
+                            <img src={aircover} alt='aircover logo'></img>
+                            <p className='aircovertext'>Every booking includes free
+                                protection from Host cancellations, listing inaccuracies,
+                                and other issues like trouble checking in.</p>
 
-                    <div className='spotAddress'>{spotDetails.address}, {spotDetails.city}, {spotDetails.state}
-                        <div>{spotDetails.description}
+                        </div>
+                        <div className='spotAddress'> Located at {spotDetails.address}, {spotDetails.city}, {spotDetails.state}
+                            <div>{spotDetails.description}
+                            </div>
                         </div>
                     </div>
                     <div>
                         <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
                     </div>
-                </div>
-                <div className='spot-details-buttons'>
-                    {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
-                    >Delete Spot</button>)}
-                    <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
-                        {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
-                            Edit Spot
-                        </button>)}
-                    </NavLink>
                 </div>
 
             </div>

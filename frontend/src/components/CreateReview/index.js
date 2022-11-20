@@ -20,11 +20,12 @@ function CreateReview({ spot }) {
     useEffect(() => {
         const errors = [];
         if (!review.length) errors.push("Review must not be empty");
-        if (review.length > 100) errors.push("Review must be shorter than 100 characters.")
+        if (review.length > 255) errors.push("Review must be shorter than 100 characters.")
         if (review.length < 2) errors.push("Review must be larger than 2 characters.")
         if (stars > 5) errors.push("You cannot give this location more than 5 stars.")
         if (stars < 0) errors.push("You cannot give this location less than 0 stars.")
         if (currentUser && (currentUser.id === currentSpot.ownerId)) errors.push('You cannot review a location you own.')
+
         // if (review) errors.push("You have already reviewed this location.")
 
 
@@ -50,7 +51,7 @@ function CreateReview({ spot }) {
     }
     return (
         <>
-            <form hidden={reviewed} onSubmit={handleSubmit}>
+            {currentUser && <form hidden={reviewed} onSubmit={handleSubmit}>
                 <div className="review-box">
                     <h4 className="leave-review-h4">Leave a Review for this location</h4>
                     <ul className='errorsList'>
@@ -81,8 +82,9 @@ function CreateReview({ spot }) {
                         />
                     </label>
                 </div>
+
                 <button id='create-review-button' class='review-buttons' type="submit">Create Review</button>
-            </form>
+            </form>}
         </>
 
     );

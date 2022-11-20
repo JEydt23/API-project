@@ -108,4 +108,38 @@ div.address-review-div {
 
 div.spotAddress {
     width: 100%;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    line-height: 1.75rem;
+}
+
+div.spot-reviews{
+    width: 400px;
+}
+
+div.hosted-and-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 950px;
+    margin-bottom: 10px;
+}
+
+div.extra-details-with-emojis {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px grey solid;
+    border-bottom: 1px grey solid;
+}
+
+div.aircover {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px grey solid;
+}
+
+p.emojitext{
+color: grey;
+font-size: .9rem;
+
 }
