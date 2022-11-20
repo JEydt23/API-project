@@ -8,7 +8,7 @@
 div.spotDetails {
     text-align: left;
     /* position: relative; */
-    top: -300px;
+    margin-top: .5%;
     width: 720px;
 
 }

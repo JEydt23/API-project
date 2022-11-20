@@ -40,13 +40,10 @@ input.review-inputs{
 }
 
 button#create-review-button.review-buttons{
-
     position: relative;
     top: 550px;
     left: 200px;
     width: 360px;
-
-
 }
 
 h3.name-of-spot{
@@ -65,8 +62,6 @@ p.list-of-reviews {
 
 li.li-li {
     position: relative;
-    top: 325px;
-    left: 650px;
-    width: 200px;
-
+    display: flex;
+    flex-direction: column;
 }

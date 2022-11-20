@@ -18,6 +18,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     // CODE FOR WHEN NOT LOGGED IN AS RIGHT USER
     let value;
     let reviewed;
+    console.log(spotDetails)
 
     {
         spotReviews.find(e => {
@@ -54,7 +55,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     return spotReviews && (
         <div>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-                {(!reviewed) &&
+                {(!reviewed) && (currentUser.id !== spotDetails.ownerId ) &&
                     <div>
                         <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                     </div>
