@@ -27,7 +27,7 @@ const SpotDetail = ({ spotDetails }) => {
     }
 
     let youMessage;
-    if (currentUser.id === spotDetails.ownerId) {
+    if (currentUser?.id === spotDetails?.ownerId) {
         youMessage = '(This is your spot)'
     } else {
         youMessage = ''
