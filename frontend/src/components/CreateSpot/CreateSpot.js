@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots';
 import './CreateSpot.css'
 
 function CreateSpot({ spot }) {
+    const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState('');
@@ -21,6 +22,7 @@ function CreateSpot({ spot }) {
 
     useEffect(() => {
         const errors = [];
+
         if (!address || address.length > 30) errors.push("Address can't be empty and must be less than 30 characters.");
         if (!city || city.length > 20) errors.push("City cannot be empty and must be less than 20 characters.");
         if (!state || state.length > 20) errors.push("State can't be empty and must be shorter than 20 characters.")
@@ -36,101 +38,119 @@ function CreateSpot({ spot }) {
         e.preventDefault();
         setErrors(true);
 
+        if (!sessionUser){
+            alert('You must be logged in to create a spot.')
+        }
         if (!validations.length) {
             const payload = {
                 address, city, state, country, name, description, price, url
             }
 
             const newNew = await dispatch(createSpot(payload))
-            newNew.SpotImages = [{url: url}]
-            if(newNew){
+            newNew.SpotImages = [{ url: url }]
+            if (newNew) {
                 history.push(`/spots/${newNew.id}`)
             }
         }
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h1>Create a New Spot</h1>
-            <ul className='errorsList'>
-                {validations.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Address
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                City
-                <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                State
-                <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Country
-                <input
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Name
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Description
-                <input
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Price
-                <input
-                    type="number"
-                    value={price}
-                    min='1'
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Image URL
-                <input
-                    type="url"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Become a Host</button>
-        </form>
-
+    return  (
+        <div className='create-a-spot-main'>
+            <form onSubmit={handleSubmit}>
+                <div className='create-spot'>
+                    <h1>Create a New Spot</h1>
+                </div>
+                <div className='ul-create-spot'>
+                    <ul className='errorsList'>
+                        {validations.map((error, idx) => <li className='create-spot-errors' key={idx}>{error}</li>)}
+                    </ul>
+                </div>
+                <div className='create-spot-label'>
+                <label className='create-spot'>
+                    {/* Address */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='Address'
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* City */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='City'
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* State */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='State'
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* Country */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='Country'
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* Name */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='Name of location/property'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* Description */}
+                    <input className='create-spot-input'
+                        type="text"
+                        placeholder='Description of residence'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* Price */}
+                    <input className='create-spot-input'
+                        type="number"
+                        value={price}
+                        placeholder='Price per night in USD'
+                        min='1'
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className='create-spot'>
+                    {/* Image URL */}
+                    <input className='create-spot-input'
+                        type="url"
+                        placeholder='Image URL of residence'
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                        required
+                    />
+                </label>
+                </div>
+                <button id='create-submit-spot' type="submit">Become a Host</button>
+            </form>
+        </div>
     );
 
 

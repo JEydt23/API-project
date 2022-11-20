@@ -49,7 +49,7 @@ function SignupFormPage({ setShowModal }) {
       <div className="input-fields">
         <label>
           {/* First Name */}
-          <input id='input-box-firstname'
+          <input className="login"
             type="text"
             value={firstName}
             placeholder="First Name"
@@ -59,7 +59,7 @@ function SignupFormPage({ setShowModal }) {
         </label>
         <label>
           {/* Last Name */}
-          <input id='input-box-lastname'
+          <input className="login"
             type="text"
             placeholder="Last Name"
             value={lastName}
@@ -69,7 +69,7 @@ function SignupFormPage({ setShowModal }) {
         </label>
         <label>
           {/* Email */}
-          <input id='input-box-email'
+          <input className="login"
             type="text"
             placeholder="Email"
             value={email}
@@ -79,7 +79,7 @@ function SignupFormPage({ setShowModal }) {
         </label>
         <label>
           {/* Username */}
-          <input id='input-box-username'
+          <input className="login"
             type="text"
             placeholder="Username"
             value={username}
@@ -89,7 +89,7 @@ function SignupFormPage({ setShowModal }) {
         </label>
         <label>
           {/* Password */}
-          <input id='input-box-password'
+          <input className="login"
             type="password"
             placeholder="Password"
             value={password}
@@ -99,7 +99,7 @@ function SignupFormPage({ setShowModal }) {
         </label>
         <label>
           {/* Confirm Password */}
-          <input id='input-box-confirm'
+          <input className="login"
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}

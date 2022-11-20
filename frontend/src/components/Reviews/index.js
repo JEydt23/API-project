@@ -64,7 +64,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                 <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
-                        <li className='li-li' key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
+                        <li className='li-li' key={ele.id}>"{ele.review}" ★  {ele.stars} - {ele.User.firstName} {ele.User.lastName}
                             {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
                                 await dispatch(deleteReviewThunk(value))

@@ -1,0 +1,52 @@
+div.create-a-spot-main {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+div.create-spot {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+div.ul-create-spot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: disc;
+
+
+}
+
+label.create-spot{
+    width: 100%;
+    justify-content: center;
+
+}
+
+li.create-spot-errors {
+    list-style-type: disc;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+div.ul-create-spot {
+    width: 100%;
+    font-size: 95%;
+    margin-bottom: 5px;
+}
+
+input.create-spot-input {
+    width: 75%;
+    height: 30px;
+    border-radius: 5px;
+    border: grey 1px solid;
+}
+
+button#create-submit-spot {
+    margin-top: 20px;
+}

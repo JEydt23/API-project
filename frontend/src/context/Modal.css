@@ -37,20 +37,22 @@
 }
 
 label {
-  padding: 10px;
+  /* padding: 10px; */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  width: 50%;
-  height: 50%;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  /* width: 50%; */
+  /* height: 50%; */
+  /* border-radius: 5px; */
+
 }
+
 h2 {
   text-align: center;
 }
-
+/*
 .input-fields {
   padding: 0;
   position: relative;
@@ -65,7 +67,7 @@ h2 {
   border-radius: 30px;
   border-color: gray;
 
-}
+} */
 
 button#loginButton {
   position: relative;
@@ -78,10 +80,18 @@ button#loginButton {
   padding: 10px;
   background-color: rgb(238, 17, 65);
   width: 100%;
+  margin: 1px;
 
 }
 
-button#submit-button{
+input.login{
+  width: 100%;
+
+}
+
+
+
+button#submit-button {
   position: relative;
   /* display: flex; */
   justify-content: center;
@@ -96,10 +106,10 @@ button#submit-button{
   height: 100%;
 }
 
-#input-box {
+/* #input-box {
   border-radius: 5px;
   border: 1px solid grey;
-}
+} */
 
 /* button#demo-user-button {
   position: relative;

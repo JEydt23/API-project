@@ -14,7 +14,7 @@ const SpotDetail = ({ spotDetails }) => {
     const currentUser = useSelector(state => state.session.user);
 
 
-    
+
 
     if (!spotImage) return null;
 
@@ -35,6 +35,7 @@ const SpotDetail = ({ spotDetails }) => {
                 <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
                 </div>
                 <div className='spotAddress'>{spotDetails.address}, {spotDetails.city}, {spotDetails.state}
+                <div>{spotDetails.description}</div>
                 <div className='spot-details-buttons'>
                 {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
                 >Delete Spot</button>)}

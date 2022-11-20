@@ -34,16 +34,18 @@ function LoginForm({ setShowModal }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
+      <div className="errors-login">
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+      </div>
       <h2>Welcome to Air-bee-en-bee</h2>
-      <div className="input-fields">
+      <div >
         <label >
           {/* Username or Email */}
-          <input id='input-box-username'
+          <input className="login"
             type="text"
             value={credential}
             placeholder="Username or email"
@@ -53,7 +55,7 @@ function LoginForm({ setShowModal }) {
         </label>
         <label >
           {/* Password */}
-          <input id='input-box-password'
+          <input className="login"
             type="password"
             placeholder="Enter your password"
             value={password}
@@ -64,7 +66,7 @@ function LoginForm({ setShowModal }) {
       </div>
       <button type="submit" id='loginButton'>Log In</button>
       <div className="demo-user-login">
-      <button id="submit-button" onClick={demoUser}>DemoUser Login</button>
+        <button id="submit-button" onClick={demoUser}>DemoUser Login</button>
       </div>
 
     </form>
