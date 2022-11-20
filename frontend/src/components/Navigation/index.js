@@ -32,18 +32,16 @@ function Navigation({ isLoaded }) {
   // console.log('session user ===', sessionUser)
   return (
     <div>
-      <div className='modalNavBar' >
+
         <NavLink exact to="/" >
           <img src={logo} alt='logo' id='logo'></img>
         </NavLink>
-        <div id='createASpot'>
-          {sessionUser &&
-            <div className='become-a-host'>
-              <NavLink to='/spots'>
-                Become a Host
-              </NavLink>
-            </div>}
-        </div>
+
+        {sessionUser &&
+          <NavLink to='/spots'>
+            Become a Host
+          </NavLink>}
+
         {isLoaded && (
           <ProfileButton
             user={sessionUser}
@@ -51,13 +49,13 @@ function Navigation({ isLoaded }) {
             setShowModal={setShowModal}
           />
         )}
-      </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} >
           {login ? <LoginForm setShowModal={setShowModal} /> :
             <SignupFormPage setShowModal={setShowModal} />}
         </Modal>
       )}
+      
     </div>
   );
 }

@@ -40,7 +40,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   return (
     <>
-      <button id='user-circle' onClick={openMenu}>
+      <button onClick={openMenu}>
         {/* <i className="fas fa-user-circle" /> */}
         <img src={droppie} alt='drop-down'></img>
       </button>
@@ -52,9 +52,9 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>) :
-        (<ul className='profile-dropdown'>
+        (<ul>
           <li>
-            <button className='login-logout-buttons' onClick={() => {
+            <button onClick={() => {
               setLogin(true)
               setShowModal(true)
             }}>
@@ -62,7 +62,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </button>
           </li>
           <li>
-            <button className='login-logout-buttons' onClick={() => {
+            <button onClick={() => {
               setLogin(false)
               setShowModal(true)
             }}>

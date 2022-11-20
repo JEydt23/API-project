@@ -54,18 +54,18 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
     return spotReviews && (
         <div>
-            <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
+            <div>
                 {(!reviewed) && (currentUser.id !== spotDetails.ownerId ) &&
                     <div>
                         <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                     </div>
                 }
-                <h3 className='name-of-spot'>  {spotDetails.name} </h3>
-                <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
-                <ul className='list-of-reviews'>
+                {/* <h3 className='name-of-spot'>  {spotDetails.name} </h3> */}
+                <p > ★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
+                <ul >
                     {spotReviews.map((ele) => (
-                        <li className='li-li' key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
-                            {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
+                        <li  key={ele.id}>"{ele.review}" - {ele.User.firstName} {ele.User.lastName}
+                            {(currentUser && (currentUser.id === ele.User.id) && <button  id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
                                 await dispatch(deleteReviewThunk(value))
 
