@@ -55,7 +55,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     return spotReviews && (
         <div>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-                {(!reviewed) && (currentUser.id !== spotDetails.ownerId ) &&
+                {(!reviewed) && (currentUser?.id !== spotDetails?.ownerId ) &&
                     <div>
                         <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                     </div>
