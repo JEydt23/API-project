@@ -1,15 +1,16 @@
 
 img#spotDetailImage {
-    min-width: 720px;
-    min-height: 480px;
+    width: 950px;
+    height: 500px;
     display: flex;
+    border-radius: 15px;
 }
 
 div.spotDetails {
     text-align: left;
     /* position: relative; */
     margin: 0 auto;
-    /* min-width: 720px; */
+    /* min-width: 950px; */
     /* width: 100%; */
     justify-content: center;
     align-content: left;
@@ -86,14 +87,25 @@ div.main-review-div {
 
 h1.spot-name-h1{
     text-align: left;
-    width: 720px;
+    width: 950px;
 }
 
 p.stars-number {
-    width: 720px;
+    width: 950px;
 }
 
 h2.host-name{
     text-align: left;
-    width: 720px;
+    width: 950px;
+}
+
+div.address-review-div {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 950px;
+}
+
+div.spotAddress {
+    width: 100%;
 }

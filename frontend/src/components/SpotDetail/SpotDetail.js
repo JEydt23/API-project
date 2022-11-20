@@ -38,27 +38,31 @@ const SpotDetail = ({ spotDetails }) => {
             <div className='spotDetails'>
 
                 <h1 className='spot-name-h1'>{spotDetails.name}</h1>
-                <p className='stars-number'>{starRating} · {spotDetails.numReviews} Review(s) · 🎖️ Superhost · {spotDetails.city}, {spotDetails.country}</p>
+                <p className='stars-number'>{starRating} · {spotDetails.numReviews} Review(s) · 🏅 Superhost · {spotDetails.city}, {spotDetails.country}</p>
                 <div className='spot-image'>
                     <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
                 </div>
                 <div className='hosted-by'>
                     <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName}</h2>
                 </div>
-                <div className='spotAddress'>{spotDetails.address}, {spotDetails.city}, {spotDetails.state}
-                    <div>{spotDetails.description}</div>
-                    <div className='spot-details-buttons'>
-                        {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
-                        >Delete Spot</button>)}
-                        <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
-                            {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
-                                Edit Spot
-                            </button>)}
-                        </NavLink>
+                <div className='address-review-div'>
+
+                    <div className='spotAddress'>{spotDetails.address}, {spotDetails.city}, {spotDetails.state}
+                        <div>{spotDetails.description}
+                        </div>
+                    </div>
+                    <div>
+                        <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
                     </div>
                 </div>
-                <div>
-                    <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
+                <div className='spot-details-buttons'>
+                    {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
+                    >Delete Spot</button>)}
+                    <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
+                        {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
+                            Edit Spot
+                        </button>)}
+                    </NavLink>
                 </div>
 
             </div>
