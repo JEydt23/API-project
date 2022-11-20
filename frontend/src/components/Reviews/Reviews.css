@@ -76,10 +76,45 @@ button.review-buttons {
 }
 
 input.review-inputs {
-    width: 200px;
+    width: 300px;
 }
 
 
 h4.leave-review-h4{
     text-align: center;
+}
+
+ul.errorsList-reviews {
+    margin: 20px;
+    list-style-type: '· ';
+}
+
+input.review-inputs-write{
+    height: 50px;
+
+    width: 100%;
+}
+
+input.review-inputs-stars{
+    width: 100%;
+}
+
+i#profile-review.fas.fa-user-circle{
+    height: 20px;
+    width: 25px;
+}
+
+li.li-li {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+li.li-li-userInfo {
+    margin-top: 30px;
+
+}
+
+span#first-last-name{
+    font-size: 1.2rem;
+    font-weight: bolder;
 }

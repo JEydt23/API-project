@@ -40,9 +40,11 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   return (
     <>
+    <div className="dropdown">
       <button id='user-circle' onClick={openMenu}>
-        {/* <i className="fas fa-user-circle" /> */}
-        <img src={droppie} alt='drop-down'></img>
+        <i className="fas fa-user-circle" />
+        <i className="fas fa-bars" />
+        {/* <img src={droppie} alt='drop-down'></img> */}
       </button>
       {showMenu && (user ?
         (<ul className="profile-dropdown">
@@ -52,7 +54,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>) :
-        (<ul className='profile-dropdown'>
+        (<ul className='login-signup-dropdown'>
           <li>
             <button className='login-logout-buttons' onClick={() => {
               setLogin(true)
@@ -71,6 +73,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           </li>
         </ul>)
       )}
+      </div>
     </>
   );
 }

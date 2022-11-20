@@ -5,12 +5,22 @@
 
  }
 
- button#user-circle {
+ /* button#user-circle {
      background-color: white;
-    /* display: flex; */
-    width: 86px;
+     top: 0px;
+     position: relative;
+     display: flex;
+     width: 86px;
 
+ } */
 
+ div.dropdown {
+     justify-content: baseline;
+ }
+
+ button.login-logout-buttons {
+     position: relative;
+     top: 30px;
  }
 
  #createASpot {
@@ -85,7 +95,14 @@
      width: 100%;
  }
 
+ button#user-circle {
+     display: block;
+     position: relative;
+     align-items: initial;
+     justify-content: right;
+     align-content: initial;
+ }
 
  .profile-dropdown {
-    top: 500px;
+     top: 500px;
  }

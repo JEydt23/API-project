@@ -20,7 +20,7 @@ function CreateReview({ spot }) {
     useEffect(() => {
         const errors = [];
         if (!review.length) errors.push("Review must not be empty");
-        if (review.length > 255) errors.push("Review must be shorter than 100 characters.")
+        if (review.length > 255) errors.push("Review must be shorter than 255 characters.")
         if (review.length < 2) errors.push("Review must be larger than 2 characters.")
         if (stars > 5) errors.push("You cannot give this location more than 5 stars.")
         if (stars < 0) errors.push("You cannot give this location less than 0 stars.")
@@ -54,14 +54,14 @@ function CreateReview({ spot }) {
             {currentUser && <form hidden={reviewed} onSubmit={handleSubmit}>
                 <div className="review-box">
                     <h4 className="leave-review-h4">Leave a Review for this location</h4>
-                    <ul className='errorsList'>
+                    <ul className='errorsList-reviews'>
                         {validations.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                 </div>
                 <div className="review-input">
                     <label>
                         {/* Review Message */}
-                        <input className="review-inputs"
+                        <input className="review-inputs-write"
                             type="text"
                             placeholder="Write a review here"
                             value={review}
@@ -71,7 +71,7 @@ function CreateReview({ spot }) {
                     </label>
                     <label>
                         {/* Stars */}
-                        <input className="review-inputs"
+                        <input className="review-inputs-stars"
                             type="number"
                             min='0'
                             max='5'
