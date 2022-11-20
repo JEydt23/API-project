@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { editSpotThunk } from '../../store/spots';
+import './EditSpotForm.css'
 
 function EditSpot() {
     const dispatch = useDispatch();
@@ -49,76 +50,92 @@ function EditSpot() {
     }
 
     return (
+        <div className='create-a-spot-main'>
         <form onSubmit={handleSubmit}>
-            <h1>Edit Spot</h1>
+        <div className='create-spot'>
+            <h1>Edit Spot Information</h1>
+            </div>
+            <div className='ul-create-spot'>
             <ul className='errorsList'>
-                {validations.map((error, idx) => <li key={idx}>{error}</li>)}
+                {validations.map((error, idx) => <li className ='create-spot-errors' key={idx}>{error}</li>)}
             </ul>
-            <label>
-                Address
-                <input
+            </div>
+            <div className='create-spot-label'>
+            <label className='create-spot'>
+                {/* Address */}
+                <input className='create-spot-input'
                     type="text"
+                    placeholder={'Updated Address'}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                City
-                <input
+            <label className='create-spot'>
+                {/* City */}
+                <input className='create-spot-input'
                     type="text"
+                    placeholder='Updated City'
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                State
-                <input
+            <label className='create-spot'>
+                {/* State  */}
+                <input className='create-spot-input'
                     type="text"
                     value={state}
+                    placeholder='Updated State'
                     onChange={(e) => setState(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                Country
-                <input
+            <label className='create-spot'>
+                {/* Country */}
+                <input className='create-spot-input'
                     type="text"
+                    placeholder='Updated Country'
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                Name
-                <input
+            <label className='create-spot'>
+                {/* Name */}
+                <input className='create-spot-input'
                     type="text"
+                    placeholder='Updated Name of Location'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                Description
-                <input
+            <label className='create-spot'>
+                {/* Description */}
+                <input className='create-spot-input'
                     type="text"
+                    placeholder='Updated Description'
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
                 />
             </label>
-            <label>
-                Price
-                <input
+            <label className='create-spot'>
+                {/* Price */}
+                <input className='create-spot-input'
                     type="number"
+                    placeholder='Updated Price in USD'
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
                 />
             </label>
-            <button type="submit">Save Changes</button>
+            </div>
+            <button id='create-submit-spot' type="submit">Save Changes</button>
         </form>
+
+        </div>
     );
 
 

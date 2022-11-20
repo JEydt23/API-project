@@ -1,16 +1,25 @@
 
-#spotDetailImage {
-    width: 720px;
-    height: 480px;
+img#spotDetailImage {
+    min-width: 720px;
+    min-height: 480px;
     display: flex;
 }
 
 div.spotDetails {
     text-align: left;
     /* position: relative; */
-    margin-top: .5%;
-    width: 720px;
+    margin: 0 auto;
+    /* min-width: 720px; */
+    /* width: 100%; */
+    justify-content: center;
+    align-content: left;
+    align-items: center;
+    justify-items: center;
 
+}
+
+div {
+    justify-content: center;
 }
 
 div.modalNavBar {
@@ -68,4 +77,23 @@ a {
     font-family: 'Fraunces', serif;
     font-family: 'Lexend Deca', sans-serif;
     font-family: 'Montserrat', sans-serif; */
+}
+
+div.main-review-div {
+    justify-content: right;
+    width: 100%;
+}
+
+h1.spot-name-h1{
+    text-align: left;
+    width: 720px;
+}
+
+p.stars-number {
+    width: 720px;
+}
+
+h2.host-name{
+    text-align: left;
+    width: 720px;
 }

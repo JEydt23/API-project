@@ -4,6 +4,8 @@ div.create-a-spot-main {
     justify-content: center;
     align-items: center;
     align-content: center;
+    margin-top: 10px;
+    width: 100%;
 }
 
 div.create-spot {
@@ -17,6 +19,7 @@ div.ul-create-spot {
     align-items: center;
     justify-content: center;
     list-style-type: disc;
+    margin-bottom: 10px;
 
 
 }
@@ -49,4 +52,8 @@ input.create-spot-input {
 
 button#create-submit-spot {
     margin-top: 20px;
+}
+
+ul.errorsList{
+    margin-bottom: 20px;
 }

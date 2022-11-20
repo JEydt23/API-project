@@ -12,7 +12,7 @@
     top: 400px;
 } */
 
-.review-buttons {
+/* .review-buttons {
     position: relative;
     display: flex;
     justify-content: center;
@@ -46,12 +46,6 @@ button#create-review-button.review-buttons{
     width: 360px;
 }
 
-h3.name-of-spot{
-    position: relative;
-    top: 325px;
-    left: 700px;
-    width: 360px;
-}
 
 p.list-of-reviews {
     position: relative;
@@ -60,8 +54,32 @@ p.list-of-reviews {
     width: 360px;
 }
 
-li.li-li {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+} */
+
+h3.name-of-spot{
+    text-align: center;
+}
+
+h4.list-of-reviews {
+    text-align: center;
+}
+
+div.spot-reviews{
+    border: grey 0px solid;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 2.5px rgba(128, 128, 128, 0.473);
+}
+
+button.review-buttons {
+    margin-top: 10px;
+}
+
+input.review-inputs {
+    width: 200px;
+}
+
+
+h4.leave-review-h4{
+    text-align: center;
 }

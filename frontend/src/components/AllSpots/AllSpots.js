@@ -4,7 +4,16 @@ import './AllSpots.css'
 
 
 const AllSpots = ({ spot }) => {
-    
+
+
+let starRating;
+if (spot.avgRating){
+    starRating = `★ ${spot.avgRating}`
+} else {
+    starRating = `☆ 0`
+}
+
+
     return (
         <div className="spots" >
             <div className="previewImage">
@@ -13,16 +22,25 @@ const AllSpots = ({ spot }) => {
                 </NavLink>
             </div>
             <div className="spots-info" >
-                <div id="city-country">{spot.city}, {spot.country}
-                    <span id='avgRating'> ★{spot.avgRating}</span>
+                <div id="city-country-stars">
+                    <div id='city-country'>
+                        {spot.city}, {spot.country}
+                    </div>
+                    <div id='avgRating'>
+                        {starRating}
+                    </div>
                 </div>
-                <div id='price'>${spot.price}
-                    <span id='night'> night</span>
-
-                </div>
+            </div>
+            <div className="allSpots-name">
+                {spot.name}
+            </div>
+            <div id='price'>${spot.price}
+                <span id='night'> night</span>
 
             </div>
+
         </div>
+
 
     )
 

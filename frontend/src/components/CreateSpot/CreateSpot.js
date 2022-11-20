@@ -140,8 +140,8 @@ function CreateSpot({ spot }) {
                 <label className='create-spot'>
                     {/* Image URL */}
                     <input className='create-spot-input'
-                        type="url"
-                        placeholder='Image URL of residence'
+                        type="text"
+                        placeholder='Photo URL of residence'
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         required

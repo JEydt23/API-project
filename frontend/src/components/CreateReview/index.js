@@ -52,7 +52,7 @@ function CreateReview({ spot }) {
         <>
             <form hidden={reviewed} onSubmit={handleSubmit}>
                 <div className="review-box">
-                    <h4 className="leave-review-h2">Leave a Review for this location</h4>
+                    <h4 className="leave-review-h4">Leave a Review for this location</h4>
                     <ul className='errorsList'>
                         {validations.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>

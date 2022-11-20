@@ -6,20 +6,22 @@
     min-height: 250px;
 }
 
-#city-country {
+#city-country-stars {
     font-weight: bolder;
-    text-align: justify;
+    display: flex;
+    /* text-align: justify; */
+    justify-content: space-between;
 }
 
 #price {
     font-weight: bold;
 }
 
-span#avgRating {
+/* span#avgRating {
     font-weight: normal;
     margin: auto;
     text-align: right;
-}
+} */
 span#night {
     font-weight: normal;
 
@@ -31,10 +33,17 @@ span#night {
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
-    top: 150px;
+    top: 100px;
     /* grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr); */
     gap: 1.75rem;
     width: min(90%);
     margin-inline: auto;
+}
+
+div.allSpots-name {
+    color: grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: .90em;
 }

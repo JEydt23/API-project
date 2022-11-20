@@ -18,7 +18,13 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     // CODE FOR WHEN NOT LOGGED IN AS RIGHT USER
     let value;
     let reviewed;
-    console.log(spotDetails)
+    let starRating;
+    if (spotDetails.avgStarRating) {
+        starRating = `★ ${spotDetails.avgStarRating}`
+    } else {
+        starRating = `☆ 0`
+    }
+    // console.log(spotDetails)
 
     {
         spotReviews.find(e => {
@@ -53,15 +59,10 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     if (currentUser) spotReviews.find(review => review.userId === currentUser.id) ? reviewed = true : reviewed = false;
 
     return spotReviews && (
-        <div>
+        <div className='main-review-div'>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-                {(!reviewed) && (currentUser?.id !== spotDetails?.ownerId ) &&
-                    <div>
-                        <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
-                    </div>
-                }
                 <h3 className='name-of-spot'>  {spotDetails.name} </h3>
-                <p className='list-of-reviews'>★ {spotDetails.avgStarRating} · {spotDetails.numReviews} Reviews</p>
+                <h4 className='list-of-reviews'>{starRating} · {spotDetails.numReviews} Review(s)</h4>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
                         <li className='li-li' key={ele.id}>"{ele.review}" ★  {ele.stars} - {ele.User.firstName} {ele.User.lastName}
@@ -74,6 +75,11 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                         </li>
                     ))}
                 </ul>
+                {(!reviewed) && (currentUser?.id !== spotDetails?.ownerId ) &&
+                    <div>
+                        <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
+                    </div>
+                }
             </div>
         </div>
     )
