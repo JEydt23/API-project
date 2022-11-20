@@ -28,7 +28,7 @@ function CreateSpot({ spot }) {
         if (!state || state.length > 20) errors.push("State can't be empty and must be shorter than 20 characters.")
         if (!country || country.length > 20) errors.push("Country can't be empty and must be shorter than 20 characters.")
         if (!name || name.length > 20) errors.push("Name can't be empty and must be shorter than 20 characters.")
-        if (!description || description.length > 100) errors.push("Description can't be empty and must be shorter than 100 characters.")
+        if (!description || description.length > 255) errors.push("Description can't be empty and must be shorter than 255 characters.")
         if (!price || price < 1) errors.push("Price can't be empty and must be greater than 0 dollars.")
         if (!url.match(/\.(gif|png|jpeg|jpg)$/)) errors.push("Image's url should use gif, png, jpeg or jpg format.");
         setValidations(errors)

@@ -5,73 +5,73 @@ module.exports = {
 		await queryInterface.bulkInsert('Reviews', [
 			{
 				spotId: 1,
-				userId: 1,
-				review: 'Excellent, would stay again!',
+				userId: 2,
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 5
 			},
 			{
 				spotId: 2,
-				userId: 2,
-				review: 'Not too shabby',
+				userId: 1,
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 4
 			},
 			{
 				spotId: 3,
 				userId: 1,
-				review: 'STAY AWAY, this was terrible',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 1
 			},
 			{
 				spotId: 4,
-				userId: 3,
-				review: 'Filthy and disgusting',
+				userId: 2,
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 1
 			},
 			{
 				spotId: 5,
 				userId: 2,
-				review: 'Just okay. Nothing to write home about.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 2
 			},
 			{
 				spotId: 6,
 				userId: 3,
-				review: 'Fantastic.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 5
 			},
 			{
 				spotId: 7,
 				userId: 1,
-				review: 'Pretty good.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 4
 			}, {
 				spotId: 8,
 				userId: 2,
-				review: 'Average.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 3
 			},
 			{
 				spotId: 9,
 				userId: 3,
-				review: 'AVOID AT ALL COSTS.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 1
 			},
 			{
 				spotId: 10,
-				userId: 1,
-				review: 'Enjoyable.',
+				userId: 3,
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 3
 			},
 			{
 				spotId: 11,
 				userId: 2,
-				review: 'Very good.',
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 4
 			},
 			{
 				spotId: 12,
-				userId: 3,
-				review: 'Just okay.',
+				userId: 2,
+				review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 				stars: 2
 			}
 		]);

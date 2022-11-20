@@ -150,26 +150,26 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: '55 Easy Street',
+        address: '789 Bingbong Lane',
         city: 'Greenwich',
         state: 'CT',
         country: 'United States',
         lat: 39.121880,
         lng: -80.436432,
-        name: 'Studio Apartment',
-        description: 'Affordable living in a not-so-affordable town.',
-        price: 750
+        name: 'Small Room for Small Person',
+        description: 'It is a small place, you have been warned.',
+        price: 50
       },
       {
         ownerId: 2,
-        address: '55 Easy Street',
-        city: 'Greenwich',
+        address: '512 Boogaloo Drive',
+        city: 'Westport',
         state: 'CT',
         country: 'United States',
         lat: 39.121880,
         lng: -80.436432,
-        name: 'Studio Apartment',
-        description: 'Affordable living in a not-so-affordable town.',
+        name: 'Beach Bungalow for Beach Bums ',
+        description: 'If you like the beach, then you will like this place. Right on the water with a private beach. Totally tubular.',
         price: 750
       }
     ], {});
