@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import droppie from './Images/droppie.png'
 
@@ -36,7 +36,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   };
 
-
+  // console.log('user ====', user)
 
   return (
     <>
@@ -46,8 +46,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
       </button>
       {showMenu && (user ?
         (<ul className="profile-dropdown">
-          <li key={user.username}>{user.username}</li>
-          <li key={user.email}>{user.email}</li>
+          <li key={user.username}>{user.user ? user.user.username : user.username}</li>
+          <li key={user.email}>{user.user ? user.user.email : user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

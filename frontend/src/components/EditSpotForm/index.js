@@ -39,7 +39,7 @@ function EditSpot() {
             const payload = {
                 address, city, state, country, name, description, price, spotId
             }
-            console.log("payload:::::::::::::::", payload)
+            // console.log("payload:::::::::::::::", payload)
             await dispatch(editSpotThunk(payload))
 
             await history.push(`/spots/${spotId}`)

@@ -15,7 +15,12 @@ function SignupFormPage({ setShowModal }) {
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  // const [userUpdate, setUserUpdate] = useState(true);
 
+  // const renderUser = () => {
+  //   console.log('userUpdate rendered')
+  //   return setUserUpdate(!userUpdate)
+  // }
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -25,6 +30,7 @@ function SignupFormPage({ setShowModal }) {
       setErrors([]);
       return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
         .then(() => setShowModal(false))
+
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(Object.values(data.errors));
@@ -102,7 +108,7 @@ function SignupFormPage({ setShowModal }) {
           />
         </label>
       </div>
-      <button id='submit-button' type="submit">Sign Up</button>
+      <button id='submit-button' type="submit" >Sign Up</button>
     </form>
   );
 }

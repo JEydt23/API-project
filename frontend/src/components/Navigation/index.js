@@ -15,6 +15,7 @@ function Navigation({ isLoaded }) {
   const [showModal, setShowModal] = useState(false);
   const [login, setLogin] = useState(true);
 
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
@@ -28,7 +29,7 @@ function Navigation({ isLoaded }) {
       </>
     );
   }
-
+  // console.log('session user ===', sessionUser)
   return (
     <div>
       <div className='modalNavBar' >

@@ -5,6 +5,7 @@ import AllSpots from './AllSpots'
 
 const ShowAllSpots = () => {
     const getSpots = useSelector(state => Object.values(state.spot.viewAllSpots))
+    const currentUser = useSelector((state) => state.session.user)
     const dispatch = useDispatch();
 
     useEffect(() => {
