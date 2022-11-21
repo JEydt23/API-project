@@ -8,7 +8,7 @@
 ![image](https://user-images.githubusercontent.com/106854954/202962656-f18a6441-e8a3-4f0b-ac75-37baf4df8190.png)
 
 # Spot detail page with review feature
-![image](https://user-images.githubusercontent.com/106854954/202962853-0003f874-7758-4940-a240-17a283819207.png)
+![image](https://user-images.githubusercontent.com/106854954/202964781-916bd6d4-589c-4fc8-9434-b6f784ff7bce.png)
 
 #Tech stack
 
