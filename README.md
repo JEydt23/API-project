@@ -5,12 +5,14 @@
 [Air-bee-en-bee](https://air-bee-en-bee.herokuapp.com/) is a full stack web application and clone of Airbnb.com that uses Sequelize and Express for backend development, and React and Redux for frontend development. 
 
 # Landing page
+This is the homepage, where you are able to view all the houses available. Once you sign up and are logged in, you are able to host your own spots.
 ![image](https://user-images.githubusercontent.com/106854954/202962656-f18a6441-e8a3-4f0b-ac75-37baf4df8190.png)
 
 # Spot detail page with review feature
+You are able to create and delete reviews for spots your account does not own. If you are not logged in, you may still see the spot and reviews.
 ![image](https://user-images.githubusercontent.com/106854954/202964781-916bd6d4-589c-4fc8-9434-b6f784ff7bce.png)
 
-#Tech stack
+## Tech stack
 
 HTML5
 CSS
@@ -23,11 +25,15 @@ PostgresSQL
 
 Application is hosted on Heroku
 
-# `AirBnB Clone Project`
-
 ## Database Schema Design
 
 ![AirBnB Schema Image](./Schema/airbnb_dbdiagram.png)
+
+## Future features to be implemented
+
+Bookings
+Advanced search options
+Google maps for spot locations
 
 ## API Documentation
 
