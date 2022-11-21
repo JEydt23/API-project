@@ -40,40 +40,42 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   return (
     <>
-    <div className="dropdown">
-      <button id='user-circle' onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-        <i className="fas fa-bars" />
-        {/* <img src={droppie} alt='drop-down'></img> */}
-      </button>
-      {showMenu && (user ?
-        (<ul className="profile-dropdown">
-          <li key={user.username}>{user.user ? user.user.username : user.username}</li>
-          <li key={user.email}>{user.user ? user.user.email : user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>) :
-        (<ul className='login-signup-dropdown'>
-          <li>
-            <button className='login-logout-buttons' onClick={() => {
-              setLogin(true)
-              setShowModal(true)
-            }}>
-              Log In
-            </button>
-          </li>
-          <li>
-            <button className='login-logout-buttons' onClick={() => {
-              setLogin(false)
-              setShowModal(true)
-            }}>
-              Sign Up
-            </button>
-          </li>
-        </ul>)
-      )}
-      </div>
+      <div className="dropdown">
+        <button className='user-circle' onClick={openMenu}>
+          <i className="fas fa-bars" />
+          <i className="fas fa-user-circle" />
+          {/* <img src={droppie} alt='drop-down'></img> */}
+          </button>
+          </div>
+        {showMenu && (user ?
+          (<ul className="profile-dropdown">
+            <li className="username-email" key={user.username}>{user.user ? user.user.username : user.username}</li>
+            <li className="username-email" key={user.email}>{user.user ? user.user.email : user.email}</li>
+            {/* <li> */}
+              <button className="logout" onClick={logout}>Log Out</button>
+            {/* </li> */}
+          </ul>) :
+          (<div className="main-login-dropdown-div">
+            <ul className='login-signup-dropdown'>
+              <li>
+                <button className='login-logout-buttons' onClick={() => {
+                  setLogin(true)
+                  setShowModal(true)
+                }}>
+                  Log In
+                </button>
+              </li>
+              <li>
+                <button className='login-logout-buttons' onClick={() => {
+                  setLogin(false)
+                  setShowModal(true)
+                }}>
+                  Sign Up
+                </button>
+              </li>
+            </ul>
+          </div>)
+        )}
     </>
   );
 }

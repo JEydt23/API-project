@@ -36,21 +36,23 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/" >
           <img src={logo} alt='logo' id='logo'></img>
         </NavLink>
-        <div id='createASpot'>
-          {sessionUser &&
-            <div className='become-a-host'>
-              <NavLink to='/spots'>
-                Become a Host
-              </NavLink>
-            </div>}
+        <div className='hostAndprofile'>
+          <div id='createASpot'>
+            {sessionUser &&
+              <div className='become-a-host'>
+                <NavLink id='host-text' to='/spots'>
+                  Become a Host
+                </NavLink>
+              </div>}
+          </div>
+          {isLoaded && (
+            <ProfileButton
+              user={sessionUser}
+              setLogin={setLogin}
+              setShowModal={setShowModal}
+            />
+          )}
         </div>
-        {isLoaded && (
-          <ProfileButton
-            user={sessionUser}
-            setLogin={setLogin}
-            setShowModal={setShowModal}
-          />
-        )}
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)} >

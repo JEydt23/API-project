@@ -1,4 +1,3 @@
-
 img#spotDetailImage {
     width: 950px;
     height: 500px;
@@ -8,14 +7,13 @@ img#spotDetailImage {
 
 div.spotDetails {
     text-align: left;
-    /* position: relative; */
     margin: 0 auto;
-    /* min-width: 950px; */
-    /* width: 100%; */
     justify-content: center;
     align-content: left;
     align-items: center;
     justify-items: center;
+    position: relative;
+
 
 }
 
@@ -23,9 +21,9 @@ div {
     justify-content: center;
 }
 
-div.modalNavBar {
+/* div.modalNavBar {
     position: relative;
-}
+} */
 
 button.spot-delete-button {
     width: 200px;
@@ -43,6 +41,11 @@ button.spot-edit-button {
     border: 0px;
     padding: 10px;
     background-color: rgb(238, 17, 65);
+    text-decoration: none;
+}
+
+button.spot-edit-button:visited{
+    text-decoration: none;
 }
 
 
@@ -50,7 +53,7 @@ div.spot-details-buttons {
     display: flex;
     position: relative;
     justify-content: left;
-    visibility: visible;
+    text-decoration: none;
 
 
 }
@@ -71,21 +74,14 @@ ul {
     font-family: 'Montserrat', sans-serif; */
 }
 
-a {
-    /* color: var(--text-color);
-    text-decoration: none;
-    font-family: 'Big Shoulders Display', cursive;
-    font-family: 'Fraunces', serif;
-    font-family: 'Lexend Deca', sans-serif;
-    font-family: 'Montserrat', sans-serif; */
-}
+
 
 div.main-review-div {
     justify-content: right;
     width: 100%;
 }
 
-h1.spot-name-h1{
+h1.spot-name-h1 {
     text-align: left;
     width: 950px;
 }
@@ -94,7 +90,7 @@ p.stars-number {
     width: 950px;
 }
 
-h2.host-name{
+h2.host-name {
     text-align: left;
     width: 950px;
 }
@@ -113,7 +109,7 @@ div.spotAddress {
     line-height: 1.75rem;
 }
 
-div.spot-reviews{
+div.spot-reviews {
     width: 400px;
 }
 
@@ -138,8 +134,8 @@ div.aircover {
     border-bottom: 1px grey solid;
 }
 
-p.emojitext{
-color: grey;
-font-size: .9rem;
+p.emojitext {
+    color: grey;
+    font-size: .9rem;
 
 }

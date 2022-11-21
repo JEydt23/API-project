@@ -51,89 +51,90 @@ function EditSpot() {
 
     return (
         <div className='create-a-spot-main'>
-        <form onSubmit={handleSubmit}>
-        <div className='create-spot'>
-            <h1>Edit Spot Information</h1>
-            </div>
-            <div className='ul-create-spot'>
-            <ul className='errorsList'>
-                {validations.map((error, idx) => <li className ='create-spot-errors' key={idx}>{error}</li>)}
-            </ul>
-            </div>
-            <div className='create-spot-label'>
-            <label className='create-spot'>
-                {/* Address */}
-                <input className='create-spot-input'
-                    type="text"
-                    placeholder={'Updated Address'}
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* City */}
-                <input className='create-spot-input'
-                    type="text"
-                    placeholder='Updated City'
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* State  */}
-                <input className='create-spot-input'
-                    type="text"
-                    value={state}
-                    placeholder='Updated State'
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* Country */}
-                <input className='create-spot-input'
-                    type="text"
-                    placeholder='Updated Country'
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* Name */}
-                <input className='create-spot-input'
-                    type="text"
-                    placeholder='Updated Name of Location'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* Description */}
-                <input className='create-spot-input'
-                    type="text"
-                    placeholder='Updated Description'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </label>
-            <label className='create-spot'>
-                {/* Price */}
-                <input className='create-spot-input'
-                    type="number"
-                    placeholder='Updated Price in USD'
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
-            </div>
-            <button id='create-submit-spot' type="submit">Save Changes</button>
-        </form>
+            <form onSubmit={handleSubmit}>
+                <div className='create-spot'>
+                    <h1>Edit Spot Information</h1>
+                </div>
+                <div className='ul-create-spot'>
+                    <ul className='errorsList'>
+                        {validations.map((error, idx) => <li className='create-spot-errors' key={idx}>{error}</li>)}
+                    </ul>
+                </div>
+                <div className='create-spot-label'>
+                    <label className='create-spot'>
+                        {/* Address */}
+                        <input className='create-spot-input'
+                            type="text"
+                            placeholder={'Updated Address'}
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* City */}
+                        <input className='create-spot-input'
+                            type="text"
+                            placeholder='Updated City'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* State  */}
+                        <input className='create-spot-input'
+                            type="text"
+                            value={state}
+                            placeholder='Updated State'
+                            onChange={(e) => setState(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Country */}
+                        <input className='create-spot-input'
+                            type="text"
+                            placeholder='Updated Country'
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Name */}
+                        <input className='create-spot-input'
+                            type="text"
+                            placeholder='Updated Name of Location'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Description */}
+                        <input className='create-spot-input'
+                            type="text"
+                            placeholder='Updated Description'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Price */}
+                        <input className='create-spot-input'
+                            type="number"
+                            placeholder='Updated Price in USD'
+                            value={price}
+                            min='1'
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <button id='create-submit-spot' type="submit">Save Changes</button>
+            </form>
 
         </div>
     );
