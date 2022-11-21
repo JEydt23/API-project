@@ -31,7 +31,7 @@ function CreateReview({ spot }) {
 
 
         setValidations(errors)
-    }, [review, stars])
+    }, [review, stars, currentUser, currentSpot])
     let reviewed;
     if (currentUser) spotReviews.find(review => review.userId === currentUser.id) ? reviewed = true : reviewed = false;
 
