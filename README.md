@@ -1,4 +1,27 @@
-# API-project
+# Air-bee-en-bee
+
+![logo-resize](https://user-images.githubusercontent.com/106854954/202962022-fd974994-5e3e-4fd3-8cd3-2f12f406fd45.png)
+
+[Air-bee-en-bee](https://air-bee-en-bee.herokuapp.com/) is a full stack web application and clone of Airbnb.com that uses Sequelize and Express for backend development, and React and Redux for frontend development. 
+
+# Landing page
+![image](https://user-images.githubusercontent.com/106854954/202962656-f18a6441-e8a3-4f0b-ac75-37baf4df8190.png)
+
+# Spot detail page with review feature
+![image](https://user-images.githubusercontent.com/106854954/202962853-0003f874-7758-4940-a240-17a283819207.png)
+
+#Tech stack
+
+HTML5
+CSS
+Javascript
+Node.js
+Express.js
+React
+Redux
+PostgresSQL
+
+Application is hosted on Heroku
 
 # `AirBnB Clone Project`
 
