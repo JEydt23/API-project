@@ -32,17 +32,17 @@
 
      position: fixed;
      top: 0;
-
      background-color: white;
      border-bottom: 1px rgb(223, 219, 219) solid;
      display: flex;
      justify-content: space-between;
      align-items: center;
      height: 75px;
-     padding: 0 10rem 0 10rem;
+     padding: 0 2rem 0 5rem;
      width: 100%;
      z-index: 1;
      box-sizing: border-box;
+     margin: 0px;
  }
 
  .spotDetails {
@@ -77,8 +77,10 @@
      border-radius: 5px;
      border: 0px;
      padding: 10px;
-     background-color: rgb(238, 17, 65);
-     width: 100%;
+     background-color: rgb(255, 255, 255);
+     width: 65%;
+     color:rgba(0, 0, 0, 0.5);
+     border: grey 1px solid;
  }
 
  button {
@@ -188,7 +190,7 @@ ul.profile-dropdown{
     z-index: 1;
     box-shadow: 3px 3px 3px 3px rgba(145, 145, 145, 0.4);
     background-color: white;
-    top: 50px;
+    top: 30px;
 }
 
 /* div.become-a-host{
@@ -234,6 +236,7 @@ a#host-text:hover {
      /* height: auto; */
      /* box-sizing: border-box; */
      position: fixed;
+     right: 190px;
      top: 30px;
      /* right: 200px; */
      /* top: 100px; */
@@ -244,4 +247,9 @@ a#host-text:hover {
  /* div.become-a-host{
     right: 200px;
     position: relative;
+ } */
+
+
+ /* div.main-login-dropdown-div {
+    border: 1px grey solid;
  } */

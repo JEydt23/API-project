@@ -13,6 +13,7 @@ div.spotDetails {
     align-items: center;
     justify-items: center;
     position: relative;
+    top: 100px;
 
 
 }

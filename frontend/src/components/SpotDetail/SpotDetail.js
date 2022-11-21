@@ -47,7 +47,7 @@ const SpotDetail = ({ spotDetails }) => {
             <div className='spotDetails'>
 
                 <h1 className='spot-name-h1'>{spotDetails.name}</h1>
-                <p className='stars-number'>{starRating} · {spotDetails.numReviews} Review(s) · 🏅 Superhost · {spotDetails.city}, {spotDetails.country}</p>
+                <p className='stars-number'>{starRating} · {spotDetails.numReviews} Review(s) · 🏅 Superhost · {spotDetails.city}, {spotDetails.country} · ${spotDetails.price} a Night</p>
                 <div className='spot-image'>
                     <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
                 </div>

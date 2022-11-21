@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { editSpotThunk } from '../../store/spots';
@@ -7,6 +7,7 @@ import './EditSpotForm.css'
 function EditSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const updateThisSpot = useSelector(state => state.spot.viewSingleSpot)
     const { spotId } = useParams();
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -18,6 +19,7 @@ function EditSpot() {
     const [validations, setValidations] = useState([]);
 
     const [errors, setErrors] = useState(false);
+    console.log(updateThisSpot)
 
     useEffect(() => {
         const errors = [];
@@ -32,6 +34,16 @@ function EditSpot() {
         setValidations(errors)
     }, [address, city, state, country, name, description, price]);
 
+    useEffect(() => {
+        setAddress(updateThisSpot?.address);
+        setCity(updateThisSpot?.city);
+        setState(updateThisSpot?.state);
+        setCountry(updateThisSpot?.country);
+        setName(updateThisSpot?.name);
+        setDescription(updateThisSpot?.description);
+        setPrice(updateThisSpot?.price);
+    }, [updateThisSpot])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(true);
@@ -41,11 +53,10 @@ function EditSpot() {
                 address, city, state, country, name, description, price, spotId
             }
             // console.log("payload:::::::::::::::", payload)
-            await dispatch(editSpotThunk(payload))
-
-            await history.push(`/spots/${spotId}`)
-
-
+            const updated = await dispatch(editSpotThunk(payload))
+            if (updated){
+                await history.push(`/spots/${spotId}`)
+            }
         }
     }
 

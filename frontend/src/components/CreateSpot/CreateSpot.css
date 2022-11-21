@@ -4,6 +4,7 @@ div.create-a-spot-main {
     justify-content: center;
     align-items: center;
     align-content: center;
+    top: 100px;
 }
 
 div.create-spot {
