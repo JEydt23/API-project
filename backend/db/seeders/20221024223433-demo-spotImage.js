@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'SpotImages';
-    await queryInterface.bulkInsert('SpotImages', [
+    await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-21409981/original/a8fa243d-dac8-4238-93e5-f7aa33072ff8.jpeg?im_w=720",
