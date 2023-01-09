@@ -1,8 +1,14 @@
 'use strict';
 
 // /** @type {import('sequelize-cli').Migration} */
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
+    options.tableName = 'ReviewImages';
     /**
      * Add seed commands here.
      *
@@ -11,7 +17,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert('ReviewImages', [
+    await queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
         url: 'test11.png'
@@ -42,6 +48,7 @@ module.exports = {
      *
      * Example:
      */
-    await queryInterface.bulkDelete('ReviewImages', null, {});
+    options.tableName = 'ReviewImages';
+    await queryInterface.bulkDelete(options, null, {});
   }
 };

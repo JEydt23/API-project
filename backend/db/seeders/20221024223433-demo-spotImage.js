@@ -1,9 +1,14 @@
 'use strict';
 
 // /** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    options.tableName = 'SpotImages';
     await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
@@ -74,16 +79,17 @@ module.exports = {
         spotId: 14,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-709425013149528376/original/c3841205-def4-40a6-a6c1-9b0cfab58688.jpeg?im_w=720",
         preview: true
-      }, ]);
+      },]);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('SpotImages', null, {});
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkDelete(options, null, {});
   }
 };
