@@ -137,7 +137,7 @@ router.get('/:spotId', async (req, res) => {
     const { spotId } = req.params;
     const detailsOfSpot = await Spot.findByPk(spotId, {
         include: [
-            { model: Review, attributes: [] },
+            { model: Review, as: "Reviews", attributes: ['id', 'review'] },
             { model: SpotImage, as: "SpotImages", attributes: ['id', 'url', 'preview'] },
             { model: User, as: "Owner", attributes: ['id', 'firstName', 'lastName'] },
         ]
@@ -153,7 +153,7 @@ router.get('/:spotId', async (req, res) => {
     const countReview = await Review.count({ where: { spotId: spotId } });
     const sumStar = await Review.sum('stars', { where: { spotId: spotId } });
 
-    
+
     let average = parseFloat((sumStar / countReview).toFixed(1));
     detailsOfSpot.dataValues.numReviews = countReview;
 

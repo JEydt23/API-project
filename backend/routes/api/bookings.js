@@ -24,15 +24,16 @@ router.get('/current', requireAuth, async (req, res) => {
         const imagePrev = await SpotImage.findByPk(booking.id, {
             where: { preview: true },
             attributes: ['url'],
-
         })
+        console.log("image prev ==== ", imagePrev.dataValues)
 
         if (imagePrev) {
-            booking.Spot.previewImage = imagePrev.url
+            console.log("bookingSPOT", bookings)
+            booking.previewImage = imagePrev.dataValues.url
         }
-        // if (!imagePrev) {
-        //     booking.Spot.previewImage = 'No preview image found';
-        // }
+        if (!imagePrev) {
+            booking.previewImage = 'No preview image found';
+        }
 
 
         bookingsList.push(booking)
