@@ -19,27 +19,26 @@ router.get('/current', requireAuth, async (req, res) => {
     })
 
     let bookingsList = [];
-    for (let booking of bookings) {
-        booking = booking.toJSON();
-        const imagePrev = await SpotImage.findByPk(booking.id, {
+    for (let booking = 0; booking < bookings.length; booking++) {
+        bookings[booking] = bookings[booking].toJSON();
+        const imagePrev = await SpotImage.findByPk(bookings[booking].id, {
             where: { preview: true },
             attributes: ['url'],
         })
-        console.log("image prev ==== ", imagePrev.dataValues)
-
+        // console.log("image prev ==== ", imagePrev.dataValues)
         if (imagePrev) {
-            console.log("bookingSPOT", bookings)
-            booking.previewImage = imagePrev.dataValues.url
+            // console.log("bookingSPOT", bookings)
+            bookings[booking].previewImage = imagePrev.dataValues.url
         }
         if (!imagePrev) {
-            booking.previewImage = 'No preview image found';
+            bookings[booking].previewImage = 'No preview image found';
         }
 
 
-        bookingsList.push(booking)
+        bookingsList.push(bookings[booking])
         // delete booking.Spot.SpotImages;
     }
-
+    console.log("bookingList === ", bookingsList)
     return res.json({ Bookings: bookingsList })
 })
 
@@ -66,11 +65,11 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     // const spot = await Spot.findByPk({ where: { id: booking.spotId } })
 
     // if (booking.req.user.id === req.user.id || spot.ownerId === req.user.id) {
-        await booking.destroy();
-        return res.status(200).json({
-            message: "Successfully deleted",
-            statusCode: 200
-        })
+    await booking.destroy();
+    return res.status(200).json({
+        message: "Successfully deleted",
+        statusCode: 200
+    })
 
 })
 
@@ -102,7 +101,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     // const updateBooking = await booking.update({ startDate, endDate, })
     booking.startDate = startDate
     booking.endDate = endDate
-    res.json( booking )
+    res.json(booking)
 
 
 })

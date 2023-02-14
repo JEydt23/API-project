@@ -7,20 +7,21 @@ const UserBookings = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const spots = useSelector(state => Object.values(state.spot?.viewAllSpots))
-    console.log("SPOTS === ", spots)
-    const bookings = useSelector(state => Object.values(state.booking?.viewAllBookings))
+    // const spots = useSelector(state => Object.values(state.spot?.viewAllSpots))
+    // console.log("SPOTS === ", spots)
+    const bookings = useSelector(state => Object.values(state.booking.viewAllBookings))
     console.log("BOOKINGS STATE ===== ", bookings)
     useEffect(() => {
         dispatch(bookingsByUserThunk(id))
     }, [dispatch, id])
 
     return (
-        <div>
+        <div style={{margin: "100px"}}>
             {bookings.map(booking => (
                 <div key={booking.id} >
                     {console.log("booking", booking)}
                     <h3>ID: {booking.id}</h3>
+                    <h3>Name: {booking.Spot?.name}</h3>
                     <img src={booking.previewImage} alt="previewImage"></img>
                     <h4>Start Date: {booking.startDate} </h4>
                     <h4>End Date: {booking.endDate}</h4>

@@ -60,7 +60,7 @@ export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBo
     switch (action.type) {
         case ALL_BOOKINGS_SPOT: {
             const newState = { viewAllBookings: {}, viewOneBooking: {} }
-            action.bookings.Bookings.forEach(e => {
+            action.bookings.Booking.forEach(e => {
                 newState.viewAllBookings[e.id] = e
             })
             return newState
