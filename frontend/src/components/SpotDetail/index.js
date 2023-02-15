@@ -25,9 +25,12 @@ const GetSpotDetail = () => {
 
     // if (!spotDetails) return null;
     return isloaded && (
-        <div>
-            <SpotDetail key={spotDetails.id} spotDetails={spotDetails} />
-        </div>
+
+
+            <div>
+                <SpotDetail key={spotDetails.id} spotDetails={spotDetails} />
+            </div>
+
 
     )
 }

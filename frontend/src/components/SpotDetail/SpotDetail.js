@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteSpot } from '../../store/spots';
 import GetReviewsBySpot from '../Reviews';
+import SpotBookings from './SpotBookings';
 import aircover from '../Navigation/Images/aircover.png'
 
 
@@ -94,11 +95,15 @@ const SpotDetail = ({ spotDetails }) => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <div>
+                            <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
+                        </div>
+                        <div style={{}}>
+                            <SpotBookings key={spotDetails.id} spotDetails={spotDetails} />
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     )

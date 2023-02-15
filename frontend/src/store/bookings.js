@@ -54,13 +54,26 @@ export const bookingsByUserThunk = () => async dispatch => {
     }
 }
 
+export const createBookingThunk = (booking, spotId) => async dispatch => {
+    const response = await fetch(`/api/spots/${spotId}/bookings`, {
+        method: 'POST',
+        body: booking
+    })
+    if (response.ok) {
+        const booking = await response.json()
+        dispatch(createBooking(booking))
+        return booking
+    }
+}
+
 // REDUCER
 
 export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBooking: {} }, action) {
     switch (action.type) {
         case ALL_BOOKINGS_SPOT: {
             const newState = { viewAllBookings: {}, viewOneBooking: {} }
-            action.bookings.Booking.forEach(e => {
+            console.log("action.bookings === ", action.bookings)
+            action.bookings.Bookings.forEach(e => {
                 newState.viewAllBookings[e.id] = e
             })
             return newState
@@ -68,10 +81,15 @@ export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBo
 
         case ALL_BOOKINGS_USER: {
             const newState = { viewAllBookings: {}, viewOneBooking: {} }
-            console.log("action.bookings === ", action.bookings)
             action.bookings.Bookings.forEach(e => {
                 newState.viewAllBookings[e.id] = e
             })
+            return newState
+        }
+
+        case CREATE_BOOKING: {
+            const newState = { ...state, viewAllBookings: { ...state.viewAllBookings }, viewOneBooking: { ...state.viewOneBooking } }
+            newState.viewAllBookings[action.bookings.id] = action.bookings
             return newState
         }
 

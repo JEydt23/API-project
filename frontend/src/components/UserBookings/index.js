@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, NavLink } from 'react-router-dom'
 import { bookingsByUserThunk } from '../../store/bookings'
 
 const UserBookings = () => {
@@ -10,23 +10,37 @@ const UserBookings = () => {
     // const spots = useSelector(state => Object.values(state.spot?.viewAllSpots))
     // console.log("SPOTS === ", spots)
     const bookings = useSelector(state => Object.values(state.booking.viewAllBookings))
-    console.log("BOOKINGS STATE ===== ", bookings)
+    // console.log("BOOKINGS STATE ===== ", bookings)
     useEffect(() => {
         dispatch(bookingsByUserThunk(id))
     }, [dispatch, id])
 
     return (
-        <div style={{margin: "100px"}}>
-            {bookings.map(booking => (
-                <div key={booking.id} >
-                    {console.log("booking", booking)}
-                    <h3>ID: {booking.id}</h3>
-                    <h3>Name: {booking.Spot?.name}</h3>
-                    <img src={booking.previewImage} alt="previewImage"></img>
-                    <h4>Start Date: {booking.startDate} </h4>
-                    <h4>End Date: {booking.endDate}</h4>
+        <div>
+            <h1 style={{paddingTop: '75px', textAlign: 'center' }}>Booking(s) for {user.firstName} {user.lastName}</h1>
+            <div id='giant-box'>
+                <div className='spots'>
+                    <div className="previewImage">
+                        {bookings.map(booking => (
+                            <div key={booking.id}>
+                                {/* {console.log("booking", booking)} */}
+                                {/* <h3>ID: {booking.id}</h3> */}
+                                <div className='spots-info'>
+                                    <NavLink to={`/spots/${booking.id}`}>
+
+                                        <img src={booking.previewImage} alt="previewImage" id="spotImage"></img>
+                                    </NavLink>
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <h3>{booking.Spot?.name}</h3>
+                                        <h4 id='price'>Start Date: <span id='night'> {booking.startDate} </span></h4>
+                                        <h4 id='price'>End Date: <span id='night'> {booking.endDate}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            ))}
+            </div>
         </div>
     )
 

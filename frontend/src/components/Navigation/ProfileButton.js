@@ -1,6 +1,7 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import droppie from './Images/droppie.png'
 
@@ -45,37 +46,43 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <i className="fas fa-bars" />
           <i className="fas fa-user-circle" />
           {/* <img src={droppie} alt='drop-down'></img> */}
-          </button>
-          </div>
-        {showMenu && (user ?
-          (<ul className="profile-dropdown">
-            <li className="username-email" key={user.username}>{user.user ? user.user.username : user.username}</li>
-            <li className="username-email" key={user.email}>{user.user ? user.user.email : user.email}</li>
-            {/* <li> */}
-              <button className="logout" onClick={logout}>Log Out</button>
-            {/* </li> */}
-          </ul>) :
-          (<div className="main-login-dropdown-div">
-            <ul className='login-signup-dropdown'>
-              <li>
-                <button className='login-logout-buttons' onClick={() => {
-                  setLogin(true)
-                  setShowModal(true)
-                }}>
-                  Log In
-                </button>
-              </li>
-              <li>
-                <button className='login-logout-buttons' onClick={() => {
-                  setLogin(false)
-                  setShowModal(true)
-                }}>
-                  Sign Up
-                </button>
-              </li>
-            </ul>
-          </div>)
-        )}
+        </button>
+      </div>
+      {showMenu && (user ?
+        (<ul className="profile-dropdown">
+          <li className="username-email" key={user.username}>{user.user ? user.user.username : user.username}</li>
+          <li className="username-email" key={user.email}>{user.user ? user.user.email : user.email}</li>
+          <NavLink to='/bookings/current'>
+            < button className="logout">
+              Your Bookings
+            </button>
+          </NavLink>
+
+          {/* <li> */}
+          <button className="logout" onClick={logout}>Log Out</button>
+          {/* </li> */}
+        </ul>) :
+        (<div className="main-login-dropdown-div">
+          <ul className='login-signup-dropdown'>
+            <li>
+              <button className='login-logout-buttons' onClick={() => {
+                setLogin(true)
+                setShowModal(true)
+              }}>
+                Log In
+              </button>
+            </li>
+            <li>
+              <button className='login-logout-buttons' onClick={() => {
+                setLogin(false)
+                setShowModal(true)
+              }}>
+                Sign Up
+              </button>
+            </li>
+          </ul>
+        </div>)
+      )}
     </>
   );
 }
