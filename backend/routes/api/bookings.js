@@ -21,7 +21,7 @@ router.get('/current', requireAuth, async (req, res) => {
     let bookingsList = [];
     for (let booking = 0; booking < bookings.length; booking++) {
         bookings[booking] = bookings[booking].toJSON();
-        const imagePrev = await SpotImage.findByPk(bookings[booking].id, {
+        const imagePrev = await SpotImage.findByPk(bookings[booking].spotId, {
             where: { preview: true },
             attributes: ['url'],
         })
@@ -38,12 +38,12 @@ router.get('/current', requireAuth, async (req, res) => {
         bookingsList.push(bookings[booking])
         // delete booking.Spot.SpotImages;
     }
-    console.log("bookingList === ", bookingsList)
+    // console.log("bookingList === ", bookingsList)
     return res.json({ Bookings: bookingsList })
 })
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-    // console.log(req.params.bookingId)
+    
     const booking = await Booking.findByPk(req.params.bookingId);
     // console.log('~~~~~~~~~~> ', currentDate)
     // console.log(new Date().toDateString())

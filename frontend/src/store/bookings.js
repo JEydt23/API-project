@@ -72,12 +72,13 @@ export const createBookingThunk = (booking, spotId) => async dispatch => {
 }
 
 export const deleteBookingThunk = booking => async dispatch => {
-    const response = await fetch(`/api/bookings/${booking}/`, {
+
+    const response = await csrfFetch(`/api/bookings/${booking}/`, {
         method: 'DELETE'
     })
     console.log("DELETE BOOKINGS THUNK === ", response)
 
-    if (response.ok){
+    if (response.ok) {
         dispatch(deleteBooking(booking))
     }
 }
@@ -104,7 +105,6 @@ export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBo
 
         case CREATE_BOOKING: {
             const newState = { ...state, viewAllBookings: { ...state.viewAllBookings }, viewOneBooking: { ...state.viewOneBooking } }
-            // console.log("ACTION.BOOKINGS ===== ", action)
             newState.viewAllBookings[action.booking.id] = action.booking
             return newState
         }

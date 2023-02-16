@@ -369,6 +369,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
     const { spotId } = req.params;
+    // console.log("BACKEND SPOTID ====", spotId)
 
     // Search query for spot by its spotId
     const spotExist = await Spot.findByPk(spotId);
@@ -390,7 +391,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     if (req.user.id !== spotExist.ownerId) {
         const bookings2 = await Booking.findAll({
             where: { spotId: spotExist.id },
-            attributes: ['spotId', 'startDate', 'endDate']
+            include: { model: User, attributes: ['id', 'firstName', 'lastName'] },
+            attributes: ['id', 'spotId', 'startDate', 'endDate']
         })
         res.json({ Bookings: bookings2 })
     }
@@ -402,6 +404,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     // console.log(req.params.spotId)
     const  spotId  = req.params.spotId;
+    console.log("SPOTID BACKEND===== ", spotId)
     const { startDate, endDate } = req.body;
     console.log("REQ BODY === ", req.body)
 
