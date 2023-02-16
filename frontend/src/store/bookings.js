@@ -46,7 +46,6 @@ export const bookingsByIdThunk = spotId => async dispatch => {
 
 export const bookingsByUserThunk = () => async dispatch => {
     const response = await fetch(`/api/bookings/current`)
-    console.log("USER THUNK BOOKINGS === ", response)
     if (response.ok) {
         const bookings = await response.json()
         dispatch(allBookingsByUser(bookings))
@@ -55,14 +54,31 @@ export const bookingsByUserThunk = () => async dispatch => {
 }
 
 export const createBookingThunk = (booking, spotId) => async dispatch => {
-    const response = await fetch(`/api/spots/${spotId}/bookings`, {
+    console.log("booking in thunk", booking)
+    console.log("spotId === ", spotId)
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
-        body: booking
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(booking)
     })
+    console.log("CREATE BOOKINGS THUNK === ", response)
     if (response.ok) {
         const booking = await response.json()
         dispatch(createBooking(booking))
         return booking
+    }
+}
+
+export const deleteBookingThunk = booking => async dispatch => {
+    const response = await fetch(`/api/bookings/${booking}/`, {
+        method: 'DELETE'
+    })
+    console.log("DELETE BOOKINGS THUNK === ", response)
+
+    if (response.ok){
+        dispatch(deleteBooking(booking))
     }
 }
 
@@ -72,7 +88,6 @@ export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBo
     switch (action.type) {
         case ALL_BOOKINGS_SPOT: {
             const newState = { viewAllBookings: {}, viewOneBooking: {} }
-            console.log("action.bookings === ", action.bookings)
             action.bookings.Bookings.forEach(e => {
                 newState.viewAllBookings[e.id] = e
             })
@@ -89,7 +104,15 @@ export default function bookingsReducer(state = { viewAllBookings: {}, viewOneBo
 
         case CREATE_BOOKING: {
             const newState = { ...state, viewAllBookings: { ...state.viewAllBookings }, viewOneBooking: { ...state.viewOneBooking } }
-            newState.viewAllBookings[action.bookings.id] = action.bookings
+            // console.log("ACTION.BOOKINGS ===== ", action)
+            newState.viewAllBookings[action.booking.id] = action.booking
+            return newState
+        }
+
+
+        case DELETE_BOOKING: {
+            const newState = { ...state, viewAllBookings: { ...state.viewAllBookings }, viewOneBooking: { ...state.viewOneBooking } }
+            delete newState.viewAllBookings[action.booking]
             return newState
         }
 

@@ -83,7 +83,7 @@ function CreateReview({ spot }) {
                     </label>
                 </div>
 
-                <button id='create-review-button' class='review-buttons' type="submit">Create Review</button>
+                <button id='create-review-button' className='review-buttons' type="submit">Create Review</button>
             </form>}
         </>
 

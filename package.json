@@ -25,6 +25,12 @@
   },
   "homepage": "https://github.com/JEydt23/API-project#readme",
   "dependencies": {
-    "pg": "^8.8.0"
+    "@babel/runtime": "^7.20.13",
+    "moment": "^2.29.4",
+    "pg": "^8.8.0",
+    "react": "^16.14.0",
+    "react-dates": "^21.8.0",
+    "react-dom": "^16.14.0",
+    "react-with-direction": "^1.4.0"
   }
 }

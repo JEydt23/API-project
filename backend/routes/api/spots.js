@@ -403,6 +403,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     // console.log(req.params.spotId)
     const  spotId  = req.params.spotId;
     const { startDate, endDate } = req.body;
+    console.log("REQ BODY === ", req.body)
 
     // const start = new Date(startDate)
     // start = start.toDateString();

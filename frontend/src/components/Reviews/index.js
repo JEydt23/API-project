@@ -65,10 +65,10 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                 <h4 className='list-of-reviews'>{starRating} · {spotDetails.numReviews} Review(s)</h4>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
-                        <li className='li-li-userInfo'> <i id='profile-review' className="fas fa-user-circle" /> <span id='first-last-name'>{ele.User.firstName} {ele.User.lastName}</span>
-                        <li className='li-li' key={ele.id}>"{ele.review}" ★  {ele.stars}
-                        </li>
-                            {(currentUser && (currentUser.id === ele.User.id) && <button class='review-buttons' id='delete-review-button' onClick={async (e) => {
+                        <li className='li-li-userInfo' key={ele}> <i id='profile-review' className="fas fa-user-circle" /> <span id='first-last-name'>{ele.User.firstName} {ele.User.lastName}</span>
+                        <span className='li-li' >"{ele.review}" ★  {ele.stars}
+                        </span>
+                            {(currentUser && (currentUser.id === ele.User.id) && <button className='review-buttons' id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
                                 await dispatch(deleteReviewThunk(value))
 

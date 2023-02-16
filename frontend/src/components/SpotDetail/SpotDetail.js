@@ -7,6 +7,7 @@ import aircover from '../Navigation/Images/aircover.png'
 
 
 import './SpotDetail.css'
+import CreateABooking from './CreateBooking';
 
 
 const SpotDetail = ({ spotDetails }) => {
@@ -96,11 +97,12 @@ const SpotDetail = ({ spotDetails }) => {
                         </div>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <div>
-                            <GetReviewsBySpot key={spotDetails.id} spotDetails={spotDetails} />
-                        </div>
                         <div style={{}}>
-                            <SpotBookings key={spotDetails.id} spotDetails={spotDetails} />
+                            <SpotBookings  spotDetails={spotDetails} />
+                            <CreateABooking  spotDetails={spotDetails} />
+                        </div>
+                        <div>
+                            <GetReviewsBySpot  spotDetails={spotDetails} />
                         </div>
                     </div>
                 </div>

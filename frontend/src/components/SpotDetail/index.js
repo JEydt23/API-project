@@ -28,8 +28,9 @@ const GetSpotDetail = () => {
 
 
             <div>
-                <SpotDetail key={spotDetails.id} spotDetails={spotDetails} />
+                <SpotDetail spotDetails={spotDetails} />
             </div>
+
 
 
     )
