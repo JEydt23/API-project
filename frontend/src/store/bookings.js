@@ -54,8 +54,8 @@ export const bookingsByUserThunk = () => async dispatch => {
 }
 
 export const createBookingThunk = (booking, spotId) => async dispatch => {
-    console.log("booking in thunk", booking)
-    console.log("spotId === ", spotId)
+    // console.log("booking in thunk", booking)
+    // console.log("spotId === ", spotId)
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
         headers: {
@@ -63,7 +63,7 @@ export const createBookingThunk = (booking, spotId) => async dispatch => {
         },
         body: JSON.stringify(booking)
     })
-    console.log("CREATE BOOKINGS THUNK === ", response)
+    // console.log("CREATE BOOKINGS THUNK === ", response)
     if (response.ok) {
         const booking = await response.json()
         dispatch(createBooking(booking))
@@ -76,7 +76,7 @@ export const deleteBookingThunk = booking => async dispatch => {
     const response = await csrfFetch(`/api/bookings/${booking}/`, {
         method: 'DELETE'
     })
-    console.log("DELETE BOOKINGS THUNK === ", response)
+    // console.log("DELETE BOOKINGS THUNK === ", response)
 
     if (response.ok) {
         dispatch(deleteBooking(booking))

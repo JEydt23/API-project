@@ -43,7 +43,7 @@ const SpotDetail = ({ spotDetails }) => {
         await dispatch(deleteSpot(spotDetails.id))
 
     }
-    console.log(spotDetails)
+    // console.log(spotDetails)
     return (
         <div>
             <div className='spotDetails'>
@@ -53,61 +53,73 @@ const SpotDetail = ({ spotDetails }) => {
                 <div className='spot-image'>
                     <img src={spotDetails.SpotImages[0].url} alt={spotDetails.name} id='spotDetailImage'></img>
                 </div>
-                <div className='hosted-and-buttons'>
-                    <div className='hosted-by'>
-                        <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName} {youMessage}</h2>
-                        <p>4 guests · 3 bedrooms · 4 beds · 3 bath</p>
-                    </div>
-                    <div className='spot-details-buttons'>
-                        {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
-                        >Delete Spot</button>)}
-                        <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
-                            {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
-                                Edit Spot
-                            </button>)}
-                        </NavLink>
-                    </div>
+                <div className='left-right-container'>
 
+                    <div className='details-left'>
+                        <div className='hosted-and-buttons'>
+                            <div className='hosted-by'>
+                                <div className='host-and-details'>
+                                    <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName} {youMessage}</h2>
+                                    <p>4 guests · 3 bedrooms · 4 beds · 3 bath</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className='spot-details-buttons'>
+                            {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className="spot-delete-button" onClick={handleDelete}
+                            >Delete Spot</button>)}
+                            <NavLink exact to={`/spots/${spotDetails.id}/edit`}>
+                                {(currentUser && (currentUser.id === spotDetails.ownerId) && <button className='spot-edit-button'>
+                                    Edit Spot
+                                </button>)}
+                            </NavLink>
+                        </div>
+
+                        <div className='address-review-div'>
+                            <div className='address-extraDetails'>
+                                <div className='extra-details-with-emojis'>
+                                    <div className='emoji-extra-details'>
+                                        <h4>💻 Great for remote work</h4>
+                                        <p className='emojitext'>Fast wifi at 120Mbps, plus a dedicated workspace in a private room.</p>
+                                    </div>
+                                    <div className='emoji-extra-details'>
+                                        <h4>🚪 Self check-in</h4>
+                                        <p className='emojitext'>Check yourself in with the keypad</p>
+                                    </div>
+                                    <div className='emoji-extra-details'>
+                                        <h4>📅 Free cancellation for 48 hours</h4>
+                                    </div>
+                                </div>
+                                <div className='aircover'>
+                                    <img src={aircover} alt='aircover logo'></img>
+                                    <p className='aircovertext'>Every booking includes free
+                                        protection from Host cancellations, listing inaccuracies,
+                                        and other issues like trouble checking in.</p>
+
+                                </div>
+                                <div className='spotAddress'> Located at {spotDetails.address}, {spotDetails.city}, {spotDetails.state}
+                                    <div>{spotDetails.description}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <div style={{}}>
+                                    {/* <SpotBookings  spotDetails={spotDetails} /> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className='create-booking-div'> */}
+                    <CreateABooking spotDetails={spotDetails} />
+                    {/* </div> */}
                 </div>
-                <div className='address-review-div'>
-                    <div className='address-extraDetails'>
-                        <div className='extra-details-with-emojis'>
-                            <div className='emoji-extra-details'>
-                                <h4>💻 Great for remote work</h4>
-                                <p className='emojitext'>Fast wifi at 120Mbps, plus a dedicated workspace in a private room.</p>
-                            </div>
-                            <div className='emoji-extra-details'>
-                                <h4>🚪 Self check-in</h4>
-                                <p className='emojitext'>Check yourself in with the keypad</p>
-                            </div>
-                            <div className='emoji-extra-details'>
-                                <h4>📅 Free cancellation for 48 hours</h4>
-                            </div>
-                        </div>
-                        <div className='aircover'>
-                            <img src={aircover} alt='aircover logo'></img>
-                            <p className='aircovertext'>Every booking includes free
-                                protection from Host cancellations, listing inaccuracies,
-                                and other issues like trouble checking in.</p>
-
-                        </div>
-                        <div className='spotAddress'> Located at {spotDetails.address}, {spotDetails.city}, {spotDetails.state}
-                            <div>{spotDetails.description}
-                            </div>
-                        </div>
-                    </div>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <div style={{}}>
-                            <SpotBookings  spotDetails={spotDetails} />
-                            <CreateABooking  spotDetails={spotDetails} />
-                        </div>
-                        <div>
-                            <GetReviewsBySpot  spotDetails={spotDetails} />
-                        </div>
-                    </div>
+                <div className='spot-reviews-container'>
+                    <GetReviewsBySpot spotDetails={spotDetails} />
                 </div>
             </div>
-        </div>
+
+        </div >
     )
 }
 

@@ -29,13 +29,13 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     {
         spotReviews.find(e => {
 
-            console.log('e ===', e)
+            // console.log('e ===', e)
             if (e?.userId === currentUser?.id) {
                 value = e.id
                 // console.log('value === ', value)
-                console.log('currentUser === ', currentUser.id)
+                // console.log('currentUser === ', currentUser.id)
 
-                console.log('current user ===', currentUser)
+                // console.log('current user ===', currentUser)
             }
         })
     }
@@ -61,13 +61,14 @@ const GetReviewsBySpot = ({ spotDetails }) => {
     return spotReviews && (
         <div className='main-review-div'>
             <div className='spot-reviews' /*style={{ border: '1px solid black' }}*/ >
-                <h3 className='name-of-spot'>  {spotDetails.name} </h3>
+                {/* <h3 className='name-of-spot'>  {spotDetails.name} </h3> */}
                 <h4 className='list-of-reviews'>{starRating} · {spotDetails.numReviews} Review(s)</h4>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
                         <li className='li-li-userInfo' key={ele}> <i id='profile-review' className="fas fa-user-circle" /> <span id='first-last-name'>{ele.User.firstName} {ele.User.lastName}</span>
-                        <span className='li-li' >"{ele.review}" ★  {ele.stars}
+                        <li><span className='li-li' >"{ele.review}" ★  {ele.stars}
                         </span>
+                        </li>
                             {(currentUser && (currentUser.id === ele.User.id) && <button className='review-buttons' id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
                                 await dispatch(deleteReviewThunk(value))

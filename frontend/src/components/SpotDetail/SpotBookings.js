@@ -10,7 +10,7 @@ const SpotBookings = ({ spotDetails }) => {
     // const spot = useSelector(state => state.spot.viewOneSpot)
     // console.log("SPOT === ", spot)
     const bookings = useSelector(state => Object.values(state.booking.viewAllBookings))
-    console.log("BOOKINGS STATE ===== ", bookings)
+    // console.log("BOOKINGS STATE ===== ", bookings)
 
     useEffect(() => {
         dispatch(bookingsByIdThunk(spotDetails.id))

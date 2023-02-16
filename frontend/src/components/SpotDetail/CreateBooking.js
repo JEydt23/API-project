@@ -7,6 +7,7 @@ import moment from "moment"
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
+import './CreateBooking.css'
 
 function CreateABooking({ spotDetails }) {
     const history = useHistory();
@@ -92,12 +93,12 @@ function CreateABooking({ spotDetails }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('is this hitting')
+        // console.log('is this hitting')
         if (!errors.length) {
             const values = {
-                 startDate: moment(startDate).format("MM-DD-YYYY"),
-                 endDate: moment(endDate).format("MM-DD-YYYY")
-             }
+                startDate: moment(startDate).format("MM-DD-YYYY"),
+                endDate: moment(endDate).format("MM-DD-YYYY")
+            }
             const created = await dispatch(createBookingThunk(values, spotDetails.id))
             if (created) history.push(`/bookings/current`)
         }
@@ -116,63 +117,57 @@ function CreateABooking({ spotDetails }) {
         setEndDate()
         document.getElementById('startDateId').focus()
     }
+    console.log("spotDetails === ", spotDetails)
+    return (
+        <div className="booking-form-container">
+            <div className='booking-form-headers'>
+                <div className='header-first'>
+                    <div className='header-price'>
+                        ${spotDetails.price} <span className="night">night</span> </div>
+                    <div className='header-right'><span className="avgRat">{`★ ${spotDetails.numReviews ? spotDetails.avgStarRating.toFixed(2) : "New"}`} · {`${spotDetails.numReviews} review(s)`} </span></div>
 
-return (
-    <div className="booking-form-container">
-        <div className='booking-form-headers'>
-            <div className='header-first'>
-                <div className='header-price'>
-                    ${spotDetails.price}
                 </div>
-                <div className='header-rest'>
-                    night
-                </div>
+
 
             </div>
-            {/* <div className='header-last'>
+            <div className='actual-form'>
+                <form
+                    className='booking-form'
+                    onSubmit={handleSubmit}>
+                    <DateRangePicker
+                        startDate={startDate} // momentPropTypes.momentObj or null,
+                        startDateId="startDateId" // PropTypes.string.isRequired,
+                        endDate={endDate} // momentPropTypes.momentObj or null,
+                        endDateId="endDateId" // PropTypes.string.isRequired,
+                        onDatesChange={handleDateChanges} // PropTypes.func.isRequired,
+                        focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                        onFocusChange={focusedInput => setFocusedInput(focusedInput)}
+                        reopenPickerOnClearDates={startDate}
+                        minimumNights={1}
+                        minDate={moment(new Date())}
+                        isDayBlocked={blockDates}
+                        startDatePlaceholderText="Start"
+                        endDatePlaceholderText="End"
+                        hideKeyboardShortcutsPanel={true}
+                        isDayHighlighted={checkGapDays}
+                        isOutsideRange={validatedDates}
+                        calendarInfoPosition={"bottom"}
+                        renderCalendarInfo={calendarInfo}
 
-                <div className='header-right'>{`★ ${spotDetails.numReviews ? Number(spotDetails.avgRating).toFixed(1) : "New"}`} · {`${spotDetails.numReviews} reviews`} </div>
-            </div> */}
-
-        </div>
-        <div className='actual-form'>
-            <form
-                className='booking-form'
-                onSubmit={handleSubmit}>
-                <DateRangePicker
-                    startDate={startDate} // momentPropTypes.momentObj or null,
-                    startDateId="startDateId" // PropTypes.string.isRequired,
-                    endDate={endDate} // momentPropTypes.momentObj or null,
-                    endDateId="endDateId" // PropTypes.string.isRequired,
-                    onDatesChange={handleDateChanges} // PropTypes.func.isRequired,
-                    focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                    onFocusChange={focusedInput => setFocusedInput(focusedInput)}
-                    reopenPickerOnClearDates={startDate}
-                    minimumNights={1}
-                    minDate={moment(new Date())}
-                    isDayBlocked={blockDates}
-                    startDatePlaceholderText="Start"
-                    endDatePlaceholderText="End"
-                    hideKeyboardShortcutsPanel={true}
-                    isDayHighlighted={checkGapDays}
-                    isOutsideRange={validatedDates}
-                    calendarInfoPosition={"bottom"}
-                    renderCalendarInfo={calendarInfo}
-
-                />
-                <button className='booking-btn'>Reserve</button>
-            </form>
-            <div className='booking-bot'>
-                <div className='bot-content'>
-                    <div>${spotDetails.price} x {endDate?.diff(startDate, 'days') || 0} nights <span>${spotDetails.price * (endDate?.diff(startDate, 'days') || 0)}</span></div>
-                    <div>Cleaning fee <span>$100</span></div>
-                    <div>Service Fee <span>${((spotDetails.price * 3) * 0.14).toFixed(0)}</span></div>
-                    <div> Total before taxes <span>${+(spotDetails.price * (endDate?.diff(startDate, 'days') || 0)) + +((spotDetails.price * 3) * 0.14).toFixed(0) + 100}</span></div>
+                    />
+                    <button className='booking-btn'>Reserve</button>
+                </form>
+                <div className='booking-bot'>
+                    <div className='bot-content'>
+                        <div className='bot-bot'>${spotDetails.price} x {endDate?.diff(startDate, 'days') || 0} nights <span>${spotDetails.price * (endDate?.diff(startDate, 'days') || 0)}</span></div>
+                        <div className='bot-bot'>Cleaning fee <span>$100</span></div>
+                        <div className='bot-bot' style={{paddingBottom: '20px'}}>Service Fee <span>${((spotDetails.price * 3) * 0.14).toFixed(0)}</span></div>
+                        <div className='bot-bot' style={{fontWeight: "bold", borderTop: '1px solid lightgrey', paddingTop: '20px'}}> Total before taxes <span>${+(spotDetails.price * (endDate?.diff(startDate, 'days') || 0)) + +((spotDetails.price * 3) * 0.14).toFixed(0) + 100}</span></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div >
-)
+        </div >
+    )
 }
 
 export default CreateABooking

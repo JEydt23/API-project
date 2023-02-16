@@ -58,17 +58,26 @@ p.list-of-reviews {
 
 h3.name-of-spot{
     text-align: center;
+    width: 100%;
 }
 
 h4.list-of-reviews {
-    text-align: center;
+    border-top: 1px lightgray solid;
+    padding-top: 25px;
+    text-align: left;
+    font-size: 24px;
+}
+
+.spot-reviews-container {
+    width: 950px;
+
 }
 
 div.spot-reviews{
     border: grey 0px solid;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 2.5px rgba(128, 128, 128, 0.473);
+    /* padding: 10px; */
+    /* border-radius: 10px;
+    box-shadow: 0px 0px 5px 2.5px rgba(128, 128, 128, 0.473); */
 }
 
 button.review-buttons {

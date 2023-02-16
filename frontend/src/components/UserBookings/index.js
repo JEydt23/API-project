@@ -14,7 +14,7 @@ const UserBookings = () => {
     const upcomingBookings = bookings.filter(booking => moment(new Date()).diff(moment(booking.startDate), 'day') <= 0)
     const pastBookings = bookings.filter(booking => moment(new Date()).diff(moment(booking.startDate), 'day') > 0)
 
-    console.log("BOOKINGS STATE IN USER BOOKINGS ===== ", bookings)
+    // console.log("BOOKINGS STATE IN USER BOOKINGS ===== ", bookings)
     useEffect(() => {
         dispatch(bookingsByUserThunk(id))
     }, [dispatch, id])

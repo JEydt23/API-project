@@ -19,7 +19,7 @@ function EditSpot() {
     const [validations, setValidations] = useState([]);
 
     const [errors, setErrors] = useState(false);
-    console.log(updateThisSpot)
+    // console.log(updateThisSpot)
 
     useEffect(() => {
         const errors = [];
