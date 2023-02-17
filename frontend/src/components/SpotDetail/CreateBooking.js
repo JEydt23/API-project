@@ -19,6 +19,7 @@ function CreateABooking({ spotDetails }) {
     const [bookedDates, setBookedDates] = useState([])
     const [blockedDates, setBlockedDates] = useState([])
     const [errors, setErrors] = useState([])
+    const [ready, setReady] = useState(false)
 
 
     useEffect(() => {
@@ -30,6 +31,20 @@ function CreateABooking({ spotDetails }) {
     useEffect(() => {
         blockedDates.push(bookedDates)
     }, [dispatch, bookedDates])
+
+    useEffect(() => {
+        if (startDate && endDate) setReady(true)
+        if (!startDate || !endDate) setReady(false)
+    }, [startDate, endDate])
+
+    useEffect(() => {
+        const endInput = document.getElementById('endDateId')
+        if (!startDate) {
+            endInput.disabled = true
+            setEndDate()
+            setStartDate()
+        }
+    }, [startDate])
 
     const handleDateChanges = ({ startDate, endDate }) => {
         setStartDate(startDate)
@@ -56,10 +71,14 @@ function CreateABooking({ spotDetails }) {
 
     const checkGapDays = (day) => {
         if (day > moment()) {
-            return bookings.find(booking => moment(booking.startDate).diff(day, 'days') == 1)
+            const gapDays = []
+            bookings.forEach(booking => gapDays.push(moment(booking.startDate).subtract(1, "days").format('YYYY-MM-DD')))
+            return gapDays.find(gapDay => gapDay == day.format('YYYY-MM-DD'))
         }
+
     }
 
+    
     const validatedDates = (day) => {
 
         if (!startDate) {
@@ -69,13 +88,13 @@ function CreateABooking({ spotDetails }) {
 
             const blockedDates = [...bookedDates]
             let earliestBlockedDate = blockedDates[0]
-
-            for (let i = 0; i < blockedDates.length; i++) {
-                if (moment(blockedDates[i]) > moment(startDate)) {
+            for (let i = 1; i < blockedDates.length; i++) {
+                if (moment(blockedDates[i]) > moment(startDate) &&
+                    moment(blockedDates[i]).diff(day, 'days') < moment(earliestBlockedDate).diff(day, 'days')) {
                     earliestBlockedDate = blockedDates[i]
-                    break
                 }
             }
+
             if (moment(startDate).diff(earliestBlockedDate, 'days') > 0) {
                 return moment(startDate).diff(day, 'days') > 0
             }

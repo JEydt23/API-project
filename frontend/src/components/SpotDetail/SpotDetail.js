@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { deleteSpot } from '../../store/spots';
+import { useEffect } from 'react';
+import { deleteSpot, getOneSpot } from '../../store/spots';
 import GetReviewsBySpot from '../Reviews';
 import SpotBookings from './SpotBookings';
 import aircover from '../Navigation/Images/aircover.png'
@@ -16,7 +17,9 @@ const SpotDetail = ({ spotDetails }) => {
     const spotImage = spotDetails.SpotImages;
     const currentUser = useSelector(state => state.session.user);
 
-
+    useEffect(()=> {
+        dispatch(getOneSpot(spotDetails.id))
+    }, [dispatch, spotDetails.id])
 
 
     if (!spotImage) return null;
@@ -59,7 +62,8 @@ const SpotDetail = ({ spotDetails }) => {
                         <div className='hosted-and-buttons'>
                             <div className='hosted-by'>
                                 <div className='host-and-details'>
-                                    <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName} {youMessage}</h2>
+                                    <h2 className='host-name'>{spotDetails.name} is hosted by {spotDetails.Owner.firstName} </h2>
+                                    <h2 className='host-name'>{youMessage}</h2>
                                     <p>4 guests · 3 bedrooms · 4 beds · 3 bath</p>
                                 </div>
 

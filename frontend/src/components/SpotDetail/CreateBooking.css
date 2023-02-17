@@ -1,12 +1,14 @@
 div.hosted-by {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+
 
 }
 
 div.host-and-details {
-    justify-content: start;
-    width: 100%;
+    justify-content: flex-start;
+    width: 90%;
 
 }
 

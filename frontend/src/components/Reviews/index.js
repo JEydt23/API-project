@@ -44,11 +44,12 @@ const GetReviewsBySpot = ({ spotDetails }) => {
 
         dispatch(getAllSpotReviews(spotDetails.id))
 
-    }, [dispatch, spotDetails.id])
-
+    }, [dispatch, spotReviewNoOV.id, spotDetails.id])
+    console.log(spotReviewNoOV)
     useEffect(() => {
         dispatch(getOneSpot(spotDetails.id))
     }, [spotDetails.id, spotReviewNoOV, dispatch])
+
     // if (!spotReviews.length) return;
 
     // {spotReviews.filter(review => {
@@ -71,9 +72,9 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                         </li>
                             {(currentUser && (currentUser.id === ele.User.id) && <button className='review-buttons' id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
-                                await dispatch(deleteReviewThunk(value))
 
-                                await history.push(`/spots/${spotDetails.id}`)
+                                dispatch(deleteReviewThunk(ele.id))
+                               
                             }}>Delete Review</button>)}
                         </li>
                     ))}

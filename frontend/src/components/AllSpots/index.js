@@ -10,7 +10,7 @@ const ShowAllSpots = () => {
 
     useEffect(() => {
         dispatch(getAllSpots())
-    }, [dispatch])
+    }, [dispatch, getSpots.id])
 
     if (!getSpots.length) return null;
     return (
