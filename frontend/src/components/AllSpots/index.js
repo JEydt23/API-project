@@ -17,7 +17,7 @@ const ShowAllSpots = () => {
         <div id='giant-box' /*style={{ border: '2px solid red' }}*/>
             {/* {console.log(getSpots)} */}
             {getSpots.map(spot => (
-                <AllSpots key={spot} spot={spot} />
+                <AllSpots key={spot.id} spot={spot} />
             ))}
         </div>
     )

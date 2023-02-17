@@ -8,6 +8,7 @@ import './Navigation.css';
 import LoginForm from '../LoginFormModal/LoginForm';
 import SignupFormPage from '../SignupFormPage'
 import { Modal } from '../../context/Modal'
+import SearchBar from '../SearchBar';
 import logo from './Images/logo-resize.png'
 
 function Navigation({ isLoaded }) {
@@ -36,6 +37,9 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/" >
           <img src={logo} alt='logo' id='logo'></img>
         </NavLink>
+        <div className='search-bar'>
+          <SearchBar />
+        </div>
         <div className='hostAndprofile'>
           <div id='createASpot'>
             {sessionUser &&
