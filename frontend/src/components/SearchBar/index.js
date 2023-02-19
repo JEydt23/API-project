@@ -31,15 +31,16 @@ function SearchBar() {
         setClose(false)
         const filter = spots.filter(spot => {
             return spot.name.toLowerCase().includes(search.toLowerCase()) ||
-                   spot.city.toLowerCase().includes(search.toLowerCase()) ||
-                   spot.country.toLowerCase().includes(search.toLowerCase()) ||
-                   spot.state.toLowerCase().includes(search.toLowerCase())
+                spot.city.toLowerCase().includes(search.toLowerCase()) ||
+                spot.country.toLowerCase().includes(search.toLowerCase()) ||
+                spot.state.toLowerCase().includes(search.toLowerCase())
         })
         if (!search) {
             setResults()
         } else {
             setResults(filter.splice(0, 5))
         }
+
     }
 
 
@@ -56,8 +57,8 @@ function SearchBar() {
                 className="searchInput"
                 onChange={searchFilter}
                 value={search}
-                placeholder="Search destinations"
-                >
+                placeholder="🔍 Search for a place to stay"
+            >
             </input>
             <div>
             </div>
@@ -65,17 +66,21 @@ function SearchBar() {
                 {!close && results && (
                     <Fragment>
                         {results.map((result, idx) =>
-                        <div onClick={closeSearch}>
-                            {console.log("result ==== ", result, "idx ==== ", idx)}
-                            <NavLink key={idx} to={`/spots/${result.id}`}>
-                                <img src={result.previewImage}/>
-                                <div>{result.name}</div>
-                            </NavLink>
-                        </div>
+                            <div onClick={closeSearch}>
+                                {/* {console.log("result ==== ", result, "idx ==== ", idx)} */}
+                                <NavLink key={idx} to={`/spots/${result.id}`}>
+                                    <img src={result.previewImage} />
+                                    <div>{result.name} in {result.city}, {result.state}</div>
+
+
+                                </NavLink>
+                            </div>
                         )}
                     </ Fragment>
                 )}
+
             </div>
+
         </div>
     )
 }
