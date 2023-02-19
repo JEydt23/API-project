@@ -1,1 +1,34 @@
+div#giant-box1{
+    display: flex;
+    flex-direction: column;
+}
 
+div.spots1 {
+    display: flex;
+    flex-direction: row;
+
+}
+
+div.spots2 {
+    display: flex;
+    flex-direction: row;
+
+}
+
+div.spots-info1 {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    padding: 25px;
+}
+
+div.spots-info2 {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    padding: 25px;
+}
+
+button.delete-spot-booking {
+    margin-bottom: 50px;
+}

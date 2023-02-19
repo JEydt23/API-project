@@ -73,6 +73,7 @@ export const getOneSpot = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const spot = await response.json();
+        console.log("spot ====", spot)
         dispatch(spotDetailsAction(spot));
 
     }
@@ -153,6 +154,7 @@ const spotsReducer = (state = { viewAllSpots: {}, viewSingleSpot: {} }, action) 
         case GET_SPOT_DETAILS: {
             const newState = { viewAllSpots: {}, viewSingleSpot: {} }
             newState.viewSingleSpot = action.spot
+            newState.viewAllSpots = {...state.viewAllSpots}
             return newState;
 
         }

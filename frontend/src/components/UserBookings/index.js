@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 import { bookingsByUserThunk, deleteBookingThunk } from '../../store/bookings'
 import moment from "moment"
+import './UserBookings.css'
 
 const UserBookings = () => {
     const { id } = useParams()
@@ -22,55 +23,50 @@ const UserBookings = () => {
     return (
         <div>
             <div>
-                <h1 style={{ paddingTop: '75px', textAlign: 'center' }}>Past Bookings</h1>
-                <div id='giant-box'>
-                    {pastBookings.map(booking => (
-                        <div key={`past${booking.id}`}>
-                            <div className='spots-info'>
+                <div id='giant-box1'>
+                    <h1 style={{ paddingTop: '75px', textAlign: 'center' }}>Upcoming booking(s) for {user.firstName} {user.lastName}</h1>
+                    <div className='spots1'>
+                    {upcomingBookings.map(booking => (
+                        <div key={`upcoming${booking.id}`}>
+                            <div className='spots-info1'>
                                 <NavLink to={`/spots/${booking.spotId}`}>
-
                                     <img src={booking.previewImage} alt="previewImage" id="spotImage"></img>
                                 </NavLink>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <h3>{booking.Spot?.name}</h3>
                                     <h4 id='price'>Start Date: <span id='night'> {booking.startDate} </span></h4>
                                     <h4 id='price'>End Date: <span id='night'> {booking.endDate}</span></h4>
+                                    <button className='delete-spot-booking' onClick={async (e) => {
+                                        e.preventDefault()
+                                        dispatch(deleteBookingThunk(booking.id))
+                                    }} >Delete Booking
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    </div>
                 </div>
-
                 <div>
-
-                    <h1 style={{ paddingTop: '75px', textAlign: 'center' }}>Upcoming booking(s) for {user.firstName} {user.lastName}</h1>
-                    <div id='giant-box'>
-                        {/* <div className='spots'>
-                            <div className="previewImage"> */}
-                                {upcomingBookings.map(booking => (
-                                    <div key={`upcoming${booking.id}`}>
-                                        {/* {console.log("booking", booking)} */}
-                                        {/* <h3>ID: {booking.id}</h3> */}
-                                        <div className='spots-info'>
-                                            <NavLink to={`/spots/${booking.spotId}`}>
-
-                                                <img src={booking.previewImage} alt="previewImage" id="spotImage"></img>
-                                            </NavLink>
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                <h3>{booking.Spot?.name}</h3>
-                                                <h4 id='price'>Start Date: <span id='night'> {booking.startDate} </span></h4>
-                                                <h4 id='price'>End Date: <span id='night'> {booking.endDate}</span></h4>
-                                                <button onClick={async (e) => {
-                                                    e.preventDefault()
-                                                    dispatch(deleteBookingThunk(booking.id))
-                                                }} >Delete Booking
-                                                </button>
-                                            </div>
+                    <div id='giant-box1'>
+                        <h1 style={{ textAlign: 'center' }}>Past Bookings</h1>
+                        <div className='spots2'>
+                            {pastBookings.map(booking => (
+                                <div key={`past${booking.id}`} >
+                                    <div className='spots-info2'>
+                                        <NavLink to={`/spots/${booking.spotId}`}>
+                                            <img src={booking.previewImage} alt="previewImage" id="spotImage"></img>
+                                        </NavLink>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <h3>{booking.Spot?.name}</h3>
+                                            <h4 id='price'>Start Date: <span id='night'> {booking.startDate} </span></h4>
+                                            <h4 id='price'>End Date: <span id='night'> {booking.endDate}</span></h4>
                                         </div>
                                     </div>
-                                ))}
-                            {/* </div>
-                        </div> */}
+                                </div>
+                            ))}
+                        </div>
+
                     </div>
                 </div>
             </div>
