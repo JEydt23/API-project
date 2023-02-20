@@ -17,6 +17,7 @@ function EditSpot() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [validations, setValidations] = useState([]);
+    const [showErrors, setShowErrors] = useState(false)
 
     const [errors, setErrors] = useState(false);
     // console.log(updateThisSpot)
@@ -24,11 +25,17 @@ function EditSpot() {
     useEffect(() => {
         const errors = [];
         if (!address || address.length > 30) errors.push("Address can't be empty and must be less than 30 characters.");
+        if (address.trim() == '') errors.push("Letters or numbers are required in the address.")
         if (!city || city.length > 20) errors.push("City cannot be empty and must be less than 20 characters.");
+        if (city.trim() == '') errors.push("Letters or numbers are required in the city.")
         if (!state || state.length > 20) errors.push("State can't be empty and must be shorter than 20 characters.")
+        if (state.trim() == '') errors.push("Letters or numbers are required in the state.")
         if (!country || country.length > 20) errors.push("Country can't be empty and must be shorter than 20 characters.")
+        if (country.trim() == '') errors.push("Letters or numbers are required in the country.")
         if (!name || name.length > 20) errors.push("Name can't be empty and must be shorter than 20 characters.")
-        if (!description || description.length > 100) errors.push("Description can't be empty and must be shorter than 100 characters.")
+        if (name.trim() == '') errors.push("Letters or numbers are required in the name.")
+        if (!description || description.length > 255) errors.push("Description can't be empty and must be shorter than 255 characters.")
+        if (description.trim() == '') errors.push("Letters or numbers are required in the description.")
         if (!price || price < 1) errors.push("Price can't be empty and must be greater than 0 dollars.")
 
         setValidations(errors)
@@ -45,6 +52,7 @@ function EditSpot() {
     }, [updateThisSpot])
 
     const handleSubmit = async (e) => {
+        setShowErrors(true)
         e.preventDefault();
         setErrors(true);
 
@@ -54,7 +62,7 @@ function EditSpot() {
             }
             // console.log("payload:::::::::::::::", payload)
             const updated = await dispatch(editSpotThunk(payload))
-            if (updated){
+            if (updated) {
                 await history.push(`/spots/${spotId}`)
             }
         }
@@ -68,7 +76,8 @@ function EditSpot() {
                 </div>
                 <div className='ul-create-spot'>
                     <ul className='errorsList'>
-                        {validations.map((error, idx) => <li className='create-spot-errors' key={idx}>{error}</li>)}
+                        { showErrors ?
+                        validations.map((error, idx) => <li className='create-spot-errors' style={{color: 'red'}} key={idx}>{error}</li>): null}
                     </ul>
                 </div>
                 <div className='create-spot-label'>
