@@ -18,8 +18,11 @@ function CreateABooking({ spotDetails }) {
     const [focusedInput, setFocusedInput] = useState(null);
     const [bookedDates, setBookedDates] = useState([])
     const [blockedDates, setBlockedDates] = useState([])
+    const [showErrors, setShowErrors] = useState(false)
     const [errors, setErrors] = useState([])
     const [ready, setReady] = useState(false)
+    const currentUser = useSelector(state => state.session.user)
+
 
 
     useEffect(() => {
@@ -78,7 +81,7 @@ function CreateABooking({ spotDetails }) {
 
     }
 
-    
+
     const validatedDates = (day) => {
 
         if (!startDate) {
@@ -107,10 +110,12 @@ function CreateABooking({ spotDetails }) {
         if (startDate?.toString().split(' ').slice(1, 4).join(' ') === endDate?.toString().split(' ').slice(1, 4).join(' ')) errors.push("Must book for at least 1 day")
         if (!startDate) errors.push('Must include Start Date')
         if (!endDate) errors.push('Must include End Date')
+        if (!currentUser) errors.push('You must be logged in to book your stay.')
         setErrors(errors)
     }, [startDate, endDate])
 
     const handleSubmit = async (e) => {
+        setShowErrors(true)
         e.preventDefault()
         // console.log('is this hitting')
         if (!errors.length) {
@@ -182,6 +187,15 @@ function CreateABooking({ spotDetails }) {
                         <div className='bot-bot'>Cleaning fee <span>$100</span></div>
                         <div className='bot-bot' style={{paddingBottom: '20px'}}>Service Fee <span>${((spotDetails.price * 3) * 0.14).toFixed(0)}</span></div>
                         <div className='bot-bot' style={{fontWeight: "bold", borderTop: '1px solid lightgrey', paddingTop: '20px'}}> Total before taxes <span>${+(spotDetails.price * (endDate?.diff(startDate, 'days') || 0)) + +((spotDetails.price * 3) * 0.14).toFixed(0) + 100}</span></div>
+                    </div>
+                    <div className='login-errors'>
+                        {
+                            showErrors ?
+                                errors.map(error => (
+                                    <li style={{color: 'red'}} key={error}>{error}</li>
+                                ))
+                                : null
+                        }
                     </div>
                 </div>
             </div>
