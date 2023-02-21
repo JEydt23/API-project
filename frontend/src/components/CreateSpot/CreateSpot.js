@@ -13,6 +13,8 @@ function CreateSpot({ spot }) {
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [name, setName] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [validations, setValidations] = useState([]);
@@ -39,8 +41,10 @@ function CreateSpot({ spot }) {
         if (description.trim() == '') errors.push("Letters or numbers are required in the description.")
         if (!price || price < 1) errors.push("Price can't be empty and must be greater than 0 dollars.")
         if (!url.match(/\.(gif|png|jpeg|jpg)$/)) errors.push("Image's url should use gif, png, jpeg or jpg format.");
+        if (!lat || lat > 90 || lat < -90) errors.push("Latitude is required and must be less than 90 degrees or more than -90 degrees.")
+        if (!lng || lng > 180 || lng < -180) errors.push("Longitude is required and must be less than 180 degrees or more than -180 degrees.")
         setValidations(errors)
-    }, [address, city, state, country, name, description, price, url]);
+    }, [address, city, state, country, name, description, price, url, lat, lng]);
 
     const handleSubmit = async (e) => {
         setShowErrors(true)
@@ -52,7 +56,7 @@ function CreateSpot({ spot }) {
         }
         if (!validations.length) {
             const payload = {
-                address, city, state, country, name, description, price, url
+                address, city, state, country, name, description, price, url, lat, lng
             }
 
             const newNew = await dispatch(createSpot(payload))
@@ -86,6 +90,30 @@ function CreateSpot({ spot }) {
                             placeholder='Address'
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Address */}
+                        <input className='create-spot-input'
+                            type="number"
+                            placeholder='Latitude'
+                            value={lat}
+                            min='-90'
+                            max='90'
+                            onChange={(e) => setLat(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label className='create-spot'>
+                        {/* Address */}
+                        <input className='create-spot-input'
+                            type="number"
+                            placeholder='Longitude'
+                            value={lng}
+                            min='-180'
+                            max='180'
+                            onChange={(e) => setLng(e.target.value)}
                             required
                         />
                     </label>
