@@ -37,7 +37,10 @@ export default function SimpleMap({spotDetails}) {
         // Important! Always set the container height explicitly
         <div style={{ height: '400px', width: '950px', paddingTop: '25px' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
+                bootstrapURLKeys={{ key:
+                    // process.env.REACT_APP_MAP_KEY
+                    'AIzaSyDq-BryCuQH61fwmCj5O6frGu_vXMKiDDE'
+                 }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 yesIWantToUseGoogleMapApiInternals
