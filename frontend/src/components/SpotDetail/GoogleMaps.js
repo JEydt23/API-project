@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import './GoogleMaps.css'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
