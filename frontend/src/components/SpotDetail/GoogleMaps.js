@@ -42,7 +42,7 @@ export default function SimpleMap({ spotDetails }) {
                 }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-                yesIWantToUseGoogleMapApiInternals
+                yesIWantToUseGoogleMapApiInternals={true}
 
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
             >{console.log("map on page")}
