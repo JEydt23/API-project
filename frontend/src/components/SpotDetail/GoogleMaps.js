@@ -3,12 +3,16 @@ import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+// console.log("text ====", text)}
+
 export default function SimpleMap({spotDetails}) {
 
-    // const handleApiLoaded = (map, maps) => {
-    //     // use map and maps objects
-    //     console.log('hi')
-    // };
+    const handleApiLoaded = (map, maps) => {
+        console.log('apiIsLoaded')
+        if (map) {
+            map.setOptions({ gestureHandling: 'greedy', mapTypeControl: false, minZoom: 2});
+        }
+    };
     const defaultProps = {
         center: {
             lat: spotDetails.lat,
@@ -24,8 +28,8 @@ export default function SimpleMap({spotDetails}) {
                 bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-                // yesIWantToUseGoogleMapApiInternals
-                // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                yesIWantToUseGoogleMapApiInternals={true}
+                onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
                 <AnyReactComponent
                     lat={spotDetails.lat}
