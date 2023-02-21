@@ -45,7 +45,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
         dispatch(getAllSpotReviews(spotDetails.id))
 
     }, [dispatch, spotReviewNoOV.id, spotDetails.id])
-    console.log(spotReviewNoOV)
+    // console.log(spotReviewNoOV)
     useEffect(() => {
         dispatch(getOneSpot(spotDetails.id))
     }, [spotDetails.id, spotReviewNoOV, dispatch])
@@ -74,7 +74,7 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                                 e.preventDefault()
 
                                 dispatch(deleteReviewThunk(ele.id))
-                               
+
                             }}>Delete Review</button>)}
                         </li>
                     ))}

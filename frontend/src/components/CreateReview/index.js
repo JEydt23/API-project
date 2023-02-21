@@ -15,6 +15,8 @@ function CreateReview({ spot }) {
     const [stars, setStars] = useState(0);
     const [errors, setErrors] = useState(false);
     const [validations, setValidations] = useState([]);
+    const [showErrors, setShowErrors] = useState(false)
+
     // console.log('------CURRENT SPOT----- ', currentSpot)
 
     useEffect(() => {
@@ -36,6 +38,7 @@ function CreateReview({ spot }) {
     if (currentUser) spotReviews.find(review => review.userId === currentUser.id) ? reviewed = true : reviewed = false;
 
     const handleSubmit = async (e) => {
+        setShowErrors(true)
         e.preventDefault();
         setErrors(true);
 
@@ -54,8 +57,11 @@ function CreateReview({ spot }) {
             {currentUser && <form hidden={reviewed} onSubmit={handleSubmit}>
                 <div className="review-box">
                     <h4 className="leave-review-h4">Leave a Review for this location</h4>
-                    <ul className='errorsList-reviews'>
-                        {validations.map((error, idx) => <li key={idx}>{error}</li>)}
+                    <ul className='errorsList'>
+                    {
+                        showErrors ?
+                        validations.map((error, idx) => <li style={{color: 'red'}} className='create-spot-errors' key={idx}>{error}</li>)
+                        : null}
                     </ul>
                 </div>
                 <div className="review-input">

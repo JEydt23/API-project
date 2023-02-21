@@ -7,6 +7,7 @@ export default function SimpleMap({spotDetails}) {
 
     const handleApiLoaded = (map, maps) => {
         // use map and maps objects
+        console.log('hi')
     };
     const defaultProps = {
         center: {
@@ -18,12 +19,12 @@ export default function SimpleMap({spotDetails}) {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '400px', width: '950px' }}>
+        <div style={{ height: '400px', width: '950px', paddingTop: '25px' }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-                yesIWantToUseGoogleMapApiInternals
+                // yesIWantToUseGoogleMapApiInternals
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
                 <AnyReactComponent
