@@ -79,7 +79,12 @@ module.exports = {
         spotId: 14,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-709425013149528376/original/c3841205-def4-40a6-a6c1-9b0cfab58688.jpeg?im_w=720",
         preview: true
-      },]);
+      },
+      {
+        spotId: 15,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-709425013149528376/original/c3841205-def4-40a6-a6c1-9b0cfab58688.jpeg?im_w=720",
+        preview: true
+      }]);
   },
 
   async down(queryInterface, Sequelize) {

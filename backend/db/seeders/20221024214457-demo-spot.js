@@ -192,7 +192,7 @@ module.exports = {
         price: 750
       },
       {
-        // 14
+        // 15
         ownerId: 2,
         address: '512 Boogaloo Drive',
         city: 'Westport',
