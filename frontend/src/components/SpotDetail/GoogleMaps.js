@@ -6,7 +6,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 // console.log("text ====", text)}
 
-export default function SimpleMap({spotDetails}) {
+export default function SimpleMap({ spotDetails }) {
 
     const handleApiLoaded = (map, maps) => {
         console.log('apiIsLoaded')
@@ -37,20 +37,19 @@ export default function SimpleMap({spotDetails}) {
         // Important! Always set the container height explicitly
         <div style={{ height: '400px', width: '950px', paddingTop: '25px' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key:
-                    // process.env.REACT_APP_MAP_KEY
-                    'AIzaSyDq-BryCuQH61fwmCj5O6frGu_vXMKiDDE'
-                 }}
+                bootstrapURLKeys={{
+                    key: process.env.REACT_APP_MAP_KEY
+                }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 yesIWantToUseGoogleMapApiInternals
 
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-                >{console.log("map on page")}
+            >{console.log("map on page")}
                 <AnyReactComponent
                     lat={spotDetails.lat}
                     lng={spotDetails.lng}
-                    text={<i className="fa fa-map-marker" aria-hidden="true" style={{color:'red', fontSize: '28px'}}></i> }
+                    text={<i className="fa fa-map-marker" aria-hidden="true" style={{ color: 'red', fontSize: '28px' }}></i>}
 
                 />
             </GoogleMapReact>
