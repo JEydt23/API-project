@@ -190,6 +190,19 @@ module.exports = {
         name: 'Beach Bungalow for Beach Bums ',
         description: 'If you like the beach, then you will like this place. Right on the water with a private beach. Totally tubular.',
         price: 750
+      },
+      {
+        // 14
+        ownerId: 2,
+        address: '512 Boogaloo Drive',
+        city: 'Westport',
+        state: 'CT',
+        country: 'United States',
+        lat: 41.141,
+        lng: -73.3579,
+        name: 'Beach Bungalow for Beach Bums ',
+        description: 'If you like the beach, then you will like this place. Right on the water with a private beach. Totally tubular.',
+        price: 750
       }
     ], {});
   },
