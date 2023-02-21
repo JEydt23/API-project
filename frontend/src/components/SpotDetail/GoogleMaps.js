@@ -11,9 +11,20 @@ export default function SimpleMap({spotDetails}) {
     const handleApiLoaded = (map, maps) => {
         console.log('apiIsLoaded')
         if (map) {
-            map.setOptions({ gestureHandling: 'greedy', mapTypeControl: false, minZoom: 2});
+            map.setOptions('SATELLITE');
+            console.log("setOptions hit")
+        } else {
+            console.log('setOptions did not hit')
         }
     };
+
+    // const apiHasLoaded = (map, maps) => {
+    //     console.log("apiHasLoaded");
+    //     // setMapApiLoaded(true);
+    //     // setMapInstance(map);
+    //     // setMapApi(maps);
+    //     // generateAddress();
+    //   };
     const defaultProps = {
         center: {
             lat: spotDetails.lat,
@@ -29,14 +40,14 @@ export default function SimpleMap({spotDetails}) {
                 bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-                yesIWantToUseGoogleMapApiInternals={true}
+                yesIWantToUseGoogleMapApiInternals
+
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-                
-                >
+                >{console.log("map on page")}
                 <AnyReactComponent
                     lat={spotDetails.lat}
                     lng={spotDetails.lng}
-                    text={<i className="fa fa-map-marker" aria-hidden="true" style={{color:'red', fontSize: '28px'}}></i>}
+                    text={<i className="fa fa-map-marker" aria-hidden="true" style={{color:'red', fontSize: '28px'}}></i> }
 
                 />
             </GoogleMapReact>
