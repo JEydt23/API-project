@@ -141,7 +141,7 @@ function CreateABooking({ spotDetails }) {
         setEndDate()
         document.getElementById('startDateId').focus()
     }
-    console.log("spotDetails === ", spotDetails)
+    // console.log("spotDetails === ", spotDetails)
     return (
         <div className="booking-form-container">
             <div className='booking-form-headers'>

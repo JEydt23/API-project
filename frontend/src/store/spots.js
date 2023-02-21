@@ -73,7 +73,7 @@ export const getOneSpot = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const spot = await response.json();
-        console.log("spot ====", spot)
+        // console.log("spot ====", spot)
         dispatch(spotDetailsAction(spot));
 
     }
