@@ -5,7 +5,7 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'ReviewImages';
@@ -17,7 +17,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert(options, [
+    return queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
         url: 'test11.png'
@@ -49,6 +49,6 @@ module.exports = {
      * Example:
      */
     options.tableName = 'ReviewImages';
-    await queryInterface.bulkDelete(options, null, {});
+    return queryInterface.bulkDelete(options);
   }
 };
