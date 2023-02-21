@@ -31,6 +31,7 @@ export default function SimpleMap({spotDetails}) {
                 defaultZoom={defaultProps.zoom}
                 yesIWantToUseGoogleMapApiInternals={true}
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                
                 >
                 <AnyReactComponent
                     lat={spotDetails.lat}
