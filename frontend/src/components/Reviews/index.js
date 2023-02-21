@@ -66,20 +66,26 @@ const GetReviewsBySpot = ({ spotDetails }) => {
                 <h4 className='list-of-reviews'>{starRating} · {spotDetails.numReviews} Review(s)</h4>
                 <ul className='list-of-reviews'>
                     {spotReviews.map((ele) => (
-                        <li className='li-li-userInfo' key={ele}> <i id='profile-review' className="fas fa-user-circle" /> <span id='first-last-name'>{ele.User.firstName} {ele.User.lastName}</span>
-                        <li><span className='li-li' >"{ele.review}" ★  {ele.stars}
-                        </span>
-                        </li>
+                        <div className='li-li-userInfo' key={ele}>
+                            <i id='profile-review' className="fas fa-user-circle" />
+                            <span id='first-last-name'>
+                                {ele.User.firstName} {ele.User.lastName}
+                            </span>
+                            <li>
+                                <span className='li-li' >
+                                    "{ele.review}" ★  {ele.stars}
+                                </span>
+                            </li>
                             {(currentUser && (currentUser.id === ele.User.id) && <button className='review-buttons' id='delete-review-button' onClick={async (e) => {
                                 e.preventDefault()
 
                                 dispatch(deleteReviewThunk(ele.id))
 
                             }}>Delete Review</button>)}
-                        </li>
+                        </div>
                     ))}
                 </ul>
-                {(!reviewed) && (currentUser?.id !== spotDetails?.ownerId ) &&
+                {(!reviewed) && (currentUser?.id !== spotDetails?.ownerId) &&
                     <div>
                         <CreateReview key={spotDetails.id} spotDetails={spotDetails} />
                     </div>

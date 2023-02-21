@@ -5,10 +5,10 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function SimpleMap({spotDetails}) {
 
-    const handleApiLoaded = (map, maps) => {
-        // use map and maps objects
-        console.log('hi')
-    };
+    // const handleApiLoaded = (map, maps) => {
+    //     // use map and maps objects
+    //     console.log('hi')
+    // };
     const defaultProps = {
         center: {
             lat: spotDetails.lat,
@@ -25,12 +25,12 @@ export default function SimpleMap({spotDetails}) {
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 // yesIWantToUseGoogleMapApiInternals
-                onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
                 <AnyReactComponent
                     lat={spotDetails.lat}
                     lng={spotDetails.lng}
-                    text={<i class="fa fa-map-marker" aria-hidden="true" style={{color:'red', fontSize: '28px'}}></i>}
+                    text={<i className="fa fa-map-marker" aria-hidden="true" style={{color:'red', fontSize: '28px'}}></i>}
 
                 />
             </GoogleMapReact>
