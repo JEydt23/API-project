@@ -122,7 +122,7 @@ const SpotDetail = ({ spotDetails }) => {
                 <div className='spot-reviews-container'>
                     <GetReviewsBySpot spotDetails={spotDetails} />
                 <div
-                //  style={{ height: '100%', width: '100%', paddingTop: '25px' }}
+                 style={{ height: '100vh', width: '100vw', paddingTop: '25px' }}
                  >
                     <SimpleMap spotDetails={spotDetails}/>
 
