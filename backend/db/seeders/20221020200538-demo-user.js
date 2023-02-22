@@ -31,11 +31,11 @@ module.exports = {
         username: 'FakeUser2',
         hashedPassword: bcrypt.hashSync('password3')
       }
-    ], {});
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
-    const Op = Sequelize.Op;
+    // const Op = Sequelize.Op;
     options.tableName = 'Users'
     return queryInterface.bulkDelete(options);
   }

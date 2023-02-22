@@ -12,6 +12,7 @@ export default function SimpleMap({ spotDetails }) {
         console.log('apiIsLoaded')
         if (map) {
             map.setOptions('SATELLITE');
+
             console.log("setOptions hit")
         } else {
             console.log('setOptions did not hit')
@@ -45,7 +46,7 @@ export default function SimpleMap({ spotDetails }) {
                 yesIWantToUseGoogleMapApiInternals={true}
 
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-            >{console.log("map on page")}
+            >{console.log(defaultProps.center)}
                 <AnyReactComponent
                     lat={spotDetails.lat}
                     lng={spotDetails.lng}

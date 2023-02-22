@@ -26,7 +26,7 @@
   "homepage": "https://github.com/JEydt23/API-project#readme",
   "dependencies": {
     "@babel/runtime": "^7.20.13",
-    "@react-google-maps/api": "^2.17.1",
+    "@react-google-maps/api": "^2.18.1",
     "google-map-react": "^2.2.0",
     "moment": "^2.29.4",
     "pg": "^8.8.0",

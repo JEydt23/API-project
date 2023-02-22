@@ -10,6 +10,7 @@ import aircover from '../Navigation/Images/aircover.png'
 import './SpotDetail.css'
 import CreateABooking from './CreateBooking';
 import SimpleMap from './GoogleMaps';
+import Maps from './GoogleMapsRedux';
 
 
 const SpotDetail = ({ spotDetails }) => {
@@ -122,11 +123,14 @@ const SpotDetail = ({ spotDetails }) => {
                 <div className='spot-reviews-container'>
                     <GetReviewsBySpot spotDetails={spotDetails} />
                 </div>
-                <div
+                {/* <div
                  style={{ height: '400px', width: '950px', paddingTop: '50px' }}
                  >
                     <SimpleMap spotDetails={spotDetails}/>
 
+                </div> */}
+                <div style={{ height: '400px', width: '950px', paddingTop: '50px' }}>
+                    <Maps spotDetails={spotDetails}/>
                 </div>
             </div>
 
