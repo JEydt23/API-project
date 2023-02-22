@@ -14,8 +14,8 @@ const Maps = ({ spotDetails }) => {
     })
 
     const containerStyle = {
-        width: '100%',
-        height: '30em'
+        width: '950px',
+        height: '400px'
     };
 
 
@@ -37,11 +37,11 @@ const Maps = ({ spotDetails }) => {
                         <GoogleMap
                             mapContainerStyle={containerStyle}
                             zoom={12}
-                            center={{lng: spotDetails.lng, lat: spotDetails.lat}}
+                            center={{lng: +spotDetails.lng, lat: +spotDetails.lat}}
                             onUnmount={onUnmount}
                         >
                         <Marker key={spotDetails}
-                            position={{lng: spotDetails.lng, lat: spotDetails.lat}}
+                            position={{lng: +spotDetails.lng, lat: +spotDetails.lat}}
                             title={spotDetails.name}
                             icon={homeMarker}
                             streetView={false}
